@@ -1,0 +1,121 @@
+.match{
+  width: 700px;
+  height: 70px;
+  border-radius: 5px;
+  background-color: rgb(255, 255, 255);
+  display: flex;
+  transition: all 0.2s;
+  cursor: pointer;
+  box-shadow: 0 5px 10px rgba(154, 160, 185, 0.05),
+  0 15px 40px rgba(166, 173, 201, 0.2)
+}
+
+.match:hover{
+  transform: translateX(-0.2em);
+  filter: saturate(100%);
+}
+
+.line-container{
+  width: 3.5px;
+  height: 70px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.line-s{
+  height: 70px;
+  width: 3.5px;
+  background-color: #0083FF;
+  position: relative;
+  border-radius: 3px 0px 0px 3px;
+}
+
+.champ-container{
+  width: 150px;
+  height: 70px;
+  display: flex;
+  align-items: center;
+}
+
+.champ-icon{
+  overflow:hidden;
+  width: 70px;
+  height: 70px;
+  display: flex;
+  border-radius: 0px 3.5px 3.5px 0px;
+}
+
+.champ_img{
+  width: 76px;
+  height: 76px;
+  position: relative;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translateY(-50%) translateX(-50%);
+  border-radius: 3px;
+}
+
+.result{
+  font-family: 'Jost', sans-serif;
+  font-weight: 900;
+  /*color: #F23F3F;*/
+  color: #388FF7;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 20px;
+}
+
+.kda-container ,.cs-container, .dmg-container, .game-container{
+  width: 120px;
+  height: 70px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.kda1, .cs, .dmg, .game-duration{
+  width: 100px;
+  height: 50%;
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  position: relative;
+  bottom: 3px;
+}
+
+.kda2 ,.cs-minute, .dmg-team, .game-type{
+  width: 100px;
+  height: 50%;
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  position: relative;
+  top: 3px;
+  color: #676767;
+}
+
+.game-type, .game-duration{
+  color: #999999;
+}
+
+.position-game{
+  width: 70px;
+  height: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.l-position{
+  width: 30px;
+  height: 30px;
+  overflow:visible;
+  position: relative;
+  left: -10px;
+}

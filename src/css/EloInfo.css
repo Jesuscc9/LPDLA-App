@@ -1,0 +1,336 @@
+.soloq {
+  width: 280px;
+  height: 280px;
+  display: flex;
+  background-color: rgb(255, 255, 255);
+  border-radius: 13px;
+  box-shadow: 0 5px 10px rgba(154, 160, 185, 0.05),
+    0 15px 40px rgba(166, 173, 201, 0.2);
+  padding: 5px;
+}
+
+
+.col1 {
+  width: 170px;
+  height: 270px;
+}
+
+.elo-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.elo-img {
+  width: 130px;
+  height: 150px;
+}
+
+.row0 {
+  width: 170px;
+  height: 20px;
+  position: relative;
+  top: 10px;
+  font-family: "Rubik", sans-serif;
+  text-align: center;
+}
+
+.row1 {
+  width: 170px;
+  height: 220px;
+}
+
+.row2 {
+  width: 170px;
+  height: 30px;
+}
+
+.col2 {
+  width: 100px;
+  height: 270px;
+}
+
+.row3 {
+  width: 100px;
+  height: 90px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Karla", sans-serif;
+}
+
+.data-wr {
+  width: 100px;
+  height: 90px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  align-items: center;
+  font-family: "Karla", sans-serif;
+  white-space: pre;
+}
+
+.wins,
+.loses,
+.wr {
+  min-width: 100px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.wr {
+  color: #ff3a3a; /*009B00*/
+}
+
+.row3-1 {
+  width: 100px;
+  height: 90px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.queue {
+  height: 30px;
+  width: 90px;
+  font-size: 13px;
+  margin-top: 5px;
+  box-shadow: 1px 1px 10px 0px rgba(155, 160, 185, 0.3);
+  border: 0px;
+}
+
+/*------------PROFILE INFO---------*/
+
+.summoner-info{
+  width: 700px;
+  height: 130px;
+  margin-top: 20px;
+  background-color: rgb(255, 255, 255);
+  box-shadow: 0 5px 10px rgba(154, 160, 185, 0.05),
+  0 15px 40px rgba(166, 173, 201, 0.2);
+  border-radius: 13px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.profile-icon{
+  width: 100px;
+  border-radius: 50%;
+  padding: 5px;
+  border: 1.5px solid #59A9F5;
+}
+
+.profile-img{
+  width: 87px;
+  border-radius: 50%;
+}
+
+.col4{
+  width: 150px;
+  height: 130px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.col5{
+  width: 200px;
+  height: 130px;
+}
+
+
+.row4{
+  width: 200px;
+  height: 65px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  font-family: "Rubik", sans-serif;
+}
+
+.row5{
+  width: 200px;
+  height: 65px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  font-size: 13px;
+  font-family: 'Asap', sans-serif;
+  color: #979FA5;
+}
+
+.row6{
+  width: 300px;
+  height: 65px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  position: relative;
+  bottom: 13px;
+
+  font-family: "Rubik", sans-serif;
+}
+
+.col6{
+  width: 350px;
+  height: 130px;
+  display: flex;
+  justify-content: center;
+}
+
+.row7{
+  width: 300px;
+  height: 65px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  font-family: "Rubik", sans-serif;
+}
+
+.lvl-container{
+  position: relative;
+  top: 25px;
+  left: -30px;
+  background-color: #002E5A;
+  color: white;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 12px;
+  font-family: "Rubik", sans-serif;
+}
+
+.position{
+  width: 40px;
+  height: 40px;
+  margin-right: 7px;
+}
+
+.position-container{
+  display: flex;
+  width: 100px;
+  height: 65px;
+  font-size: 12px;
+  color: #3D3D3D;
+  font-weight: 100;
+}
+
+.position-data{
+  margin-top: 3px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+
+/*-------------MATCHES STYLE--------------*/
+.matches{
+  width: 700px;
+  height: auto;
+  margin-left: 15px;
+  margin-top: 20px;
+  border-radius: 15px;
+}
+
+/*---------MOS USED CHAMPS----------------*/
+.most-used-champs{
+  width: 280px;
+  height: 365px;
+  margin-top: 30px;
+  border-radius: 13px;
+  background-color: rgb(255, 255, 255);
+  box-shadow: 0 5px 10px rgba(154, 160, 185, 0.05),
+  0 15px 40px rgba(166, 173, 201, 0.2);
+  padding: 10px;
+}
+
+.most-used-champ{
+  width: 60px;
+  height: 50px;
+}
+
+.champion-container-img{
+  width: 54px;
+  height: 54px;
+  border: 2px solid #0083FF;
+  border-radius: 50%;
+  padding: 2px;
+}
+
+.used-champion-img{
+  width: 46px;
+  height: 46px;
+  overflow: hidden;
+  border-radius: 50%;
+}
+
+.liner{
+  width: 700px;
+}
+
+.item{
+  width: 260px;
+  height: 50px;
+  display: flex;
+}
+
+.used-champ-img{
+  width: 60px;
+  height: 60px;
+  position: relative;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translateY(-50%) translateX(-50%);
+}
+
+.divisor{
+  min-width: 260px;
+  min-height: 1px;
+  background-color: #E5E5E5;
+  border-radius: 1px;
+  margin: 10px 0px;
+}
+
+.played-champion-container{
+  width: 120px;
+  height: 50px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 13px;
+  margin-top: 6px;
+  font-weight: 900;
+  color: #4A4A4A;
+}
+
+.percent-played{
+  width: 100%;
+  height: 25px;
+  display: flex;
+  justify-content: center;
+  color: #005DB6;
+}
+
+.games-played{
+  width: 100%;
+  height: 25px;
+  display: flex;
+  justify-content: center;
+}
+
+.mastery-img{
+  width: 50px;
+  height: 50px;
+}
+
+.champion-mastery{
+  width: 70px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  margin-top: 3px;
+}
+
