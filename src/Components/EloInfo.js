@@ -6,14 +6,17 @@ import adc from "../img/positions/adc-icon.png";
 import jg from "../img/positions/jungla-icon.jpeg";
 import Matches from "../Components/Matches";
 import Anivia from "../img/champions/Anivia.png";
-import Mastery from '../img/masteries/7.png';
+import Mastery from "../img/masteries/7.png";
+import Jhin from "../img/champions/Jhin.png";
+import Aatrox from "../img/champions/Aatrox.png";
 
 function EloInfo() {
   return (
     <React.Fragment>
       <div className="container">
-        <div className="row justify-content-around">
-          <div className="soloq">
+        <div className="row justify-content-around border">
+
+          <div className="soloq border">
             <div className="col1">
               <div className="row0">Aventador9</div>
               <div className="row1 elo-container">
@@ -43,7 +46,8 @@ function EloInfo() {
             </div>
           </div>
 
-          <div className="summoner-info">
+
+          <div className="summoner-info border">
             <div className="col4">
               <div className="profile-icon">
                 <img src={profileIcon} alt="" className="profile-img" />
@@ -77,15 +81,9 @@ function EloInfo() {
                 </div>
               </div>
             </div>
-
-            <div className="row">
-              <div className="matches">
-                <Matches />
-              </div>
-            </div>
           </div>
-        </div>
-        <div className="row justify-content-around">
+
+
           <div className="most-used-champs">
             <div className="item">
               <div className="most-used-champ">
@@ -101,7 +99,7 @@ function EloInfo() {
               </div>
               <div className="champion-mastery">
                 <div className="mastery">
-                  <img src={Mastery} alt="" className="mastery-img"/>
+                  <img src={Mastery} alt="" className="mastery-img" />
                 </div>
               </div>
             </div>
@@ -120,7 +118,7 @@ function EloInfo() {
               </div>
               <div className="champion-mastery">
                 <div className="mastery">
-                  <img src={Mastery} alt="" className="mastery-img"/>
+                  <img src={Mastery} alt="" className="mastery-img" />
                 </div>
               </div>
             </div>
@@ -139,7 +137,7 @@ function EloInfo() {
               </div>
               <div className="champion-mastery">
                 <div className="mastery">
-                  <img src={Mastery} alt="" className="mastery-img"/>
+                  <img src={Mastery} alt="" className="mastery-img" />
                 </div>
               </div>
             </div>
@@ -158,7 +156,7 @@ function EloInfo() {
               </div>
               <div className="champion-mastery">
                 <div className="mastery">
-                  <img src={Mastery} alt="" className="mastery-img"/>
+                  <img src={Mastery} alt="" className="mastery-img" />
                 </div>
               </div>
             </div>
@@ -177,12 +175,14 @@ function EloInfo() {
               </div>
               <div className="champion-mastery">
                 <div className="mastery">
-                  <img src={Mastery} alt="" className="mastery-img"/>
+                  <img src={Mastery} alt="" className="mastery-img" />
                 </div>
               </div>
             </div>
           </div>
-          <div className="liner"></div>
+
+          <Matches/>
+
         </div>
       </div>
       <br />

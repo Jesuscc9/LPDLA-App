@@ -174,7 +174,7 @@
 }
 
 .col6{
-  width: 350px;
+  width: 320px;
   height: 130px;
   display: flex;
   justify-content: center;
@@ -228,15 +228,6 @@
 }
 
 
-/*-------------MATCHES STYLE--------------*/
-.matches{
-  width: 700px;
-  height: auto;
-  margin-left: 15px;
-  margin-top: 20px;
-  border-radius: 15px;
-}
-
 /*---------MOS USED CHAMPS----------------*/
 .most-used-champs{
   width: 280px;
@@ -269,9 +260,6 @@
   border-radius: 50%;
 }
 
-.liner{
-  width: 700px;
-}
 
 .item{
   width: 260px;
@@ -333,4 +321,3 @@
   justify-content: center;
   margin-top: 3px;
 }
-

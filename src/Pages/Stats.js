@@ -68,7 +68,7 @@ function Stats() {
       </div>
       <br />
       <EloInfo/>
-      <br/><br/><br/><br/><br/><br/><br/>
+      <br/><br/><br/>
     </React.Fragment>
   );
 }

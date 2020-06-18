@@ -4,8 +4,9 @@ import Match from "../Components/Match";
 function Matches() {
   return (
     <React.Fragment>
-      <Match />
-      <Match />
+      <div className="matches">
+        <Match/>
+      </div>
     </React.Fragment>
   );
 }
