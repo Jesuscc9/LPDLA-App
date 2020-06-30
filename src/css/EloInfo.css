@@ -103,136 +103,12 @@
 
 /*------------PROFILE INFO---------*/
 
-.summoner-info{
-  width: 700px;
-  height: 130px;
-  margin-top: 20px;
-  background-color: rgb(255, 255, 255);
-  box-shadow: 0 5px 10px rgba(154, 160, 185, 0.05),
-  0 15px 40px rgba(166, 173, 201, 0.2);
-  border-radius: 13px;
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.profile-icon{
-  width: 100px;
-  border-radius: 50%;
-  padding: 5px;
-  border: 1.5px solid #59A9F5;
-}
-
-.profile-img{
-  width: 87px;
-  border-radius: 50%;
-}
-
-.col4{
-  width: 150px;
-  height: 130px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.col5{
-  width: 200px;
-  height: 130px;
-}
-
-
-.row4{
-  width: 200px;
-  height: 65px;
-  display: flex;
-  justify-content: center;
-  align-items: flex-end;
-  font-family: "Rubik", sans-serif;
-}
-
-.row5{
-  width: 200px;
-  height: 65px;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  font-size: 13px;
-  font-family: 'Asap', sans-serif;
-  color: #979FA5;
-}
-
-.row6{
-  width: 300px;
-  height: 65px;
-  display: flex;
-  justify-content: center;
-  align-items: flex-end;
-  position: relative;
-  bottom: 13px;
-
-  font-family: "Rubik", sans-serif;
-}
-
-.col6{
-  width: 320px;
-  height: 130px;
-  display: flex;
-  justify-content: center;
-}
-
-.row7{
-  width: 300px;
-  height: 65px;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  font-family: "Rubik", sans-serif;
-}
-
-.lvl-container{
-  position: relative;
-  top: 25px;
-  left: -30px;
-  background-color: #002E5A;
-  color: white;
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 12px;
-  font-family: "Rubik", sans-serif;
-}
-
-.position{
-  width: 40px;
-  height: 40px;
-  margin-right: 7px;
-}
-
-.position-container{
-  display: flex;
-  width: 100px;
-  height: 65px;
-  font-size: 12px;
-  color: #3D3D3D;
-  font-weight: 100;
-}
-
-.position-data{
-  margin-top: 3px;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-}
 
 
 /*---------MOS USED CHAMPS----------------*/
 .most-used-champs{
   width: 280px;
   height: 365px;
-  margin-top: 30px;
   border-radius: 13px;
   background-color: rgb(255, 255, 255);
   box-shadow: 0 5px 10px rgba(154, 160, 185, 0.05),
@@ -268,13 +144,20 @@
 }
 
 .used-champ-img{
-  width: 60px;
-  height: 60px;
+  width: 55px;
+  height: 55px;
   position: relative;
   left: 50%;
   top: 50%;
   -webkit-transform: translateY(-50%) translateX(-50%);
+  transition: all 0.3s;
+  cursor: pointer;
 }
+
+.used-champ-img:hover{
+  width: 50px;
+  height: 50px;
+} 
 
 .divisor{
   min-width: 260px;
@@ -312,6 +195,12 @@
 .mastery-img{
   width: 50px;
   height: 50px;
+  transition: all 0.1s;
+}
+
+.mastery-img:hover{
+  cursor: pointer;
+  filter: saturate(1.7);
 }
 
 .champion-mastery{
