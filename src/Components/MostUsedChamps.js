@@ -35,7 +35,7 @@ function MostUsedChamps(props) {
                 </div>
                 <div className="champion-mastery">
                   <div className="mastery">
-                    <img src={'../img/masteries/' + img +'.png'} alt="" className="mastery-img" />
+                    <img src={champs[i].masteryImg} alt="" className="mastery-img" />
                   </div>
                 </div>
               </div>

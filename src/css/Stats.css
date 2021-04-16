@@ -25,9 +25,10 @@ body{
   background-color: rgb(255, 255, 255);
   box-shadow: 0 5px 10px rgba(154, 160, 185, 0.05),
   0 15px 40px rgba(166, 173, 201, 0.2);
+  outline: none !important;
 }
 
-.aventador9{
+.initial-tab{
   background-color: #0083FF;
   color: white;
 }
@@ -64,4 +65,17 @@ body{
   width: 700px;
   max-width: 90%;
   height: auto;
+}
+
+.main-container{
+  display: flex;
+  justify-content: space-around;
+}
+
+@media (max-width: 900px) {
+  .main-container{
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column-reverse;
+  }
 }

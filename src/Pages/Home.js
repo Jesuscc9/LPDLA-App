@@ -49,6 +49,36 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 function Home() {
   return (
     <React.Fragment>
+      <nav className="navbar navbar-expand-lg navbar-dark primary-color">
+        <a className="navbar-brand" href="/">
+          LPDLA
+        </a>
+        <button
+          className="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span className="navbar-toggler-icon"></span>
+        </button>
+        <div className="collapse navbar-collapse" id="navbarNav">
+          <ul className="navbar-nav mr-auto">
+            <li className="nav-item">
+              <Link className="nav-link" to="/">
+                Home <span className="sr-only">(current)</span>
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link to="/stats" className="nav-link">
+                Stats
+              </Link>
+            </li>
+          </ul>
+        </div>
+      </nav>
       <div className="carousel-container">
         <MDBCarousel
           activeItem={1}
@@ -60,12 +90,7 @@ function Home() {
           <MDBCarouselInner>
             <MDBCarouselItem itemId="1">
               <MDBView>
-                <img
-                  className="d-block w-100"
-                  src={LPDLA1}
-                  alt="First slide"
-                />
-                
+                <img className="d-block w-100" src={LPDLA1} alt="First slide" />
               </MDBView>
               <MDBCarouselCaption>
                 <h3 className="h3-responsive"></h3>
@@ -74,12 +99,7 @@ function Home() {
             </MDBCarouselItem>
             <MDBCarouselItem itemId="2">
               <MDBView>
-                <img
-                  className="d-block w-100"
-                  src={LPDLA2}
-                  alt="First slide"
-                />
-                
+                <img className="d-block w-100" src={LPDLA2} alt="First slide" />
               </MDBView>
               <MDBCarouselCaption>
                 <h3 className="h3-responsive"></h3>
@@ -88,12 +108,7 @@ function Home() {
             </MDBCarouselItem>
             <MDBCarouselItem itemId="3">
               <MDBView>
-                <img
-                  className="d-block w-100"
-                  src={LPDLA3}
-                  alt="First slide"
-                />
-                
+                <img className="d-block w-100" src={LPDLA3} alt="First slide" />
               </MDBView>
               <MDBCarouselCaption>
                 <h3 className="h3-responsive"></h3>
@@ -115,11 +130,7 @@ function Home() {
             </MDBCarouselItem>
             <MDBCarouselItem itemId="5">
               <MDBView>
-                <img
-                  className="d-block w-100"
-                  src={LPDLA5}
-                  alt="Third slide"
-                />
+                <img className="d-block w-100" src={LPDLA5} alt="Third slide" />
               </MDBView>
               <MDBCarouselCaption>
                 <h3 className="h3-responsive"></h3>
@@ -232,16 +243,16 @@ function Home() {
       <br />
       <br />
 
-      <div className="container-fluid">
+      <div className="container p-0">
         <div className="players_banner rounded shadow">
           <div className="title-container">JUGADORES</div>
         </div>
       </div>
       <br />
-      <div className="container-fluid">
+      <div className="container p-0">
         <div className="row justify-content-around">
-          <MDBCol style={{ maxWidth: "20rem" }}>
-            <MDBCard className="i1">
+          <MDBCol style={{ maxWidth: "20rem", margin:"0px", padding: "0px" }}>
+            <MDBCard className="i1 m-0">
               <MDBCardImage
                 className="img-fluid player-pic"
                 src={BandoCard}
@@ -254,17 +265,20 @@ function Home() {
                     href="https://www.facebook.com/profile.php?id=100010360786143"
                     target="_blank"
                   >
-                    <button className="btn btn-primary btn-icon btn-fb">
+                    <button className="btn btn-primary btn-icon d-flex justify-content-center align-items-center">
                       <img src={FacebookIcon} alt="" className="fb-icon" />
                     </button>
                   </a>
                   <a href="https://twitter.com/DanderoBandero" target="_blank">
-                    <button className="btn btn-primary btn-icon">
+                    <button className="btn btn-primary btn-icon d-flex justify-content-center align-items-center">
                       <img src={TwitterIcon} alt="" className="tw-icon" />
                     </button>
                   </a>
-                  <a href="https://lan.op.gg/summoner/userName=xXDiegonchoXx" target="_blank">
-                    <button className="btn btn-primary btn-icon btn-gg">
+                  <a
+                    href="https://lan.op.gg/summoner/userName=xXDiegonchoXx"
+                    target="_blank"
+                  >
+                    <button className="btn btn-primary btn-icon d-flex justify-content-center align-items-center btn-gg">
                       <img src={GGIcon} alt="" className="gg-icon" />
                     </button>
                   </a>
@@ -285,17 +299,20 @@ function Home() {
                     href="https://www.facebook.com/profile.php?id=100009461385568"
                     target="_blank"
                   >
-                    <button className="btn btn-primary btn-icon btn-fb">
+                    <button className="btn btn-primary btn-icon d-flex justify-content-center align-items-center btn-fb">
                       <img src={FacebookIcon} alt="" className="fb-icon" />
                     </button>
                   </a>
                   <a href="https://twitter.com/PerroFeo17" target="_blank">
-                    <button className="btn btn-primary btn-icon">
+                    <button className="btn btn-primary btn-icon d-flex justify-content-center align-items-center">
                       <img src={TwitterIcon} alt="" className="tw-icon" />
                     </button>
                   </a>
-                  <a href="https://lan.op.gg/summoner/userName=Lalo8115scout" target="_blank">
-                    <button className="btn btn-primary btn-icon btn-gg">
+                  <a
+                    href="https://lan.op.gg/summoner/userName=Lalo8115scout"
+                    target="_blank"
+                  >
+                    <button className="btn btn-primary btn-icon d-flex justify-content-center align-items-center btn-gg">
                       <img src={GGIcon} alt="" className="gg-icon" />
                     </button>
                   </a>
@@ -316,17 +333,20 @@ function Home() {
                     href="https://www.facebook.com/alan.cristobal.9256"
                     target="_blank"
                   >
-                    <button className="btn btn-primary btn-icon btn-fb">
+                    <button className="btn btn-primary btn-icon d-flex justify-content-center align-items-center btn-fb">
                       <img src={FacebookIcon} alt="" className="fb-icon" />
                     </button>
                   </a>
                   <a href="https://twitter.com/pedropapas90" target="_blank">
-                    <button className="btn btn-primary btn-icon">
+                    <button className="btn btn-primary btn-icon d-flex justify-content-center align-items-center">
                       <img src={TwitterIcon} alt="" className="tw-icon" />
                     </button>
                   </a>
-                  <a href="https://lan.op.gg/summoner/userName=PedroPapas909" target="_blank">
-                    <button className="btn btn-primary btn-icon btn-gg">
+                  <a
+                    href="https://lan.op.gg/summoner/userName=PedroPapas909"
+                    target="_blank"
+                  >
+                    <button className="btn btn-primary btn-icon d-flex justify-content-center align-items-center btn-gg">
                       <img src={GGIcon} alt="" className="gg-icon" />
                     </button>
                   </a>
@@ -351,17 +371,20 @@ function Home() {
                     href="https://www.facebook.com/jesuseduardo.cervantescastro"
                     target="_blank"
                   >
-                    <button className="btn btn-primary btn-icon btn-fb">
+                    <button className="btn btn-primary btn-icon d-flex justify-content-center align-items-center btn-fb">
                       <img src={FacebookIcon} alt="" className="fb-icon" />
                     </button>
                   </a>
                   <a href="https://twitter.com/JessCC905" target="_blank">
-                    <button className="btn btn-primary btn-icon">
+                    <button className="btn btn-primary btn-icon d-flex justify-content-center align-items-center">
                       <img src={TwitterIcon} alt="" className="tw-icon" />
                     </button>
                   </a>
-                  <a href="https://lan.op.gg/summoner/userName=aventador9" target="_blank">
-                    <button className="btn btn-primary btn-icon btn-gg">
+                  <a
+                    href="https://lan.op.gg/summoner/userName=aventador9"
+                    target="_blank"
+                  >
+                    <button className="btn btn-primary btn-icon d-flex justify-content-center align-items-center btn-gg">
                       <img src={GGIcon} alt="" className="gg-icon" />
                     </button>
                   </a>
@@ -382,17 +405,20 @@ function Home() {
                     href="https://www.facebook.com/humberto.longoria"
                     target="_blank"
                   >
-                    <button className="btn btn-primary btn-icon btn-fb">
+                    <button className="btn btn-primary btn-icon d-flex justify-content-center align-items-center btn-fb">
                       <img src={FacebookIcon} alt="" className="fb-icon" />
                     </button>
                   </a>
                   <a href="https://twitter.com/Mago_Electrico9" target="_blank">
-                    <button className="btn btn-primary btn-icon">
+                    <button className="btn btn-primary btn-icon d-flex justify-content-center align-items-center">
                       <img src={TwitterIcon} alt="" className="tw-icon" />
                     </button>
                   </a>
-                  <a href="https://lan.op.gg/summoner/userName=HumbLong" target="_blank">
-                    <button className="btn btn-primary btn-icon btn-gg">
+                  <a
+                    href="https://lan.op.gg/summoner/userName=HumbLong"
+                    target="_blank"
+                  >
+                    <button className="btn btn-primary btn-icon d-flex justify-content-center align-items-center btn-gg">
                       <img src={GGIcon} alt="" className="gg-icon" />
                     </button>
                   </a>

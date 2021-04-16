@@ -1,14 +1,35 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import "../css/Stats.css";
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
+
+import Navbar from "../Components/Navbar";
+import Tabs from "../Components/Tabs";
 import EloInfo from "../Components/EloInfo";
 import SummonerInfo from "../Components/SummonerInfo";
 import MostUsedChamps from "../Components/MostUsedChamps";
 import Matches from "../Components/Matches";
 
+import Loader from "react-loader-spinner";
+import { Animated } from "react-animated-css";
+
 const Stats = () => {
+  const API_KEY = "RGAPI-b184baf4-2de0-4277-9f4f-5db7b0a682bb";
+
+  const [summonerSearch, setSummonerSearch] = useState("");
   const [server, setServer] = useState("la1");
-  const [summoner, setSummoner] = useState("aventador9");
-  const [summonerInfo, setSummonerInfo] = useState({});
+  const [summoner, setSummoner] = useState("Rekkłes Fanboy");
+
+  const [summonerInfo, setSummonerInfo] = useState({
+    summonerData: {
+      profileIconImg: "",
+      summonerLevel: "",
+      name: "",
+    },
+  });
+
+  const [loading, setLoading] = useState(true);
+
   let summInfo = {
     id: "",
     name: "",
@@ -17,23 +38,30 @@ const Stats = () => {
     favPos1: "",
     favPos2: "",
     profileIconImg: "",
+    accountId: "",
   };
 
   const [eloInfo, setEloInfo] = useState({});
   let elo = {
+    summoner: {
+      name: "",
+    },
     soloq: {
       wins: "",
-      loses: "",
+      losses: "",
       points: "",
       lp: "",
       division: "",
+      rank: "",
+      winrate: 0,
     },
     flex: {
       wins: "",
-      loses: "",
+      losses: "",
       points: "",
       lp: "",
       division: "",
+      winrate: 0,
     },
   };
 
@@ -46,7 +74,7 @@ const Stats = () => {
       mastery: "",
       games: "",
       img: "",
-      masteryImg: '',
+      masteryImg: "",
     },
     1: {
       name: "",
@@ -55,7 +83,7 @@ const Stats = () => {
       mastery: "",
       games: "",
       img: "",
-      masteryImg: '',
+      masteryImg: "",
     },
     2: {
       name: "",
@@ -64,7 +92,7 @@ const Stats = () => {
       mastery: "",
       games: "",
       img: "",
-      masteryImg: '',
+      masteryImg: "",
     },
     3: {
       name: "",
@@ -73,7 +101,7 @@ const Stats = () => {
       mastery: "",
       games: "",
       img: "",
-      masteryImg: '',
+      masteryImg: "",
     },
     4: {
       name: "",
@@ -82,8 +110,16 @@ const Stats = () => {
       mastery: "",
       games: "",
       img: "",
-      masteryImg: '',
+      masteryImg: "",
     },
+  };
+
+  const [matchesList, setMatchesList] = useState({});
+
+  let matches = {
+    matches: {},
+    endpoint: "",
+    api: "",
   };
 
   const handleClick = (e) => {
@@ -101,81 +137,138 @@ const Stats = () => {
     setSummoner(tab.textContent);
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setSummoner(summonerSearch);
+  };
+
+  const handleChange = (e) => {
+    setSummonerSearch(e.target.value);
+  };
+
   async function fetchData() {
-    let res = await fetch(
-      "https://" +
-        server +
-        ".api.riotgames.com/lol/summoner/v4/summoners/by-name/" +
-        summoner +
-        "?api_key=RGAPI-b184baf4-2de0-4277-9f4f-5db7b0a682bb"
-    );
-    res.json().then((res) => {
-      summInfo.level = res.summonerLevel;
-      summInfo.name = res.name;
-      summInfo.id = res.id;
-      summInfo.profileIconImg =
-        "http://ddragon.leagueoflegends.com/cdn/10.13.1/img/profileicon/" +
-        res.profileIconId +
-        ".png";
-      setSummonerInfo(summInfo);
+    setLoading(true);
 
-      async function getMostUsedChamps() {
-        res = await fetch(
-          "https://" +
-            server +
-            ".api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-summoner/" +
-            summInfo.id +
-            "?api_key=RGAPI-b184baf4-2de0-4277-9f4f-5db7b0a682bb"
-        );
-        res.json().then((res) => {
-          for (let i = 0; i < 5; i++) {
-            usedChamps[i].id = res[i].championId;
-            usedChamps[i].mastery = res[i].championLevel;
-            usedChamps[i].points = res[i].championPoints;
-            usedChamps[i].masteryImg = '../img/masteries/'+ res[i].championLevel +'.png'
-          }
-          async function championNames() {
-            res = await fetch(
-              "http://ddragon.leagueoflegends.com/cdn/10.13.1/data/en_US/champion.json"
-            );
-            res.json().then((res) => {
+    //400ms are necessary to animation execute correctly c:
+    await new Promise((resolve) => setTimeout(resolve, 400));
 
-              let keys = [];
-              for (let i in res.data) {
-                keys.push(res.data[i]);
-              }
+    const summonerData = await (
+      await fetch(
+        `https://${server}.api.riotgames.com/lol/summoner/v4/summoners/by-name/${summoner}?api_key=${API_KEY}`
+      )
+    ).json();
 
-              for(let i = 0;i<5;i++){
-                for(let j = 0;j<keys.length;j++){
-                  if(usedChamps[i].id == keys[j].key){
-                    usedChamps[i].name = keys[j].id;
-                    usedChamps[i].img = 'http://ddragon.leagueoflegends.com/cdn/10.13.1/img/champion/' + keys[j].id + '.png';
-                  }
-                }
-              }
+    summonerData.profileIconImg = `http://ddragon.leagueoflegends.com/cdn/10.13.1/img/profileicon/${summonerData.profileIconId}.png`;
 
-              setMostUsedChamps(usedChamps);
-            });
-          }
+    setSummonerInfo((prevState) => ({
+      ...prevState,
+      summonerData,
+    }));
 
-          championNames();
+    const mostUsedChamps = await (
+      await fetch(
+        `https://${server}.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-summoner/${summonerData.id}$?api_key=${API_KEY}`
+      )
+    ).json();
 
-        });
-      }
+    console.log(mostUsedChamps);
 
-      getMostUsedChamps();
+    setLoading(false);
 
-      async function getEloInfo(){
-        res = await fetch(
-          'https://la1.api.riotgames.com/lol/league/v4/entries/by-summoner/WKX_OfZPl0cJW3lJyarcjgCcJ-PHrx_he_t6d8htbg6jwQ?api_key=RGAPI-b184baf4-2de0-4277-9f4f-5db7b0a682bb'
-        );
-        res.json().then((res => {
+    //   async function getMostUsedChamps() {
+    //     res = await fetch(`https://server.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-summoner/${summInfo.id}$?api_key=${API_KEY}`);
+    //     res.json().then((res) => {
+    //       for (let i = 0; i < 5; i++) {
+    //         usedChamps[i].id = res[i].championId;
+    //         usedChamps[i].mastery = res[i].championLevel;
+    //         usedChamps[i].points = res[i].championPoints;
+    //         usedChamps[
+    //           i
+    //         ].masteryImg = `https://raw.communitydragon.org/pbe/game/assets/ux/mastery/mastery_icon_${res[i].championLevel}.png`;
 
-        }));
-      }
+    //         if (parseInt(res[i].championLevel) < 5) {
+    //           usedChamps[i].masteryImg =
+    //             "https://raw.communitydragon.org/pbe/game/assets/ux/mastery/mastery_icon_default.png";
+    //         }
+    //       }
+    //       async function championNames() {
+    //         res = await fetch(
+    //           "http://ddragon.leagueoflegends.com/cdn/10.13.1/data/en_US/champion.json"
+    //         );
+    //         res.json().then((res) => {
+    //           let keys = [];
+    //           for (let i in res.data) {
+    //             keys.push(res.data[i]);
+    //           }
 
-      getEloInfo();
-    });
+    //           for (let i = 0; i < 5; i++) {
+    //             for (let j = 0; j < keys.length; j++) {
+    //               if (usedChamps[i].id == keys[j].key) {
+    //                 usedChamps[i].name = keys[j].id;
+    //                 usedChamps[i].img =
+    //                   "http://ddragon.leagueoflegends.com/cdn/10.13.1/img/champion/" +
+    //                   keys[j].id +
+    //                   ".png";
+    //               }
+    //             }
+    //           }
+
+    //           setMostUsedChamps(usedChamps);
+    //         });
+    //       }
+
+    //       championNames();
+    //     });
+    //   }
+
+    //   getMostUsedChamps();
+
+    //   async function getEloInfo() {
+    //     res = await fetch(
+    //       "https://" +
+    //         server +
+    //         ".api.riotgames.com/lol/league/v4/entries/by-summoner/" +
+    //         summInfo.id +
+    //         API_KEY
+    //     );
+    //     res.json().then((res) => {
+    //       console.log(res);
+    //       elo.soloq.wins = res[0].wins;
+    //       elo.soloq.losses = res[0].losses;
+    //       elo.soloq.lp = res[0].leaguePoints;
+    //       elo.soloq.rank = res[0].rank;
+    //       elo.soloq.division = res[0].tier;
+    //       elo.summoner.name = summInfo.name;
+    //       elo.soloq.winrate = Math.round(
+    //         (parseInt(res[0].wins) /
+    //           (parseInt(res[0].wins) + parseInt(res[0].losses))) *
+    //           100
+    //       );
+
+    //       console.log(elo);
+
+    //       setEloInfo(elo);
+    //     });
+    //   }
+    //   getEloInfo();
+
+    //   async function getMatches() {
+    //     res = await fetch(
+    //       "https://" +
+    //         server +
+    //         ".api.riotgames.com/lol/match/v4/matchlists/by-account/" +
+    //         summInfo.accountId +
+    //         API_KEY
+    //     );
+    //     res.json().then((res) => {
+    //       matches.matches = res.matches;
+    //       matches.api = API_KEY;
+    //       matches.endpoint = 'https://' + server + '.api.riotgames.com/lol/match/v4/matches/';
+    //       setMatchesList(matches);
+    //     });
+    //   }
+
+    //getMatches();
   }
 
   useEffect(() => {
@@ -184,64 +277,58 @@ const Stats = () => {
 
   return (
     <React.Fragment>
+      <Navbar
+        onSubmit={(name) => {
+          setSummoner(name);
+        }}
+      />
       <br />
-      <div className="container">
-        <div className="row">
-          <div className="button-container">
-            <button
-              className="tab aventador9"
-              onClick={handleClick}
-              id="aventador9"
-            >
-              <p className="name-player">aventador9</p>
-            </button>
-          </div>
-          <div className="line"></div>
-
-          <div className="button-container">
-            <button className="tab" onClick={handleClick} id="xXDiegonchoXx">
-              <p className="name-player">xXDiegonchoXx</p>
-            </button>
-          </div>
-          <div className="line"></div>
-
-          <div className="button-container">
-            <button className="tab" onClick={handleClick} id="Lalo8115scout">
-              <p className="name-player">Lalo8115scout</p>
-            </button>
-          </div>
-          <div className="line"></div>
-
-          <div className="button-container">
-            <button className="tab" onClick={handleClick} id="HumbLong">
-              <p className="name-player">HumbLong</p>
-            </button>
-          </div>
-          <div className="line"></div>
-
-          <div className="button-container">
-            <button className="tab" onClick={handleClick} id="PedroPapas909">
-              <p className="name-player">PedroPapas909</p>
-            </button>
-          </div>
-          <div className="line"></div>
-        </div>
-      </div>
+      <Tabs
+        onSummonerChange={(name) => {
+          setSummoner(name);
+        }}
+      />
       <br />
 
-      <div className="container">
-        <div className="row justify-content-around">
-          <div className="column1">
-            <EloInfo />
-            <MostUsedChamps data={mostUsedChamps}/>
-          </div>
-          <div className="column2">
-            <SummonerInfo data={summonerInfo} />
-            <br />
-            <Matches />
+      {loading ? (
+        <div className="container d-flex justify-content-center">
+          <div className="position-absolute mt-5 p-0">
+          <Loader
+            type="Puff"
+            color="#2c99ff"
+            height={50}
+            width={50}
+            timeout={1500}
+            className="position-absolute"
+          />
           </div>
         </div>
-      </div>
+      ) : (
+        <div></div>
+      )}
+
+      <Animated
+        animationIn="fadeIn"
+        animationOut="fadeOut"
+        animationInDuration={200}
+        animationOutDuration={200}
+        isVisible={!loading}
+      >
+        <div className="container">
+          <div className="main-container">
+            <div className="column1">
+              <EloInfo data={eloInfo} />
+              <MostUsedChamps data={mostUsedChamps} />
+            </div>
+            <div className="column2">
+              <SummonerInfo data={summonerInfo} />
+              <br />
+              <Matches data={matchesList} />
+            </div>
+          </div>
+        </div>
+      </Animated>
+
       <br />
     </React.Fragment>
   );
