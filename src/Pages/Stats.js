@@ -21,11 +21,9 @@ const Stats = () => {
   const [summoner, setSummoner] = useState("Rekkłes Fanboy");
 
   const [summonerInfo, setSummonerInfo] = useState({
-    summonerData: {
-      profileIconImg: "",
-      summonerLevel: "",
-      name: "",
-    },
+    profileIconImg: "",
+    summonerLevel: "",
+    name: "",
   });
 
   const [loading, setLoading] = useState(true);
@@ -122,34 +120,10 @@ const Stats = () => {
     api: "",
   };
 
-  const handleClick = (e) => {
-    const tab = e.target;
-    let tabs = document.getElementsByClassName("tab");
-
-    for (let i = 0; i < tabs.length; i++) {
-      tabs[i].style.backgroundColor = "rgb(255, 255, 255)";
-      tabs[i].style.color = "black";
-    }
-
-    document.getElementById(tab.textContent).style.backgroundColor = "#0083FF";
-    document.getElementById(tab.textContent).style.color = "white";
-
-    setSummoner(tab.textContent);
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setSummoner(summonerSearch);
-  };
-
-  const handleChange = (e) => {
-    setSummonerSearch(e.target.value);
-  };
-
   async function fetchData() {
     setLoading(true);
 
-    //400ms are necessary to animation execute correctly c:
+    //400ms are necessary to execute the animation correctly c:
     await new Promise((resolve) => setTimeout(resolve, 400));
 
     const summonerData = await (
@@ -162,7 +136,7 @@ const Stats = () => {
 
     setSummonerInfo((prevState) => ({
       ...prevState,
-      summonerData,
+      ...summonerData,
     }));
 
     const mostUsedChamps = await (
@@ -293,14 +267,14 @@ const Stats = () => {
       {loading ? (
         <div className="container d-flex justify-content-center">
           <div className="position-absolute mt-5 p-0">
-          <Loader
-            type="Puff"
-            color="#2c99ff"
-            height={50}
-            width={50}
-            timeout={1500}
-            className="position-absolute"
-          />
+            <Loader
+              type="Puff"
+              color="#2c99ff"
+              height={50}
+              width={50}
+              timeout={1500}
+              className="position-absolute"
+            />
           </div>
         </div>
       ) : (

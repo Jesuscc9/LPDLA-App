@@ -9,7 +9,7 @@ body{
   border-left: 1.5px solid #0083FF;
   border-right: 0px solid #0083FF;
   border-bottom: 0px;
-  border-radius: 2px 0px 0px 0px;
+  border-radius: 5px 0px 5px 0px;
   display: flex;
   justify-content: center;
   align-items: center;
