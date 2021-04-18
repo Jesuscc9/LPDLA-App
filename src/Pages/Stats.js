@@ -19,6 +19,7 @@ const Stats = () => {
   const [summonerSearch, setSummonerSearch] = useState("");
   const [server, setServer] = useState("la1");
   const [summoner, setSummoner] = useState("Rekkłes Fanboy");
+  const [olderChamp, setOlderChamp] = useState(Date.now());
 
   const [summonerInfo, setSummonerInfo] = useState({
     profileIconImg: "",
@@ -120,6 +121,8 @@ const Stats = () => {
     api: "",
   };
 
+  var older_champ = Date.now();
+
   async function fetchData() {
     setLoading(true);
 
@@ -139,15 +142,48 @@ const Stats = () => {
       ...summonerData,
     }));
 
-    const mostUsedChamps = await (
+    const mostMasteryChamps = (await (
       await fetch(
         `https://${server}.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-summoner/${summonerData.id}$?api_key=${API_KEY}`
       )
-    ).json();
+    ).json()).slice(0, 19)
 
-    console.log(mostUsedChamps);
+    const championNames = (
+      await (
+        await fetch(
+          "http://ddragon.leagueoflegends.com/cdn/10.13.1/data/en_US/champion.json"
+        )
+      ).json()
+    ).data;
 
+    const name = (el) => {
+      const keys = Object.keys(championNames);
+      for (let i = 0; i < keys.length; i++) {
+        if (el.championId == parseInt(championNames[keys[i]].key)) {
+          return championNames[keys[i]].id;
+        }
+      }
+    };
+
+    mostMasteryChamps.forEach((el) => {
+      el.masteryImg =
+        el.championLevel >= 5
+          ? `https://raw.communitydragon.org/pbe/game/assets/ux/mastery/mastery_icon_${el.championLevel}.png`
+          : "https://raw.communitydragon.org/pbe/game/assets/ux/mastery/mastery_icon_default.png";
+      el.championName = name(el);
+      el.championImg = `http://ddragon.leagueoflegends.com/cdn/10.13.1/img/champion/${el.championName}.png`;
+
+      older_champ = Math.min(older_champ, el.lastPlayTime);
+    });
+
+    setOlderChamp(older_champ);
+
+    setMostUsedChamps(mostMasteryChamps);
+
+    console.log("SE TERMINA DE CARGAR");
     setLoading(false);
+
+    //const mostUsedChamps = await fetch(`https://${server}.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-summoner/${summonerData.id}$?api_key=${API_KEY}`).json();
 
     //   async function getMostUsedChamps() {
     //     res = await fetch(`https://server.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-summoner/${summInfo.id}$?api_key=${API_KEY}`);
@@ -257,11 +293,13 @@ const Stats = () => {
         }}
       />
       <br />
-      <Tabs
-        onSummonerChange={(name) => {
-          setSummoner(name);
-        }}
-      />
+      <div className="container d-flex justify-content-center">
+        <Tabs
+          onSummonerChange={(name) => {
+            setSummoner(name);
+          }}
+        />
+      </div>
       <br />
 
       {loading ? (
@@ -288,17 +326,15 @@ const Stats = () => {
         animationOutDuration={200}
         isVisible={!loading}
       >
-        <div className="container">
-          <div className="main-container">
-            <div className="column1">
-              <EloInfo data={eloInfo} />
-              <MostUsedChamps data={mostUsedChamps} />
-            </div>
-            <div className="column2">
-              <SummonerInfo data={summonerInfo} />
-              <br />
-              <Matches data={matchesList} />
-            </div>
+        <div className="main-container">
+          <div className="column1">
+            <EloInfo data={eloInfo} />
+            <MostUsedChamps data={mostUsedChamps} olderChamp={olderChamp} />
+          </div>
+          <div className="column2">
+            <SummonerInfo data={summonerInfo} />
+            <br />
+            <Matches data={matchesList} />
           </div>
         </div>
       </Animated>

@@ -28,6 +28,11 @@ body{
   outline: none !important;
 }
 
+.tabs-container{
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
 .initial-tab{
   background-color: #0083FF;
   color: white;
@@ -56,26 +61,20 @@ body{
   justify-content: center;
 }
 
-.column1{
-  width: 280px;
-  height: auto;
-}
-
-.column2{
-  width: 700px;
-  max-width: 90%;
-  height: auto;
-}
-
 .main-container{
   display: flex;
-  justify-content: space-around;
+  justify-content: space-arounced;
+  width: 90%;
+  margin: auto;
+  margin-top: 20px;
 }
 
 @media (max-width: 900px) {
   .main-container{
     display: flex;
-    justify-content: space-around;
     flex-direction: column-reverse;
+    flex-wrap: wrap;
+    justify-content: center;
+    border: 1px solid;
   }
 }

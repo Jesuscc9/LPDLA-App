@@ -61,7 +61,7 @@ function EloInfo(props) {
       </React.Fragment>
     );
   } else {
-    return <div>Buenas</div>;
+    return <div></div>;
   }
 }
 

@@ -9,7 +9,7 @@ function Matches(props) {
   ) {
     return (
       <React.Fragment>
-        <p>Está cargando</p>
+        <p></p>
       </React.Fragment>
     );
   } else {

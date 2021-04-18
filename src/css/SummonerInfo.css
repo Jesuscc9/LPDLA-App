@@ -1,7 +1,66 @@
-.summoner-info{
-  width: 90%;
+.col4{
+  width: 110px;
   height: 130px;
-  margin-top: 20px;
+}
+
+.col5{
+  width: 200px;
+  height: 130px;
+}
+
+.col6{
+  width: 220px;
+  height: 130px;
+  display: flex;
+  justify-content: center;
+}
+
+.row4{
+  width: 200px;
+  height: 65px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  font-family: "Rubik", sans-serif;
+}
+
+.row5{
+  width: 200px;
+  height: 65px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  font-size: 13px;
+  font-family: 'Asap', sans-serif;
+  color: #979FA5;
+}
+
+.row6{
+  width: 100%;
+  height: 65px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  position: relative;
+  bottom: 13px;
+
+  font-family: "Rubik", sans-serif;
+}
+
+
+.row7{
+  width: 100%;
+  height: 65px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  font-family: "Rubik", sans-serif;
+}
+
+.summoner-info{
+  width: 80%;
+  min-width: 530px;
+  height: 130px;
   background-color: rgb(255, 255, 255);
   box-shadow: 0 5px 10px rgba(154, 160, 185, 0.05),
   0 15px 40px rgba(166, 173, 201, 0.2);
@@ -10,6 +69,11 @@
   flex-wrap: wrap;
   max-width: 100%;
   justify-content: space-around;
+  margin: 0px 20px;
+}
+
+.favorites-position{
+  width: 100%;
 }
 
 .profile-icon{
@@ -34,72 +98,11 @@
   border-radius: 50%;
 }
 
-.col4{
-  width: 110px;
-  height: 130px;
-  border: 1px solid;
-}
-
-.col5{
-  width: 200px;
-  height: 130px;
-  border: 1px solid;
-}
-
-
-.row4{
-  width: 200px;
-  height: 65px;
-  display: flex;
-  justify-content: center;
-  align-items: flex-end;
-  font-family: "Rubik", sans-serif;
-}
-
-.row5{
-  width: 200px;
-  height: 65px;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  font-size: 13px;
-  font-family: 'Asap', sans-serif;
-  color: #979FA5;
-}
-
-.row6{
-  width: 300px;
-  height: 65px;
-  display: flex;
-  justify-content: center;
-  align-items: flex-end;
-  position: relative;
-  bottom: 13px;
-
-  font-family: "Rubik", sans-serif;
-}
-
-.col6{
-  width: 220px;
-  height: 130px;
-  display: flex;
-  justify-content: center;
-  border: 1px solid;
-}
-
-.row7{
-  width: 300px;
-  height: 65px;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  font-family: "Rubik", sans-serif;
-}
 
 .lvl-container{
   position: relative;
-  top: 0px;
-  left: -0px;
+  top: -55px;
+  left: 78px;
   background-color: #002E5A;
   color: white;
   width: 30px;
@@ -132,4 +135,46 @@
   display: flex;
   justify-content: center;
   align-items: flex-start;
+}
+
+@media (max-width: 800px){
+  .col6{
+    width: 210px;
+    height: 130px;
+    display: flex;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 630px){
+
+  .col5{
+    width: 60%;
+  }
+
+  .row4{
+    width: 100%;
+  }
+
+  .row5{
+    width: 100%;
+  }
+
+  .col6{
+    display: none;
+  }
+
+  .summoner-info{
+    width: 80%;
+    max-width: 100%;
+    min-width: 0 !important;
+    display: flex;
+    flex-wrap: nowrap;
+  }
+}
+
+@media (max-width: 900px){
+  .summoner-info{
+    margin: auto !important;
+  }
 }

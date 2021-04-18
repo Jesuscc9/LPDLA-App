@@ -5,7 +5,6 @@ import adc from "../img/positions/adc-icon.png";
 import jg from "../img/positions/jungla-icon.jpeg";
 
 function SummonerInfo(props) {
-  console.log(props);
   const data = props.data;
 
   return (
