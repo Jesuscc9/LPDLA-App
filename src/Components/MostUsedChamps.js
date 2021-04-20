@@ -20,24 +20,25 @@ const MostUsedChamps = (props) =>{
     <React.Fragment>
       {champs.length && props.olderChamp < now ? (
         <div className="most-used-champs">
-          <p className="mb-0 font-weight-bold">Campeones Principales</p>
+          <p className="mb-0 font-weight-bold">Campeones Más Usados</p>
           <div className="divisor"></div>
           {champs.map((champ) => {
-            // const timeDiff = ((((champ.lastPlayTime - props.olderChamp) / ((props.newerChamp - props.olderChamp) - (champ.lastPlayTime - props.olderChamp))) * 100))
-            // console.log(champ.lastPlayTime - props.olderChamp, ' es ', (props.newerChamp - props.olderChamp) - (champ.lastPlayTime - props.olderChamp))
-            const timeDiff = Map(champ.lastPlayTime, props.olderChamp, props.newerChamp, 0, 100)
-            console.log(champ.championName, ' ES ', timeDiff)
+            // // const timeDiff = ((((champ.lastPlayTime - props.olderChamp) / ((props.newerChamp - props.olderChamp) - (champ.lastPlayTime - props.olderChamp))) * 100))
+            // // console.log(champ.lastPlayTime - props.olderChamp, ' es ', (props.newerChamp - props.olderChamp) - (champ.lastPlayTime - props.olderChamp))
+            // const timeDiff = Map(champ.lastPlayTime, props.olderChamp, props.newerChamp, 0, 100)
+            // console.log(champ.championName, ' ES ', timeDiff)
             return (
               <React.Fragment key={champ}>
                 <div className="item">
                   <div className="most-used-champ">
-                    <div className="champion-container-img" style={timeDiff > 80 ? { border: '2px solid #0083FF'} : timeDiff > 60 ? { border: '2px solid orange' } : { border: '2px solid red'}}>
+                    {/* <div className="champion-container-img" style={timeDiff > 80 ? { border: '2px solid #0083FF'} : timeDiff > 60 ? { border: '2px solid orange' } : { border: '2px solid red'}}> */}
+                     <div className="champion-container-img" style={{ border: '2px solid #0083FF'}}>
                       <div className="used-champion-img">
                         <img
                           src={champ.championImg}
                           alt=""
                           className="used-champ-img"
-                          style={{ filter: `grayscale(${100 - timeDiff}%)` }}
+                          style={{ filter: `grayscale(${0}%)` }}
                         />
                       </div>
                     </div>

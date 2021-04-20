@@ -64,7 +64,8 @@ body{
 .main-container{
   display: flex;
   justify-content: space-around;
-  width: 100%;
+  max-width: 90%;
+  min-width: 90%;
   margin: auto;
   margin-top: 20px;
 }

@@ -18,7 +18,7 @@ const Stats = () => {
 
   const [summonerSearch, setSummonerSearch] = useState("");
   const [server, setServer] = useState("la1");
-  const [summoner, setSummoner] = useState("Rekkłes Fanboy");
+  const [summoner, setSummoner] = useState("Lalo8115scout");
   const [olderChamp, setOlderChamp] = useState(Date.now());
   const [newerChamp, setNewerChamp] = useState(Date.now());
 
@@ -78,11 +78,6 @@ const Stats = () => {
 
     summonerData.profileIconImg = `http://ddragon.leagueoflegends.com/cdn/10.13.1/img/profileicon/${summonerData.profileIconId}.png`;
 
-    setSummonerInfo((prevState) => ({
-      ...prevState,
-      ...summonerData,
-    }));
-
     let mostMasteryChamps = await (
       await fetch(
         `https://${server}.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-summoner/${summonerData.id}$?api_key=${API_KEY}`
@@ -93,7 +88,7 @@ const Stats = () => {
       return b.lastPlayTime - a.lastPlayTime;
     });
 
-    mostMasteryChamps = mostMasteryChamps.slice(0, 15);
+    mostMasteryChamps = mostMasteryChamps.slice(0, 20);
 
     const championNames = (
       await (
@@ -121,62 +116,16 @@ const Stats = () => {
       el.championImg = `http://ddragon.leagueoflegends.com/cdn/10.13.1/img/champion/${el.championName}.png`;
     });
 
-    setOlderChamp(recentChamps[50].lastPlayTime);
+    setSummonerInfo((prevState) => ({
+      ...prevState,
+      ...summonerData,
+    }));
+    setOlderChamp(recentChamps[19].lastPlayTime);
     setNewerChamp(recentChamps[0].lastPlayTime);
     setMostUsedChamps(mostMasteryChamps);
 
     console.log("SE TERMINA DE CARGAR");
     setLoading(false);
-
-    //const mostUsedChamps = await fetch(`https://${server}.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-summoner/${summonerData.id}$?api_key=${API_KEY}`).json();
-
-    //   async function getMostUsedChamps() {
-    //     res = await fetch(`https://server.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-summoner/${summInfo.id}$?api_key=${API_KEY}`);
-    //     res.json().then((res) => {
-    //       for (let i = 0; i < 5; i++) {
-    //         usedChamps[i].id = res[i].championId;
-    //         usedChamps[i].mastery = res[i].championLevel;
-    //         usedChamps[i].points = res[i].championPoints;
-    //         usedChamps[
-    //           i
-    //         ].masteryImg = `https://raw.communitydragon.org/pbe/game/assets/ux/mastery/mastery_icon_${res[i].championLevel}.png`;
-
-    //         if (parseInt(res[i].championLevel) < 5) {
-    //           usedChamps[i].masteryImg =
-    //             "https://raw.communitydragon.org/pbe/game/assets/ux/mastery/mastery_icon_default.png";
-    //         }
-    //       }
-    //       async function championNames() {
-    //         res = await fetch(
-    //           "http://ddragon.leagueoflegends.com/cdn/10.13.1/data/en_US/champion.json"
-    //         );
-    //         res.json().then((res) => {
-    //           let keys = [];
-    //           for (let i in res.data) {
-    //             keys.push(res.data[i]);
-    //           }
-
-    //           for (let i = 0; i < 5; i++) {
-    //             for (let j = 0; j < keys.length; j++) {
-    //               if (usedChamps[i].id == keys[j].key) {
-    //                 usedChamps[i].name = keys[j].id;
-    //                 usedChamps[i].img =
-    //                   "http://ddragon.leagueoflegends.com/cdn/10.13.1/img/champion/" +
-    //                   keys[j].id +
-    //                   ".png";
-    //               }
-    //             }
-    //           }
-
-    //           setMostUsedChamps(usedChamps);
-    //         });
-    //       }
-
-    //       championNames();
-    //     });
-    //   }
-
-    //   getMostUsedChamps();
 
     //   async function getEloInfo() {
     //     res = await fetch(

@@ -19,10 +19,6 @@ function EloInfo(props) {
       <React.Fragment>
         <div className="soloq">
           <div className="col1">
-            <div className="row0">
-              {/* {props.data.summoner.name} */}
-              rektes
-            </div>
             <div className="row1 elo-container">
               <img
                 // src={require(`../img/emblems/Emblem_${capitalize(
