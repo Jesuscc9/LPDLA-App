@@ -14,23 +14,27 @@ function EloInfo(props) {
   const soloq = props.data.soloq;
   const flex = props.data.flex;
 
-  if (soloq != undefined) {
+  if (true) {
     return (
       <React.Fragment>
         <div className="soloq">
           <div className="col1">
-            <div className="row0">{props.data.summoner.name}</div>
+            <div className="row0">
+              {/* {props.data.summoner.name} */}
+              rektes
+            </div>
             <div className="row1 elo-container">
               <img
-                src={require(`../img/emblems/Emblem_${capitalize(
-                  soloq.division.toLowerCase()
-                )}.png`)}
+                // src={require(`../img/emblems/Emblem_${capitalize(
+                //   soloq.division.toLowerCase()
+                // )}.png`)}
+                src={elo}
                 alt=""
                 className="elo-img"
               />
             </div>
             <div className="row2 text-center">
-              {soloq.division + " " + soloq.rank}
+              ORO 4{/* {soloq.division + " " + soloq.rank} */}
             </div>
           </div>
           <div className="col2">
@@ -42,22 +46,26 @@ function EloInfo(props) {
             </div>
             <div className="row3 data-wr">
               <div className="wins">
-                {soloq.wins}
+                {/* {soloq.wins} */}
+                20
                 <span style={{ color: "#37B03F" }}>W</span>
               </div>
               <div className="loses">
-                {soloq.losses}
+                {/* {soloq.losses} */}
+                30
                 <span style={{ color: "#F94848" }}>L</span>
               </div>
               <div className="wr" style={{ color: "black" }}>
-                {soloq.winrate}% WR
+                {/* {soloq.winrate}% WR */}
+                56%
               </div>
             </div>
-                <div className="row3">{soloq.lp} LP</div>
+            <div className="row3">
+              {/* {soloq.lp} LP */}
+              25 LP
+            </div>
           </div>
         </div>
-
-        <br />
       </React.Fragment>
     );
   } else {

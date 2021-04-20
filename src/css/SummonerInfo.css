@@ -58,7 +58,7 @@
 }
 
 .summoner-info{
-  width: 80%;
+  width: 100px;
   min-width: 530px;
   height: 130px;
   background-color: rgb(255, 255, 255);
@@ -68,8 +68,7 @@
   display: flex;
   flex-wrap: wrap;
   max-width: 100%;
-  justify-content: space-around;
-  margin: 0px 20px;
+  justify-content: center;
 }
 
 .favorites-position{

@@ -63,8 +63,8 @@ body{
 
 .main-container{
   display: flex;
-  justify-content: space-arounced;
-  width: 90%;
+  justify-content: space-around;
+  width: 100%;
   margin: auto;
   margin-top: 20px;
 }

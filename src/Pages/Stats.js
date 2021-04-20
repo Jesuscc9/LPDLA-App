@@ -20,6 +20,7 @@ const Stats = () => {
   const [server, setServer] = useState("la1");
   const [summoner, setSummoner] = useState("Rekkłes Fanboy");
   const [olderChamp, setOlderChamp] = useState(Date.now());
+  const [newerChamp, setNewerChamp] = useState(Date.now());
 
   const [summonerInfo, setSummonerInfo] = useState({
     profileIconImg: "",
@@ -28,17 +29,6 @@ const Stats = () => {
   });
 
   const [loading, setLoading] = useState(true);
-
-  let summInfo = {
-    id: "",
-    name: "",
-    level: "",
-    lastGame: "",
-    favPos1: "",
-    favPos2: "",
-    profileIconImg: "",
-    accountId: "",
-  };
 
   const [eloInfo, setEloInfo] = useState({});
   let elo = {
@@ -65,53 +55,6 @@ const Stats = () => {
   };
 
   const [mostUsedChamps, setMostUsedChamps] = useState({});
-  let usedChamps = {
-    0: {
-      name: "",
-      id: "",
-      points: "",
-      mastery: "",
-      games: "",
-      img: "",
-      masteryImg: "",
-    },
-    1: {
-      name: "",
-      id: "",
-      points: "",
-      mastery: "",
-      games: "",
-      img: "",
-      masteryImg: "",
-    },
-    2: {
-      name: "",
-      id: "",
-      points: "",
-      mastery: "",
-      games: "",
-      img: "",
-      masteryImg: "",
-    },
-    3: {
-      name: "",
-      id: "",
-      points: "",
-      mastery: "",
-      games: "",
-      img: "",
-      masteryImg: "",
-    },
-    4: {
-      name: "",
-      id: "",
-      points: "",
-      mastery: "",
-      games: "",
-      img: "",
-      masteryImg: "",
-    },
-  };
 
   const [matchesList, setMatchesList] = useState({});
 
@@ -120,8 +63,6 @@ const Stats = () => {
     endpoint: "",
     api: "",
   };
-
-  var older_champ = Date.now();
 
   async function fetchData() {
     setLoading(true);
@@ -142,11 +83,17 @@ const Stats = () => {
       ...summonerData,
     }));
 
-    const mostMasteryChamps = (await (
+    let mostMasteryChamps = await (
       await fetch(
         `https://${server}.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-summoner/${summonerData.id}$?api_key=${API_KEY}`
       )
-    ).json()).slice(0, 19)
+    ).json();
+
+    const recentChamps = [...mostMasteryChamps].sort((a, b) => {
+      return b.lastPlayTime - a.lastPlayTime;
+    });
+
+    mostMasteryChamps = mostMasteryChamps.slice(0, 15);
 
     const championNames = (
       await (
@@ -172,12 +119,10 @@ const Stats = () => {
           : "https://raw.communitydragon.org/pbe/game/assets/ux/mastery/mastery_icon_default.png";
       el.championName = name(el);
       el.championImg = `http://ddragon.leagueoflegends.com/cdn/10.13.1/img/champion/${el.championName}.png`;
-
-      older_champ = Math.min(older_champ, el.lastPlayTime);
     });
 
-    setOlderChamp(older_champ);
-
+    setOlderChamp(recentChamps[50].lastPlayTime);
+    setNewerChamp(recentChamps[0].lastPlayTime);
     setMostUsedChamps(mostMasteryChamps);
 
     console.log("SE TERMINA DE CARGAR");
@@ -327,15 +272,27 @@ const Stats = () => {
         isVisible={!loading}
       >
         <div className="main-container">
-          <div className="column1">
+          <EloInfo data={eloInfo} />
+          <SummonerInfo data={summonerInfo} />
+          <MostUsedChamps
+            data={mostUsedChamps}
+            olderChamp={olderChamp}
+            newerChamp={newerChamp}
+          />
+          <Matches data={matchesList} />
+          {/* <div className="column1">
             <EloInfo data={eloInfo} />
-            <MostUsedChamps data={mostUsedChamps} olderChamp={olderChamp} />
+            <MostUsedChamps
+              data={mostUsedChamps}
+              olderChamp={olderChamp}
+              newerChamp={newerChamp}
+            />
           </div>
           <div className="column2">
             <SummonerInfo data={summonerInfo} />
             <br />
             <Matches data={matchesList} />
-          </div>
+          </div> */}
         </div>
       </Animated>
 

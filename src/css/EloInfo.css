@@ -114,8 +114,39 @@
   box-shadow: 0 5px 10px rgba(154, 160, 185, 0.05),
   0 15px 40px rgba(166, 173, 201, 0.2);
   padding: 10px;
-  overflow-x: auto;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  transition: all 0.5s;
 }
+
+.most-used-champs::-webkit-scrollbar{
+  /* width */
+  width: 7px !important;
+  border-radius: 50%;
+  height: 10px;
+}
+
+.most-used-champs::-webkit-scrollbar-thumb{
+  background: rgba(0, 140, 255, 0.192); 
+  border-radius: 10rem;
+}
+
+.most-used-champs:hover{
+  overflow-y: scroll;
+}
+
+/* 
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey; 
+  border-radius: 10px;
+  background: 'blue'
+}
+ 
+/* Handle */
+/* ::-webkit-scrollbar-thumb {
+  background: red; 
+  border-radius: 10px;
+}  */
 
 .most-used-champ{
   width: 60px;
@@ -125,7 +156,7 @@
 .champion-container-img{
   width: 54px;
   height: 54px;
-  border: 2px solid #0083FF;
+  /* border: 2px solid #0083FF; */
   border-radius: 50%;
   padding: 2px;
 }
