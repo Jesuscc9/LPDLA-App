@@ -18,9 +18,10 @@ const Stats = () => {
 
   const [summonerSearch, setSummonerSearch] = useState("");
   const [server, setServer] = useState("la1");
-  const [summoner, setSummoner] = useState("Lalo8115scout");
+  const [summoner, setSummoner] = useState("Rekkłes Fanboy");
   const [olderChamp, setOlderChamp] = useState(Date.now());
   const [newerChamp, setNewerChamp] = useState(Date.now());
+  const [rankType, setRankType] = useState('soloq')
 
   const [summonerInfo, setSummonerInfo] = useState({
     profileIconImg: "",
@@ -30,7 +31,7 @@ const Stats = () => {
 
   const [loading, setLoading] = useState(true);
 
-  const [eloInfo, setEloInfo] = useState({});
+  const [eloInfo, setEloInfo] = useState([]);
   let elo = {
     summoner: {
       name: "",
@@ -116,6 +117,20 @@ const Stats = () => {
       el.championImg = `http://ddragon.leagueoflegends.com/cdn/10.13.1/img/champion/${el.championName}.png`;
     });
 
+    const elo = await (
+      await fetch(
+        `https://${server}.api.riotgames.com/lol/league/v4/entries/by-summoner/${summonerData.id}$?api_key=${API_KEY}`
+      )
+    ).json();
+
+    console.log(elo)
+
+    if(elo[0].queueType == 'RANKED_SOLO_5x5'){
+      setEloInfo(elo)
+    }else{
+      setEloInfo([{...elo[1]}, {...elo[0]}])
+    }
+
     setSummonerInfo((prevState) => ({
       ...prevState,
       ...summonerData,
@@ -126,35 +141,6 @@ const Stats = () => {
 
     console.log("SE TERMINA DE CARGAR");
     setLoading(false);
-
-    //   async function getEloInfo() {
-    //     res = await fetch(
-    //       "https://" +
-    //         server +
-    //         ".api.riotgames.com/lol/league/v4/entries/by-summoner/" +
-    //         summInfo.id +
-    //         API_KEY
-    //     );
-    //     res.json().then((res) => {
-    //       console.log(res);
-    //       elo.soloq.wins = res[0].wins;
-    //       elo.soloq.losses = res[0].losses;
-    //       elo.soloq.lp = res[0].leaguePoints;
-    //       elo.soloq.rank = res[0].rank;
-    //       elo.soloq.division = res[0].tier;
-    //       elo.summoner.name = summInfo.name;
-    //       elo.soloq.winrate = Math.round(
-    //         (parseInt(res[0].wins) /
-    //           (parseInt(res[0].wins) + parseInt(res[0].losses))) *
-    //           100
-    //       );
-
-    //       console.log(elo);
-
-    //       setEloInfo(elo);
-    //     });
-    //   }
-    //   getEloInfo();
 
     //   async function getMatches() {
     //     res = await fetch(
@@ -221,7 +207,11 @@ const Stats = () => {
         isVisible={!loading}
       >
         <div className="main-container">
-          <EloInfo data={eloInfo} />
+          <EloInfo data={rankType == 'soloq' ? eloInfo[0] : eloInfo[1]} 
+            onQueueChange={(e) => {
+              // setRankType(e)
+            }}
+          />
           <SummonerInfo data={summonerInfo} />
           <MostUsedChamps
             data={mostUsedChamps}

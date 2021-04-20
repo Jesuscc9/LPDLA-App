@@ -13,8 +13,8 @@ const MostUsedChamps = (props) =>{
 
   const now = Date.now()
 
-  console.log('Este es el más viejo: ' + props.olderChamp)
-  console.log('Este es el más nuevo: ' + props.newerChamp)
+  // console.log('Este es el más viejo: ' + props.olderChamp)
+  // console.log('Este es el más nuevo: ' + props.newerChamp)
 
   return (
     <React.Fragment>
