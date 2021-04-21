@@ -15,6 +15,15 @@ function EloInfo ({data, onQueueChange}){
     challenger: require('../img/emblems/Emblem_Challenger.png'),
   }
 
+  const option = React.useRef(null)
+
+  const resetOption = () => {
+    option.current.innerHTML = `
+      <option value="soloq">SoloQ</option>
+      <option value="flex">Flex</option>
+    `
+  }
+
   if (data) {
     return (
       <React.Fragment>
@@ -35,7 +44,7 @@ function EloInfo ({data, onQueueChange}){
             <div className="row3-1">
               <select name="" id="" className="form-control queue" onChange={(e) => {
                 onQueueChange(e.target.value)
-              }}>
+              }} ref={option}>
                 <option value="soloq">SoloQ</option>
                 <option value="flex">Flex</option>
               </select>

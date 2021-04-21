@@ -19,8 +19,6 @@ const Stats = () => {
   const [summonerSearch, setSummonerSearch] = useState("");
   const [server, setServer] = useState("la1");
   const [summoner, setSummoner] = useState("Rekkłes Fanboy");
-  const [olderChamp, setOlderChamp] = useState(Date.now());
-  const [newerChamp, setNewerChamp] = useState(Date.now());
   const [rankType, setRankType] = useState('soloq')
 
   const [summonerInfo, setSummonerInfo] = useState({
@@ -133,8 +131,6 @@ const Stats = () => {
       ...prevState,
       ...summonerData,
     }));
-    setOlderChamp(recentChamps[19].lastPlayTime);
-    setNewerChamp(recentChamps[0].lastPlayTime);
     setMostUsedChamps(mostMasteryChamps);
 
     setLoading(false);
@@ -158,6 +154,10 @@ const Stats = () => {
     //getMatches();
   }
 
+  const handleSummonerChange = (name) => {
+    setSummoner(name)
+  }
+
   useEffect(() => {
     fetchData();
   }, [summoner, server]);
@@ -166,14 +166,14 @@ const Stats = () => {
     <React.Fragment>
       <Navbar
         onSubmit={(name) => {
-          setSummoner(name);
+          handleSummonerChange(name)
         }}
       />
       <br />
       <div className="container d-flex justify-content-center">
         <Tabs
           onSummonerChange={(name) => {
-            setSummoner(name);
+            handleSummonerChange(name)
           }}
         />
       </div>
@@ -212,8 +212,6 @@ const Stats = () => {
           <SummonerInfo data={summonerInfo} />
           <MostUsedChamps
             data={mostUsedChamps}
-            olderChamp={olderChamp}
-            newerChamp={newerChamp}
           />
           <Matches data={matchesList} />
         </div>

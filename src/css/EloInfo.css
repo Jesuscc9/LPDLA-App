@@ -128,6 +128,11 @@
   transition: all 0.5s;
 }
 
+.most-title{
+  font-family: "Rubik", sans-serif;
+  font-weight: 600;
+}
+
 .most-used-champs::-webkit-scrollbar{
   /* width */
   width: 7px !important;
