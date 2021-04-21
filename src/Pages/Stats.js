@@ -123,8 +123,6 @@ const Stats = () => {
       )
     ).json();
 
-    console.log(elo)
-
     if(elo[0].queueType == 'RANKED_SOLO_5x5'){
       setEloInfo(elo)
     }else{
@@ -139,7 +137,6 @@ const Stats = () => {
     setNewerChamp(recentChamps[0].lastPlayTime);
     setMostUsedChamps(mostMasteryChamps);
 
-    console.log("SE TERMINA DE CARGAR");
     setLoading(false);
 
     //   async function getMatches() {
@@ -209,7 +206,7 @@ const Stats = () => {
         <div className="main-container">
           <EloInfo data={rankType == 'soloq' ? eloInfo[0] : eloInfo[1]} 
             onQueueChange={(e) => {
-              // setRankType(e)
+              setRankType(e)
             }}
           />
           <SummonerInfo data={summonerInfo} />
@@ -219,19 +216,6 @@ const Stats = () => {
             newerChamp={newerChamp}
           />
           <Matches data={matchesList} />
-          {/* <div className="column1">
-            <EloInfo data={eloInfo} />
-            <MostUsedChamps
-              data={mostUsedChamps}
-              olderChamp={olderChamp}
-              newerChamp={newerChamp}
-            />
-          </div>
-          <div className="column2">
-            <SummonerInfo data={summonerInfo} />
-            <br />
-            <Matches data={matchesList} />
-          </div> */}
         </div>
       </Animated>
 

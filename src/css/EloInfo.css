@@ -24,6 +24,8 @@
 .elo-img {
   width: 130px;
   height: 150px;
+  transition: all 0.2s;
+  cursor: pointer;
 }
 
 .row0 {
@@ -92,7 +94,7 @@
   align-items: flex-start;
 }
 
-.queue {
+.queue{
   height: 30px;
   width: 90px;
   font-size: 13px;
@@ -100,6 +102,13 @@
   box-shadow: 1px 1px 10px 0px rgba(155, 160, 185, 0.3);
   border: 0px;
 }
+
+.queue *{
+ border-radius: 15px !important;
+ background-color: #ffff;
+}
+
+
 
 /*------------PROFILE INFO---------*/
 
