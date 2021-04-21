@@ -16,7 +16,7 @@ import { Animated } from "react-animated-css";
 const Stats = () => {
   const API_KEY = "RGAPI-b184baf4-2de0-4277-9f4f-5db7b0a682bb";
 
-  const [summonerSearch, setSummonerSearch] = useState("");
+  const [matchList, setMatchList] = useState([]);
   const [server, setServer] = useState("la1");
   const [summoner, setSummoner] = useState("Rekkłes Fanboy");
   const [rankType, setRankType] = useState('soloq')
@@ -30,28 +30,6 @@ const Stats = () => {
   const [loading, setLoading] = useState(true);
 
   const [eloInfo, setEloInfo] = useState([]);
-  let elo = {
-    summoner: {
-      name: "",
-    },
-    soloq: {
-      wins: "",
-      losses: "",
-      points: "",
-      lp: "",
-      division: "",
-      rank: "",
-      winrate: 0,
-    },
-    flex: {
-      wins: "",
-      losses: "",
-      points: "",
-      lp: "",
-      division: "",
-      winrate: 0,
-    },
-  };
 
   const [mostUsedChamps, setMostUsedChamps] = useState({});
 
@@ -83,11 +61,7 @@ const Stats = () => {
       )
     ).json();
 
-    const recentChamps = [...mostMasteryChamps].sort((a, b) => {
-      return b.lastPlayTime - a.lastPlayTime;
-    });
-
-    mostMasteryChamps = mostMasteryChamps.slice(0, 20);
+    if(mostMasteryChamps.length >= 19)mostMasteryChamps = mostMasteryChamps.slice(0, 20);
 
     const championNames = (
       await (
@@ -127,31 +101,33 @@ const Stats = () => {
       setEloInfo([{...elo[1]}, {...elo[0]}])
     }
 
+    let matches = (await (
+      await fetch(
+        `https://${server}.api.riotgames.com/lol/match/v4/matchlists/by-account/${summonerData.accountId}$?api_key=${API_KEY}`
+      )
+    ).json()).matches;
+
+    if(matches.length >= 14) matches = matches.slice(0, 15)
+
+    matches.forEach(async (match) =>{
+      match.gameDetails = await (
+        await fetch(
+          `https://${server}.api.riotgames.com/lol/match/v4/matches/${match.gameId}?api_key=${API_KEY}`
+        )
+      ).json();
+    })
+
+
+    setMatchList(matches)
+
     setSummonerInfo((prevState) => ({
       ...prevState,
       ...summonerData,
+      lastGame: matches[0].timestamp
     }));
     setMostUsedChamps(mostMasteryChamps);
 
     setLoading(false);
-
-    //   async function getMatches() {
-    //     res = await fetch(
-    //       "https://" +
-    //         server +
-    //         ".api.riotgames.com/lol/match/v4/matchlists/by-account/" +
-    //         summInfo.accountId +
-    //         API_KEY
-    //     );
-    //     res.json().then((res) => {
-    //       matches.matches = res.matches;
-    //       matches.api = API_KEY;
-    //       matches.endpoint = 'https://' + server + '.api.riotgames.com/lol/match/v4/matches/';
-    //       setMatchesList(matches);
-    //     });
-    //   }
-
-    //getMatches();
   }
 
   const handleSummonerChange = (name) => {
@@ -160,7 +136,7 @@ const Stats = () => {
 
   useEffect(() => {
     fetchData();
-  }, [summoner, server]);
+  }, [summoner]);
 
   return (
     <React.Fragment>
@@ -209,11 +185,13 @@ const Stats = () => {
               setRankType(e)
             }}
           />
+          <div>
           <SummonerInfo data={summonerInfo} />
           <MostUsedChamps
             data={mostUsedChamps}
           />
-          <Matches data={matchesList} />
+          </div>
+          <Matches matches={matchList} />
         </div>
       </Animated>
 

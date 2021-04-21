@@ -4,7 +4,10 @@ import Jhin from "../img/champions/Jhin.png";
 import Aatrox from "../img/champions/Aatrox.png";
 import adc from "../img/positions/adc-icon.png";
 
-function Match() {
+const Match = ({data}) =>{
+
+  console.log(data)
+  
   return (
     <React.Fragment>
         <div className="match">

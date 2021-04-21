@@ -40,7 +40,6 @@ function Navbar(props) {
           <form className="form-inline" onSubmit={(e) => {
             e.preventDefault()
             props.onSubmit(search)
-            console.log(input)
             setSearch('')
           }}>
             <div className="md-form my-0">
