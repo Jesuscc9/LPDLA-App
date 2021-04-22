@@ -47,13 +47,15 @@ const Stats = () => {
     //400ms are necessary to execute the animation correctly c:
     await new Promise((resolve) => setTimeout(resolve, 400));
 
+    const version = ((await (await fetch('https://ddragon.leagueoflegends.com/api/versions.json')).json()))[0]
+
     const summonerData = await (
       await fetch(
         `https://${server}.api.riotgames.com/lol/summoner/v4/summoners/by-name/${summoner}?api_key=${API_KEY}`
       )
     ).json();
 
-    summonerData.profileIconImg = `http://ddragon.leagueoflegends.com/cdn/10.13.1/img/profileicon/${summonerData.profileIconId}.png`;
+    summonerData.profileIconImg = `http://ddragon.leagueoflegends.com/cdn/${version}/img/profileicon/${summonerData.profileIconId}.png`;
 
     let mostMasteryChamps = await (
       await fetch(
@@ -66,7 +68,7 @@ const Stats = () => {
     const championNames = (
       await (
         await fetch(
-          "http://ddragon.leagueoflegends.com/cdn/10.13.1/data/en_US/champion.json"
+          `http://ddragon.leagueoflegends.com/cdn/${version}/data/en_US/champion.json`
         )
       ).json()
     ).data;
@@ -86,7 +88,7 @@ const Stats = () => {
           ? `https://raw.communitydragon.org/pbe/game/assets/ux/mastery/mastery_icon_${el.championLevel}.png`
           : "https://raw.communitydragon.org/pbe/game/assets/ux/mastery/mastery_icon_default.png";
       el.championName = name(el);
-      el.championImg = `http://ddragon.leagueoflegends.com/cdn/10.13.1/img/champion/${el.championName}.png`;
+      el.championImg = `http://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${el.championName}.png`;
     });
 
     const elo = await (
@@ -116,7 +118,6 @@ const Stats = () => {
         )
       ).json();
     })
-
 
     setMatchList(matches)
 
