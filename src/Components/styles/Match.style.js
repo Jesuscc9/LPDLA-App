@@ -25,7 +25,7 @@ const ImgAnimation = keyframes`
 export const MatchContainer = styled.div`
   min-width: 530px;
   max-width: 530px;
-  height: 100px;
+  height: 110px;
   border-radius: 10px;
   background-color: #ffffff;
   display: flex;
@@ -43,6 +43,10 @@ export const MatchContainer = styled.div`
       /* transform: scale(1.1); */
       filter: saturate(2);
       opacity: 1;
+    }
+
+    .match-status {
+      opacity: 0;
     }
 
     .emoji {
@@ -142,4 +146,13 @@ export const Emoji = styled.img`
   flex-basis: 100%;
   opacity: 0;
   transition: all 0.5s;
+`;
+
+export const MatchResult = styled.p`
+  position: relative;
+  bottom: 62px;
+  color: ${(props) => (props.status ? "#4286f5" : "#FF3838")};
+  font-weight: 800;
+  opacity: 1;
+  transition: all 0.2s;
 `;

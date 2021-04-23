@@ -19,9 +19,11 @@ import {
   DetailsData,
   RankedType,
   Emoji,
+  MatchResult,
 } from "../Components/styles/Match.style";
 
 const Match = ({ data }) => {
+  const gameStatus = false;
   const GetEmoji = ({ value }) => {
     console.log(value);
     const i = Math.floor(Math.random() * 3) + 1;
@@ -97,18 +99,17 @@ const Match = ({ data }) => {
 
   return (
     <React.Fragment>
-      <MatchContainer
-        onMouseEnter={() => {
-          console.log("BUENAS TARDES");
-        }}
-      >
+      <MatchContainer>
         <MatchDetails>
-          <Line status={false}></Line>
+          <Line status={gameStatus}></Line>
           <DetailsData>
             <RankedType className="m-0">Ranked Solo</RankedType>
-            <p className="mb-4">Hace 5 horas</p>
+            <p style={{ marginBottom: 30 }}>Hace 5 horas</p>
             <p className="m-0">33.23 min</p>
-            <GetEmoji value={false} />
+            <GetEmoji value={gameStatus} />
+            <MatchResult status={gameStatus} className="match-status">
+              DERROTA
+            </MatchResult>
           </DetailsData>
         </MatchDetails>
         <ChampContainer>
