@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "../css/Match.css";
 import Jhin from "../img/champions/Jhin.png";
 import adc from "../img/positions/adc-icon.png";
@@ -23,76 +23,32 @@ import {
 } from "../Components/styles/Match.style";
 
 const Match = ({ data }) => {
+  const [emoji, setEmoji] = useState("none");
+
   const gameStatus = false;
   const GetEmoji = ({ value }) => {
-    console.log(value);
     const i = Math.floor(Math.random() * 3) + 1;
 
     if (value) {
       switch (i) {
         case 1:
+          setEmoji("peepoDance");
           return (
-            <Emoji
-              src={peepoDance}
-              emoji="peepoDance"
-              alt=""
-              width="30"
-              className="emoji"
-            />
+            <Emoji src={peepoDance} emoji="peepoDance" className="emoji" />
           );
         case 2:
-          return (
-            <Emoji
-              src={peepoClap}
-              emoji="peepoClap"
-              alt=""
-              width="30"
-              className="emoji"
-            />
-          );
+          return <Emoji src={peepoClap} emoji="peepoClap" className="emoji" />;
         case 3:
-          return (
-            <Emoji
-              src={ezyClap}
-              emoji="ezyClap"
-              alt=""
-              width="30"
-              className="emoji"
-            />
-          );
+          return <Emoji src={ezyClap} emoji="ezyClap" className="emoji" />;
       }
     } else {
       switch (i) {
         case 1:
-          return (
-            <Emoji
-              src={peepoSad}
-              emoji="peepoSad"
-              alt=""
-              width="30"
-              className="emoji"
-            />
-          );
+          return <Emoji src={peepoSad} emoji="peepoSad" className="emoji" />;
         case 2:
-          return (
-            <Emoji
-              src={sadge}
-              emoji="sadge"
-              alt=""
-              width="30"
-              className="emoji"
-            />
-          );
+          return <Emoji src={sadge} emoji="sadge" className="emoji" />;
         case 3:
-          return (
-            <Emoji
-              src={sadgeRain}
-              emoji="sadgeRain"
-              alt=""
-              width="30"
-              className="emoji"
-            />
-          );
+          return <Emoji src={sadgeRain} emoji="sadgeRain" className="emoji" />;
       }
     }
   };
@@ -104,12 +60,16 @@ const Match = ({ data }) => {
           <Line status={gameStatus}></Line>
           <DetailsData>
             <RankedType className="m-0">Ranked Solo</RankedType>
-            <p style={{ marginBottom: 30 }}>Hace 5 horas</p>
+            <p style={{ marginBottom: 3 }}>Hace 5 horas</p>
+            <MatchResult
+              status={gameStatus}
+              emoji={emoji}
+              className="match-status"
+            >
+              {gameStatus ? "VICTORIA" : "DERROTA"}
+            </MatchResult>
             <p className="m-0">33.23 min</p>
             <GetEmoji value={gameStatus} />
-            <MatchResult status={gameStatus} className="match-status">
-              DERROTA
-            </MatchResult>
           </DetailsData>
         </MatchDetails>
         <ChampContainer>

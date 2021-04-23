@@ -25,7 +25,7 @@ const ImgAnimation = keyframes`
 export const MatchContainer = styled.div`
   min-width: 530px;
   max-width: 530px;
-  height: 110px;
+  height: 100px;
   border-radius: 10px;
   background-color: #ffffff;
   display: flex;
@@ -133,13 +133,13 @@ export const Emoji = styled.img`
     props.emoji == "peepoDance"
       ? "47px"
       : props.emoji == "peepoClap"
-      ? "43px"
+      ? "40px"
       : props.emoji == "ezyClap"
-      ? "42px"
+      ? "40px"
       : props.emoji == "peepoSad"
-      ? "43px"
+      ? "40px"
       : props.emoji == "sadge"
-      ? "43px"
+      ? "40px"
       : props.emoji == "sadgeRain"
       ? "45px"
       : "47px"};
@@ -149,10 +149,9 @@ export const Emoji = styled.img`
 `;
 
 export const MatchResult = styled.p`
-  position: relative;
-  bottom: 62px;
   color: ${(props) => (props.status ? "#4286f5" : "#FF3838")};
   font-weight: 800;
+  margin: 0px;
   opacity: 1;
   transition: all 0.2s;
 `;
