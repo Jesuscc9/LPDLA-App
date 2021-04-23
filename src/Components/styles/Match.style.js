@@ -69,9 +69,6 @@ export const DetailsData = styled.div`
   width: 90px;
   height: 100%;
   font-size: 12px;
-  /* display: flex;
-  flex-wrap: wrap;
-  justify-content: center; */
   text-align: center;
 `;
 
@@ -114,9 +111,34 @@ export const timeAgo = styled.p``;
 
 export const Emoji = styled.img`
   position: relative;
-  min-width: 30px;
-  max-width: 30px;
-  bottom: 47px;
+  width: ${(props) =>
+    props.emoji == "peepoDance"
+      ? "30px"
+      : props.emoji == "peepoClap"
+      ? "23px"
+      : props.emoji == "ezyClap"
+      ? "40px"
+      : props.emoji == "peepoSad"
+      ? "27px"
+      : props.emoji == "sadge"
+      ? "23px"
+      : props.emoji == "sadgeRain"
+      ? "25px"
+      : "20px"};
+  bottom: ${(props) =>
+    props.emoji == "peepoDance"
+      ? "47px"
+      : props.emoji == "peepoClap"
+      ? "43px"
+      : props.emoji == "ezyClap"
+      ? "42px"
+      : props.emoji == "peepoSad"
+      ? "43px"
+      : props.emoji == "sadge"
+      ? "43px"
+      : props.emoji == "sadgeRain"
+      ? "45px"
+      : "47px"};
   flex-basis: 100%;
   opacity: 0;
   transition: all 0.5s;
