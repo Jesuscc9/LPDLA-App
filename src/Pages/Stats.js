@@ -12,6 +12,7 @@ import Matches from "../Components/Matches";
 
 import Loader from "react-loader-spinner";
 import { Animated } from "react-animated-css";
+import { MainContainer, Column1, Column2, Column3 } from "./styles/Stats.style";
 
 const Stats = () => {
   const API_KEY = "RGAPI-b184baf4-2de0-4277-9f4f-5db7b0a682bb";
@@ -19,7 +20,7 @@ const Stats = () => {
   const [matchList, setMatchList] = useState([]);
   const [server, setServer] = useState("la1");
   const [summoner, setSummoner] = useState("Rekkłes Fanboy");
-  const [rankType, setRankType] = useState('soloq')
+  const [rankType, setRankType] = useState("soloq");
 
   const [summonerInfo, setSummonerInfo] = useState({
     profileIconImg: "",
@@ -33,21 +34,17 @@ const Stats = () => {
 
   const [mostUsedChamps, setMostUsedChamps] = useState({});
 
-  const [matchesList, setMatchesList] = useState({});
-
-  let matches = {
-    matches: {},
-    endpoint: "",
-    api: "",
-  };
-
   async function fetchData() {
     setLoading(true);
 
     //400ms are necessary to execute the animation correctly c:
     await new Promise((resolve) => setTimeout(resolve, 400));
 
-    const version = ((await (await fetch('https://ddragon.leagueoflegends.com/api/versions.json')).json()))[0]
+    const version = (
+      await (
+        await fetch("https://ddragon.leagueoflegends.com/api/versions.json")
+      ).json()
+    )[0];
 
     const summonerData = await (
       await fetch(
@@ -63,7 +60,8 @@ const Stats = () => {
       )
     ).json();
 
-    if(mostMasteryChamps.length >= 19)mostMasteryChamps = mostMasteryChamps.slice(0, 20);
+    if (mostMasteryChamps.length >= 19)
+      mostMasteryChamps = mostMasteryChamps.slice(0, 20);
 
     const championNames = (
       await (
@@ -97,34 +95,36 @@ const Stats = () => {
       )
     ).json();
 
-    if(elo[0].queueType == 'RANKED_SOLO_5x5'){
-      setEloInfo(elo)
-    }else{
-      setEloInfo([{...elo[1]}, {...elo[0]}])
+    if (elo[0].queueType == "RANKED_SOLO_5x5") {
+      setEloInfo(elo);
+    } else {
+      setEloInfo([{ ...elo[1] }, { ...elo[0] }]);
     }
 
-    let matches = (await (
-      await fetch(
-        `https://${server}.api.riotgames.com/lol/match/v4/matchlists/by-account/${summonerData.accountId}$?api_key=${API_KEY}`
-      )
-    ).json()).matches;
+    // let matches = (await (
+    //   await fetch(
+    //     `https://${server}.api.riotgames.com/lol/match/v4/matchlists/by-account/${summonerData.accountId}$?api_key=${API_KEY}`
+    //   )
+    // ).json()).matches;
 
-    if(matches.length >= 14) matches = matches.slice(0, 15)
+    // if(matches.length >= 14) matches = matches.slice(0, 15)
 
-    matches.forEach(async (match) =>{
-      match.gameDetails = await (
-        await fetch(
-          `https://${server}.api.riotgames.com/lol/match/v4/matches/${match.gameId}?api_key=${API_KEY}`
-        )
-      ).json();
-    })
+    // matches.forEach(async (match) =>{
+    //   match.gameDetails = await (
+    //     await fetch(
+    //       `https://${server}.api.riotgames.com/lol/match/v4/matches/${match.gameId}?api_key=${API_KEY}`
+    //     )
+    //   ).json();
+    // })
 
-    setMatchList(matches)
+    // setMatchList(matches)
+    setMatchList([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
 
     setSummonerInfo((prevState) => ({
       ...prevState,
       ...summonerData,
-      lastGame: matches[0].timestamp
+      //lastGame: matches[0].timestamp
+      lastGame: Date.now(),
     }));
     setMostUsedChamps(mostMasteryChamps);
 
@@ -132,8 +132,8 @@ const Stats = () => {
   }
 
   const handleSummonerChange = (name) => {
-    setSummoner(name)
-  }
+    setSummoner(name);
+  };
 
   useEffect(() => {
     fetchData();
@@ -143,14 +143,14 @@ const Stats = () => {
     <React.Fragment>
       <Navbar
         onSubmit={(name) => {
-          handleSummonerChange(name)
+          handleSummonerChange(name);
         }}
       />
       <br />
       <div className="container d-flex justify-content-center">
         <Tabs
           onSummonerChange={(name) => {
-            handleSummonerChange(name)
+            handleSummonerChange(name);
           }}
         />
       </div>
@@ -180,20 +180,23 @@ const Stats = () => {
         animationOutDuration={200}
         isVisible={!loading}
       >
-        <div className="main-container">
-          <EloInfo data={rankType == 'soloq' ? eloInfo[0] : eloInfo[1]} 
-            onQueueChange={(e) => {
-              setRankType(e)
-            }}
-          />
-          <div>
-          <SummonerInfo data={summonerInfo} />
-          <MostUsedChamps
-            data={mostUsedChamps}
-          />
-          </div>
-          <Matches matches={matchList} />
-        </div>
+        <MainContainer>
+          <Column1>
+            <EloInfo
+              data={rankType == "soloq" ? eloInfo[0] : eloInfo[1]}
+              onQueueChange={(e) => {
+                setRankType(e);
+              }}
+            />
+          </Column1>
+          <Column2>
+            <SummonerInfo data={summonerInfo} />
+            <Matches matches={matchList} />
+          </Column2>
+          <Column3>
+            <MostUsedChamps data={mostUsedChamps} />
+          </Column3>
+        </MainContainer>
       </Animated>
 
       <br />

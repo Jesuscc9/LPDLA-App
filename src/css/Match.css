@@ -1,21 +1,3 @@
-.match{
-  width: 700px;
-  height: 70px;
-  border-radius: 5px;
-  background-color: rgb(255, 255, 255);
-  display: flex;
-  transition: all 0.2s;
-  cursor: pointer;
-  box-shadow: 0 5px 10px rgba(154, 160, 185, 0.05),
-  0 15px 40px rgba(166, 173, 201, 0.2);
-  margin: 20px 0px;
-}
-
-.match:hover{
-  transform: translateX(-0.2em);
-  filter: saturate(100%);
-}
-
 .line-container{
   width: 3.5px;
   height: 70px;

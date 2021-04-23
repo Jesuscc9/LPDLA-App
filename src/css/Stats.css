@@ -76,6 +76,5 @@ body{
     flex-direction: column-reverse;
     flex-wrap: wrap;
     justify-content: center;
-    border: 1px solid;
   }
 }
