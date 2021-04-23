@@ -8,6 +8,7 @@ import ezyClap from "../img/emojis/ezyClap.gif";
 import peepoSad from "../img/emojis/peepoSad.gif";
 import sadge from "../img/emojis/sadge.gif";
 import sadgeRain from "../img/emojis/sadgeRain.gif";
+import { Animated } from "react-animated-css";
 
 import {
   MatchContainer,
@@ -22,12 +23,13 @@ import {
   MatchResult,
 } from "../Components/styles/Match.style";
 
-const Match = ({ data }) => {
+const Match = ({ data, emojiIndex }) => {
   const [emoji, setEmoji] = useState("none");
+  const [showEmoji, setShowEmoji] = useState(false);
 
-  const gameStatus = false;
+  const gameStatus = true;
   const GetEmoji = ({ value }) => {
-    const i = Math.floor(Math.random() * 3) + 1;
+    const i = emojiIndex;
 
     if (value) {
       switch (i) {
@@ -55,21 +57,47 @@ const Match = ({ data }) => {
 
   return (
     <React.Fragment>
-      <MatchContainer>
+      <MatchContainer
+        onMouseEnter={() => {
+          setShowEmoji(true);
+        }}
+        onMouseLeave={() => {
+          setShowEmoji(false);
+        }}
+      >
         <MatchDetails>
           <Line status={gameStatus}></Line>
           <DetailsData>
             <RankedType className="m-0">Ranked Solo</RankedType>
             <p style={{ marginBottom: 3 }}>Hace 5 horas</p>
-            <MatchResult
-              status={gameStatus}
-              emoji={emoji}
-              className="match-status"
+
+            <Animated
+              animationIn={gameStatus ? "fadeInRight" : "fadeIn"}
+              animationOut={gameStatus ? "fadeOutRight" : "fadeOut"}
+              isVisible={!showEmoji}
+              animationInDuration={gameStatus ? 100 : 500}
+              animationOutDuration={100}
+              animateOnMount={false}
             >
-              {gameStatus ? "VICTORIA" : "DERROTA"}
-            </MatchResult>
+              <MatchResult
+                status={gameStatus}
+                emoji={emoji}
+                className="match-status"
+              >
+                {gameStatus ? "VICTORIA" : "DERROTA"}
+              </MatchResult>
+            </Animated>
             <p className="m-0">33.23 min</p>
-            <GetEmoji value={gameStatus} />
+            <Animated
+              animationIn={gameStatus ? "bounceIn" : "fadeIn"}
+              animationOut="fadeOut"
+              isVisible={showEmoji}
+              animationInDuration={gameStatus ? 700 : 500}
+              animationOutDuration={100}
+              animateOnMount={false}
+            >
+              <GetEmoji value={gameStatus} />
+            </Animated>
           </DetailsData>
         </MatchDetails>
         <ChampContainer>

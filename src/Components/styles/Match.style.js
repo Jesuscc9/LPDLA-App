@@ -42,15 +42,15 @@ export const MatchContainer = styled.div`
     img {
       /* transform: scale(1.1); */
       filter: saturate(2);
-      opacity: 1;
+      /* opacity: 1; */
     }
 
     .match-status {
-      opacity: 0;
+      /* opacity: 0; */
     }
 
     .emoji {
-      opacity: 1;
+      /* opacity: 1; */
     }
   }
 `;
@@ -144,7 +144,7 @@ export const Emoji = styled.img`
       ? "45px"
       : "47px"};
   flex-basis: 100%;
-  opacity: 0;
+  opacity: 1;
   transition: all 0.5s;
 `;
 
@@ -152,6 +152,6 @@ export const MatchResult = styled.p`
   color: ${(props) => (props.status ? "#4286f5" : "#FF3838")};
   font-weight: 800;
   margin: 0px;
-  opacity: 1;
+  /* opacity: 1; */
   transition: all 0.2s;
 `;

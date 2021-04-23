@@ -6,9 +6,10 @@ const Matches = ({ matches }) => {
     <React.Fragment>
       <div>
         {matches.map((match, i) => {
+          const random = Math.floor(Math.random() * 3) + 1;
           return (
             <React.Fragment key={i}>
-              <Match data={match} />
+              <Match data={match} emojiIndex={random} />
             </React.Fragment>
           );
         })}
