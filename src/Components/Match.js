@@ -21,6 +21,8 @@ import {
   RankedType,
   Emoji,
   MatchResult,
+  SummonersContainer,
+  Summoner,
 } from "../Components/styles/Match.style";
 
 const Match = ({ data, emojiIndex }) => {
@@ -73,6 +75,7 @@ const Match = ({ data, emojiIndex }) => {
 
             <Animated
               animationIn={gameStatus ? "fadeInRight" : "fadeIn"}
+              animationInDelay={gameStatus ? 400 : 0}
               animationOut={gameStatus ? "fadeOutRight" : "fadeOut"}
               isVisible={!showEmoji}
               animationInDuration={gameStatus ? 100 : 500}
@@ -90,10 +93,10 @@ const Match = ({ data, emojiIndex }) => {
             <p className="m-0">33.23 min</p>
             <Animated
               animationIn={gameStatus ? "bounceIn" : "fadeIn"}
-              animationOut="fadeOut"
+              animationOut={gameStatus ? "bounceOut" : "fadeOut"}
               isVisible={showEmoji}
               animationInDuration={gameStatus ? 700 : 500}
-              animationOutDuration={100}
+              animationOutDuration={500}
               animateOnMount={false}
             >
               <GetEmoji value={gameStatus} />
@@ -104,6 +107,13 @@ const Match = ({ data, emojiIndex }) => {
           <ImageWrapper>
             <ChampionImg src={Jhin}></ChampionImg>
           </ImageWrapper>
+          <SummonersContainer>
+            <Summoner src="http://ddragon.leagueoflegends.com/cdn/11.8.1/img/spell/SummonerFlash.png"></Summoner>
+            <Summoner
+              src="http://ddragon.leagueoflegends.com/cdn/11.8.1/img/spell/SummonerDot.png"
+              style={{ marginTop: 2 }}
+            ></Summoner>
+          </SummonersContainer>
         </ChampContainer>
       </MatchContainer>
     </React.Fragment>

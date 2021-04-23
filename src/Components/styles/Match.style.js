@@ -38,20 +38,6 @@ export const MatchContainer = styled.div`
     transform: translateX(-0.2em);
     filter: saturate(100%);
     box-shadow: rgba(0, 0, 0, 0.048) 0px 4px 12px;
-
-    img {
-      /* transform: scale(1.1); */
-      filter: saturate(2);
-      /* opacity: 1; */
-    }
-
-    .match-status {
-      /* opacity: 0; */
-    }
-
-    .emoji {
-      /* opacity: 1; */
-    }
   }
 `;
 
@@ -89,6 +75,8 @@ export const ImageWrapper = styled.div`
   height: 60px;
   display: inline-block;
   overflow: hidden;
+  /* border-top-left-radius: 0.5rem;
+  border-bottom-left-radius: 0.5rem; */
   border-radius: 0.5rem;
 `;
 
@@ -152,6 +140,22 @@ export const MatchResult = styled.p`
   color: ${(props) => (props.status ? "#4286f5" : "#FF3838")};
   font-weight: 800;
   margin: 0px;
-  /* opacity: 1; */
   transition: all 0.2s;
+`;
+
+export const SummonersContainer = styled.div`
+  width: 30px;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-left: 1px;
+`;
+
+export const Summoner = styled.img`
+  width: 96%;
+  height: 48%;
+  border-radius: 3px;
+  /* border-top-right-radius: 0.3rem;
+  border-bottom-right-radius: 0.3rem; */
 `;
