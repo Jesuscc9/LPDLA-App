@@ -32,7 +32,8 @@ import {
 const Match = ({ data, emojiIndex }) => {
   const [emoji, setEmoji] = useState("none");
   const [showEmoji, setShowEmoji] = useState(false);
-  const [runesColors, setRunesColors] = useState([]);
+  const [primaryRuneColor, setPrimaryRuneColor] = useState("");
+  const [secondRuneColor, setSecondRuneColor] = useState("");
 
   const gameStatus = true;
   const GetEmoji = ({ value }) => {
@@ -74,7 +75,7 @@ const Match = ({ data, emojiIndex }) => {
       ? `rgba(${parseInt(result[1], 16)}, ${parseInt(
           result[2],
           16
-        )}, ${parseInt(result[3], 16)}, 0.15)`
+        )}, ${parseInt(result[3], 16)}, 0.1)`
       : null;
   }
 
@@ -96,7 +97,7 @@ const Match = ({ data, emojiIndex }) => {
 
             <Animated
               animationIn={gameStatus ? "fadeInRight" : "fadeIn"}
-              animationInDelay={gameStatus ? 400 : 0}
+              animationInDelay={gameStatus ? 200 : 0}
               animationOut={gameStatus ? "fadeOutRight" : "fadeOut"}
               isVisible={!showEmoji}
               animationInDuration={gameStatus ? 100 : 500}
@@ -117,7 +118,7 @@ const Match = ({ data, emojiIndex }) => {
               animationOut={gameStatus ? "bounceOut" : "fadeOut"}
               isVisible={showEmoji}
               animationInDuration={gameStatus ? 700 : 500}
-              animationOutDuration={500}
+              animationOutDuration={gameStatus ? 400 : 500}
               animateOnMount={false}
             >
               <GetEmoji value={gameStatus} />
@@ -138,7 +139,7 @@ const Match = ({ data, emojiIndex }) => {
           <RunesContainer>
             <ColorExtractor
               getColors={(colors) => {
-                setRunesColors([hexToRgb(colors[0])]);
+                setPrimaryRuneColor(hexToRgb(colors[0]));
               }}
             >
               <img
@@ -146,19 +147,17 @@ const Match = ({ data, emojiIndex }) => {
                 src="http://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Domination/DarkHarvest/DarkHarvest.png"
               />
             </ColorExtractor>
-            <Rune color={runesColors[0]}>
+            <Rune color={primaryRuneColor}>
               <img
                 src="http://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Domination/DarkHarvest/DarkHarvest.png"
+                alt=""
                 style={{ width: 25, height: 25 }}
               />
             </Rune>
 
             <ColorExtractor
               getColors={(colors) => {
-                setRunesColors((prevState) => [
-                  ...prevState,
-                  hexToRgb(colors[0]),
-                ]);
+                setSecondRuneColor(hexToRgb(colors[0]));
               }}
             >
               <img
@@ -166,9 +165,10 @@ const Match = ({ data, emojiIndex }) => {
                 src="http://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/7203_Whimsy.png"
               />
             </ColorExtractor>
-            <Rune color={runesColors[1]}>
+            <Rune src="" color={secondRuneColor}>
               <img
                 src="http://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/7203_Whimsy.png"
+                alt=""
                 style={{ width: 20, height: 20 }}
               />
             </Rune>

@@ -180,7 +180,7 @@ export const Rune = styled.div`
   background-color: ${(props) => props.color};
   display: flex;
   justify-content: center;
-  align-items: center;S
+  align-items: center;
   /* border-top-right-radius: 0.3rem;
   border-bottom-right-radius: 0.3rem; */
 `;
