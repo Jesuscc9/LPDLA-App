@@ -42,6 +42,11 @@ export const MatchContainer = styled.div`
     img {
       /* transform: scale(1.1); */
       filter: saturate(2);
+      opacity: 1;
+    }
+
+    .emoji {
+      opacity: 1;
     }
   }
 `;
@@ -63,10 +68,11 @@ export const MatchDetails = styled.div`
 export const DetailsData = styled.div`
   width: 90px;
   height: 100%;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
   font-size: 12px;
+  /* display: flex;
+  flex-wrap: wrap;
+  justify-content: center; */
+  text-align: center;
 `;
 
 export const ChampContainer = styled.div`
@@ -102,4 +108,16 @@ export const RankedType = styled.p`
   font-size: 12px;
   font-weight: 700 !important;
   margin: 0px;
+`;
+
+export const timeAgo = styled.p``;
+
+export const Emoji = styled.img`
+  position: relative;
+  min-width: 30px;
+  max-width: 30px;
+  bottom: 47px;
+  flex-basis: 100%;
+  opacity: 0;
+  transition: all 0.5s;
 `;

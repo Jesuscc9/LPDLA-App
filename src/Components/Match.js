@@ -2,6 +2,8 @@ import React from "react";
 import "../css/Match.css";
 import Jhin from "../img/champions/Jhin.png";
 import adc from "../img/positions/adc-icon.png";
+import peepoDance from "../img/emojis/peepoDance.gif";
+
 import {
   MatchContainer,
   Line,
@@ -11,6 +13,7 @@ import {
   MatchDetails,
   DetailsData,
   RankedType,
+  Emoji,
 } from "../Components/styles/Match.style";
 
 const Match = ({ data }) => {
@@ -21,12 +24,9 @@ const Match = ({ data }) => {
           <Line status={true}></Line>
           <DetailsData>
             <RankedType className="m-0">Ranked Solo</RankedType>
-            <p className="m-0">Hace 5 horas</p>
-            <p className="m-0" status={true}>
-              Derrota
-            </p>
-            <br />
+            <p className="mb-4">Hace 5 horas</p>
             <p className="m-0">33.23 min</p>
+            <Emoji src={peepoDance} alt="" width="30" className="emoji" />
           </DetailsData>
         </MatchDetails>
         <ChampContainer>
