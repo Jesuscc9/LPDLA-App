@@ -63,7 +63,7 @@ export const DetailsData = styled.div`
 `;
 
 export const ChampContainer = styled.div`
-  width: 90px;
+  width: 120px;
   height: 100%;
   display: flex;
   justify-content: space-between;
@@ -94,12 +94,15 @@ export const ChampionImg = styled.img`
 
 export const RankedType = styled.p`
   font-family: "Roboto", sans-serif !important;
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 700 !important;
   margin: 0px;
 `;
 
-export const timeAgo = styled.p``;
+export const TimeAgo = styled.p`
+  font-size: 12px;
+  font-weight: 300;
+`;
 
 export const Emoji = styled.img`
   position: relative;
@@ -155,7 +158,29 @@ export const SummonersContainer = styled.div`
 export const Summoner = styled.img`
   width: 96%;
   height: 48%;
-  border-radius: 3px;
+  border-radius: 5px;
+  /* border-top-right-radius: 0.3rem;
+  border-bottom-right-radius: 0.3rem; */
+`;
+
+export const RunesContainer = styled.div`
+  width: 30px;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-left: 1px;
+`;
+
+export const Rune = styled.div`
+  width: 96%;
+  height: 48%;
+  border-radius: 5px;
+  padding: 3px;
+  background-color: ${(props) => props.color};
+  display: flex;
+  justify-content: center;
+  align-items: center;S
   /* border-top-right-radius: 0.3rem;
   border-bottom-right-radius: 0.3rem; */
 `;
