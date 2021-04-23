@@ -27,38 +27,34 @@ import {
   TimeAgo,
   RunesContainer,
   Rune,
+  KdaContainer,
 } from "../Components/styles/Match.style";
 
 const Match = ({ data, emojiIndex }) => {
-  const [emoji, setEmoji] = useState("none");
   const [showEmoji, setShowEmoji] = useState(false);
   const [primaryRuneColor, setPrimaryRuneColor] = useState("");
   const [secondRuneColor, setSecondRuneColor] = useState("");
 
   const gameStatus = true;
+
   const GetEmoji = ({ value }) => {
     const i = emojiIndex;
 
     if (value) {
-      switch (i) {
-        case 1:
-          setEmoji("peepoDance");
-          return (
-            <Emoji src={peepoDance} emoji="peepoDance" className="emoji" />
-          );
-        case 2:
-          return <Emoji src={peepoClap} emoji="peepoClap" className="emoji" />;
-        case 3:
-          return <Emoji src={ezyClap} emoji="ezyClap" className="emoji" />;
+      if (emojiIndex <= 4) {
+        return <Emoji src={peepoDance} emoji="peepoDance" className="emoji" />;
+      } else if (i <= 7) {
+        return <Emoji src={ezyClap} emoji="ezyClap" className="emoji" />;
+      } else {
+        return <Emoji src={peepoClap} emoji="peepoClap" className="emoji" />;
       }
     } else {
-      switch (i) {
-        case 1:
-          return <Emoji src={peepoSad} emoji="peepoSad" className="emoji" />;
-        case 2:
-          return <Emoji src={sadge} emoji="sadge" className="emoji" />;
-        case 3:
-          return <Emoji src={sadgeRain} emoji="sadgeRain" className="emoji" />;
+      if (emojiIndex <= 4) {
+        return <Emoji src={peepoSad} emoji="peepoSad" className="emoji" />;
+      } else if (i <= 7) {
+        return <Emoji src={sadge} emoji="sadge" className="emoji" />;
+      } else {
+        return <Emoji src={sadgeRain} emoji="sadgeRain" className="emoji" />;
       }
     }
   };
@@ -104,15 +100,11 @@ const Match = ({ data, emojiIndex }) => {
               animationOutDuration={100}
               animateOnMount={false}
             >
-              <MatchResult
-                status={gameStatus}
-                emoji={emoji}
-                className="match-status"
-              >
+              <MatchResult status={gameStatus} className="match-status">
                 {gameStatus ? "VICTORIA" : "DERROTA"}
               </MatchResult>
             </Animated>
-            <p className="m-0">33.23 min</p>
+            <p className="m-0 game-duration">33:23 min</p>
             <Animated
               animationIn={gameStatus ? "bounceIn" : "fadeIn"}
               animationOut={gameStatus ? "bounceOut" : "fadeOut"}
@@ -174,6 +166,16 @@ const Match = ({ data, emojiIndex }) => {
             </Rune>
           </RunesContainer>
         </ChampContainer>
+        <KdaContainer>
+          <div className="kda-container">
+            <p className="kills">12</p>
+            <p className="kda-divisor">/</p>
+            <p className="deaths">2</p>
+            <p className="kda-divisor">/</p>
+            <p className="assists">9</p>
+          </div>
+          <p>2.60 KDA</p>
+        </KdaContainer>
       </MatchContainer>
     </React.Fragment>
   );

@@ -53,6 +53,12 @@ export const MatchDetails = styled.div`
   height: 100%;
   display: flex;
   flex-wrap: wrap;
+
+  .game-duration {
+    font-size: 13px;
+    font-weight: 600;
+    color: #9b9b9b;
+  }
 `;
 
 export const DetailsData = styled.div`
@@ -68,6 +74,7 @@ export const ChampContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-left: 20px;
 `;
 
 export const ImageWrapper = styled.div`
@@ -183,4 +190,43 @@ export const Rune = styled.div`
   align-items: center;
   /* border-top-right-radius: 0.3rem;
   border-bottom-right-radius: 0.3rem; */
+`;
+
+export const KdaContainer = styled.div`
+  width: 100px;
+  height: 60%;
+  font-size: 14px;
+  text-align: center;
+  margin: auto 10px;
+
+  .kda-container {
+    width: 100px;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+
+    p {
+      font-size: 16px;
+      font-weight: 600;
+      margin: 0px 2px;
+      color: #3a3a3a;
+    }
+
+    .kda-divisor {
+      font-weight: 900;
+      color: #808080;
+    }
+
+    .deaths {
+      color: rgba(255, 56, 56, 0.85);
+    }
+  }
+
+  p {
+    font-size: 13px;
+    font-weight: 600;
+    color: #9b9b9b;
+    margin-top: 5px;
+    text-align: center;
+  }
 `;
