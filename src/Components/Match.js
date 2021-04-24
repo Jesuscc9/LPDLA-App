@@ -28,12 +28,28 @@ import {
   RunesContainer,
   Rune,
   KdaContainer,
+  ItemsContainer,
 } from "../Components/styles/Match.style";
 
 const Match = ({ data, emojiIndex }) => {
   const [showEmoji, setShowEmoji] = useState(false);
   const [primaryRuneColor, setPrimaryRuneColor] = useState("");
   const [secondRuneColor, setSecondRuneColor] = useState("");
+
+  const items = [
+    {
+      src: "http://ddragon.leagueoflegends.com/cdn/11.8.1/img/item/3046.png",
+    },
+    {
+      src: "http://ddragon.leagueoflegends.com/cdn/11.8.1/img/item/3001.png",
+    },
+    {
+      src: "http://ddragon.leagueoflegends.com/cdn/11.8.1/img/item/3004.png",
+    },
+    {},
+    {},
+    {},
+  ];
 
   const gameStatus = true;
 
@@ -157,7 +173,7 @@ const Match = ({ data, emojiIndex }) => {
                 src="http://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/7203_Whimsy.png"
               />
             </ColorExtractor>
-            <Rune src="" color={secondRuneColor}>
+            <Rune color={secondRuneColor}>
               <img
                 src="http://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/7203_Whimsy.png"
                 alt=""
@@ -176,6 +192,27 @@ const Match = ({ data, emojiIndex }) => {
           </div>
           <p>2.60 KDA</p>
         </KdaContainer>
+        <ItemsContainer>
+          <div className="items">
+            {items.map((item) => {
+              return (
+                <React.Fragment>
+                  {item.src ? (
+                    <img className="item" src={item.src} />
+                  ) : (
+                    <div className="item"></div>
+                  )}
+                </React.Fragment>
+              );
+            })}
+          </div>
+          <div className="wards">
+            <img
+              className="item"
+              src="http://ddragon.leagueoflegends.com/cdn/11.8.1/img/item/3340.png"
+            ></img>
+          </div>
+        </ItemsContainer>
       </MatchContainer>
     </React.Fragment>
   );

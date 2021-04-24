@@ -18,7 +18,6 @@ const Stats = () => {
   const API_KEY = "RGAPI-b184baf4-2de0-4277-9f4f-5db7b0a682bb";
 
   const [matchList, setMatchList] = useState([]);
-  const [server, setServer] = useState("la1");
   const [summoner, setSummoner] = useState("Rekkłes Fanboy");
   const [rankType, setRankType] = useState("soloq");
 
@@ -131,6 +130,8 @@ const Stats = () => {
     setLoading(false);
   }
 
+  const server = "la1";
+
   const handleSummonerChange = (name) => {
     setSummoner(name);
   };
@@ -164,7 +165,6 @@ const Stats = () => {
               color="#2c99ff"
               height={50}
               width={50}
-              timeout={1500}
               className="position-absolute"
             />
           </div>

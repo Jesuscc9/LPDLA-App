@@ -23,8 +23,7 @@ const ImgAnimation = keyframes`
   `;
 
 export const MatchContainer = styled.div`
-  min-width: 530px;
-  max-width: 530px;
+  width: 100%;
   height: 100px;
   border-radius: 10px;
   background-color: #ffffff;
@@ -228,5 +227,49 @@ export const KdaContainer = styled.div`
     color: #9b9b9b;
     margin-top: 5px;
     text-align: center;
+  }
+`;
+
+export const ItemsContainer = styled.div`
+  width: 150px;
+  height: 100%;
+
+  display: flex;
+  flex-wrap: wrap;
+
+  .items {
+    margin: auto;
+    width: 90px;
+    height: 90%;
+
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+  .wards {
+    margin: auto;
+    width: 40px;
+    height: 90%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .item {
+    width: 27px;
+    height: 27px;
+    border-radius: 5px;
+    background: rgba(66, 125, 245, 0.16);
+    outline: none !important;
+    border: none;
+  }
+
+  img {
+    display: none;
+  }
+
+  img[src] {
+    display: block;
   }
 `;

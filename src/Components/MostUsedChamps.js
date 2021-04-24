@@ -1,27 +1,27 @@
 import React, { useState } from "react";
 
-const MostUsedChamps = (props) =>{
+const MostUsedChamps = (props) => {
   const champs = props.data;
 
-  const numberWithCommas = (x) =>{
+  const numberWithCommas = (x) => {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-  }
+  };
 
-  const Map = (x, in_min, in_max, out_min, out_max) =>{
-    return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
-  }
+  const Map = (x, in_min, in_max, out_min, out_max) => {
+    return ((x - in_min) * (out_max - out_min)) / (in_max - in_min) + out_min;
+  };
 
-  let olderChamp = Date.now()
-  let newerChamp = 0
+  let olderChamp = Date.now();
+  let newerChamp = 0;
 
-  if(props.data.length){
-    const dates = (props.data).map((e) => {
-      return e.lastPlayTime
-    })
+  if (props.data.length) {
+    const dates = props.data.map((e) => {
+      return e.lastPlayTime;
+    });
 
-    dates.forEach(element => {
-      olderChamp = Math.min(element, olderChamp)
-      newerChamp = Math.max(element, newerChamp)
+    dates.forEach((element) => {
+      olderChamp = Math.min(element, olderChamp);
+      newerChamp = Math.max(element, newerChamp);
     });
   }
 
@@ -29,15 +29,32 @@ const MostUsedChamps = (props) =>{
     <React.Fragment>
       {champs.length && newerChamp > 0 ? (
         <div className="most-used-champs">
-          <p className="mb-0 font-weight-bold" className="most-title">Campeones Más Usados</p>
+          <p className="mb-0 font-weight-bold" className="most-title">
+            Campeones Más Usados
+          </p>
           <div className="divisor"></div>
           {champs.map((champ) => {
-            const timeDiff = Map(champ.lastPlayTime, olderChamp, newerChamp, 0, 100)
+            const timeDiff = Map(
+              champ.lastPlayTime,
+              olderChamp,
+              newerChamp,
+              0,
+              100
+            );
             return (
               <React.Fragment key={champ}>
-                <div className="item">
+                <div className="elo-info-item">
                   <div className="most-used-champ">
-                    <div className="champion-container-img" style={timeDiff > 80 ? { border: '2px solid #0083FF'} : timeDiff > 60 ? { border: '2px solid orange' } : { border: '2px solid red'}}>
+                    <div
+                      className="champion-container-img"
+                      style={
+                        timeDiff > 80
+                          ? { border: "2px solid #0083FF" }
+                          : timeDiff > 60
+                          ? { border: "2px solid orange" }
+                          : { border: "2px solid red" }
+                      }
+                    >
                       <div className="used-champion-img">
                         <img
                           src={champ.championImg}
@@ -74,6 +91,6 @@ const MostUsedChamps = (props) =>{
       )}
     </React.Fragment>
   );
-}
+};
 
 export default MostUsedChamps;

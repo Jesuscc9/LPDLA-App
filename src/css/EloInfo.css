@@ -9,7 +9,6 @@
   padding: 5px;
 }
 
-
 .col1 {
   width: 170px;
   height: 270px;
@@ -94,7 +93,7 @@
   align-items: flex-start;
 }
 
-.queue{
+.queue {
   height: 30px;
   width: 90px;
   font-size: 13px;
@@ -103,49 +102,45 @@
   border: 0px;
 }
 
-.queue *{
- border-radius: 15px !important;
- background-color: #ffff;
+.queue * {
+  border-radius: 15px !important;
+  background-color: #ffff;
 }
-
-
 
 /*------------PROFILE INFO---------*/
 
-
-
 /*---------MOS USED CHAMPS----------------*/
-.most-used-champs{
+.most-used-champs {
   width: 280px;
   height: 365px;
   border-radius: 13px;
   background-color: rgb(255, 255, 255);
   box-shadow: 0 5px 10px rgba(154, 160, 185, 0.05),
-  0 15px 40px rgba(166, 173, 201, 0.2);
+    0 15px 40px rgba(166, 173, 201, 0.2);
   padding: 10px;
   overflow-x: hidden;
   overflow-y: hidden;
   transition: all 0.5s;
 }
 
-.most-title{
+.most-title {
   font-family: "Rubik", sans-serif;
   font-weight: 600;
 }
 
-.most-used-champs::-webkit-scrollbar{
+.most-used-champs::-webkit-scrollbar {
   /* width */
   width: 7px !important;
   border-radius: 50%;
   height: 10px;
 }
 
-.most-used-champs::-webkit-scrollbar-thumb{
-  background: rgba(0, 140, 255, 0.192); 
+.most-used-champs::-webkit-scrollbar-thumb {
+  background: rgba(0, 140, 255, 0.192);
   border-radius: 10rem;
 }
 
-.most-used-champs:hover{
+.most-used-champs:hover {
   overflow-y: scroll;
 }
 
@@ -162,12 +157,12 @@
   border-radius: 10px;
 }  */
 
-.most-used-champ{
+.most-used-champ {
   width: 60px;
   height: 50px;
 }
 
-.champion-container-img{
+.champion-container-img {
   width: 54px;
   height: 54px;
   /* border: 2px solid #0083FF; */
@@ -175,21 +170,20 @@
   padding: 2px;
 }
 
-.used-champion-img{
+.used-champion-img {
   width: 46px;
   height: 46px;
   overflow: hidden;
   border-radius: 50%;
 }
 
-
-.item{
+.elo-info-item {
   width: 260px;
   height: 50px;
   display: flex;
 }
 
-.used-champ-img{
+.used-champ-img {
   width: 50px;
   height: 50px;
   position: relative;
@@ -200,56 +194,56 @@
   cursor: pointer;
 }
 
-.used-champ-img:hover{
+.used-champ-img:hover {
   width: 55px;
   height: 55px;
-} 
+}
 
-.divisor{
+.divisor {
   min-width: 260px;
   min-height: 1px;
-  background-color: #E5E5E5;
+  background-color: #e5e5e5;
   border-radius: 1px;
   margin: 10px 0px;
 }
 
-.played-champion-container{
+.played-champion-container {
   width: 120px;
   height: 50px;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   font-size: 13px;
   margin-top: 6px;
   font-weight: 900;
-  color: #4A4A4A;
+  color: #4a4a4a;
 }
 
-.percent-played{
+.percent-played {
   width: 100%;
   height: 25px;
   display: flex;
   justify-content: center;
-  color: #005DB6;
+  color: #005db6;
 }
 
-.games-played{
+.games-played {
   width: 100%;
   height: 25px;
   display: flex;
   justify-content: center;
 }
 
-.mastery-img{
+.mastery-img {
   width: 50px;
   height: 50px;
   transition: all 0.1s;
 }
 
-.mastery-img:hover{
+.mastery-img:hover {
   cursor: pointer;
   filter: saturate(1.7);
 }
 
-.champion-mastery{
+.champion-mastery {
   width: 70px;
   height: 50px;
   display: flex;
