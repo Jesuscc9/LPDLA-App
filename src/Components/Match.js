@@ -30,8 +30,6 @@ import {
 } from "../Components/styles/Match.style";
 
 const Match = ({ data, emojiIndex }) => {
-  console.log(data);
-
   const [showEmoji, setShowEmoji] = useState(false);
   const [primaryRuneColor, setPrimaryRuneColor] = useState("");
   const [secondRuneColor, setSecondRuneColor] = useState("");
@@ -84,8 +82,6 @@ const Match = ({ data, emojiIndex }) => {
         )}, ${parseInt(result[3], 16)}, 0.10)`
       : null;
   }
-
-  console.log(data);
 
   return (
     <React.Fragment>

@@ -57,8 +57,7 @@
 }
 
 .summoner-info {
-  width: 550px;
-  min-width: 530px;
+  width: 570px;
   height: 130px;
   background-color: rgb(255, 255, 255);
   box-shadow: 0 5px 10px rgba(154, 160, 185, 0.05),
@@ -67,7 +66,7 @@
   display: flex;
   flex-wrap: wrap;
   max-width: 100%;
-  justify-content: center;
+  justify-content: space-around;
   margin-bottom: 30px;
 }
 

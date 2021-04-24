@@ -24,7 +24,7 @@ const SummonerInfo = ({ data }) => {
               Última partida: {TimeDiff(data.lastGame)}
             </div>
           </div>
-          <div className="col6">
+          <div className="col6 d-none">
             <div className="favorites-position">
               <div className="row6 text-center">Posiciones favoritas:</div>
               <div className="row7">

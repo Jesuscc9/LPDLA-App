@@ -33,6 +33,8 @@ const Stats = () => {
 
   const [mostUsedChamps, setMostUsedChamps] = useState({});
 
+  let server = "la1";
+
   async function fetchData() {
     setLoading(true);
 
@@ -234,8 +236,6 @@ const Stats = () => {
     setLoading(false);
   }
 
-  const server = "la1";
-
   const handleSummonerChange = (name) => {
     setSummoner(name);
   };
@@ -249,6 +249,10 @@ const Stats = () => {
       <Navbar
         onSubmit={(name) => {
           handleSummonerChange(name);
+        }}
+        onRegionChange={(region) => {
+          console.log("SE cambia de region");
+          server = region;
         }}
       />
       <br />

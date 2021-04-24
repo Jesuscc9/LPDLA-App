@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 function Navbar(props) {
+  const [search, setSearch] = useState("");
+  const [server, setServer] = useState("la1");
 
-  const [search, setSearch] = useState('')
-
-  const input = React.useRef(null)
+  const input = React.useRef(null);
 
   return (
     <React.Fragment>
@@ -37,15 +37,31 @@ function Navbar(props) {
               </Link>
             </li>
           </ul>
-          <form className="form-inline" onSubmit={(e) => {
-            e.preventDefault()
-            props.onSubmit(search)
-            setSearch('')
-          }}>
+          <form
+            className="form-inline"
+            onSubmit={(e) => {
+              e.preventDefault();
+              props.onSubmit(search);
+              setSearch("");
+            }}
+          >
+            {/* <select
+              className="form-control bg-primary text-white border-0"
+              onChange={(e) => {
+                set
+              }}
+            >
+              <option value="la1">LAN</option>
+              <option value="la2">LAS</option>
+              <option value="euw1">EUW</option>
+              <option value="na1">NA</option>
+              <option value="kr">KR</option>
+            </select> */}
+
             <div className="md-form my-0">
               <input
                 onChange={(e) => {
-                  setSearch(e.target.value)
+                  setSearch(e.target.value);
                 }}
                 value={search}
                 className="form-control mr-sm-2"
