@@ -70,10 +70,10 @@ const Stats = () => {
       ).json()
     ).data;
 
-    const name = (el) => {
+    const name = (id) => {
       const keys = Object.keys(championNames);
       for (let i = 0; i < keys.length; i++) {
-        if (el.championId == parseInt(championNames[keys[i]].key)) {
+        if (id == parseInt(championNames[keys[i]].key)) {
           return championNames[keys[i]].id;
         }
       }
@@ -84,7 +84,7 @@ const Stats = () => {
         el.championLevel >= 5
           ? `https://raw.communitydragon.org/pbe/game/assets/ux/mastery/mastery_icon_${el.championLevel}.png`
           : "https://raw.communitydragon.org/pbe/game/assets/ux/mastery/mastery_icon_default.png";
-      el.championName = name(el);
+      el.championName = name(el.championId);
       el.championImg = `http://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${el.championName}.png`;
     });
 
@@ -100,30 +100,134 @@ const Stats = () => {
       setEloInfo([{ ...elo[1] }, { ...elo[0] }]);
     }
 
-    // let matches = (await (
-    //   await fetch(
-    //     `https://${server}.api.riotgames.com/lol/match/v4/matchlists/by-account/${summonerData.accountId}$?api_key=${API_KEY}`
-    //   )
-    // ).json()).matches;
+    const getSummonerName = async (summId) => {
+      const summonerSpells = await (
+        await fetch(
+          `http://ddragon.leagueoflegends.com/cdn/${version}/data/en_US/summoner.json`
+        )
+      ).json();
 
-    // if(matches.length >= 14) matches = matches.slice(0, 15)
+      return Object.keys(summonerSpells.data).find((e) => {
+        return parseInt(summonerSpells.data[e].key) == parseInt(summId);
+      });
+    };
 
-    // matches.forEach(async (match) =>{
-    //   match.gameDetails = await (
-    //     await fetch(
-    //       `https://${server}.api.riotgames.com/lol/match/v4/matches/${match.gameId}?api_key=${API_KEY}`
-    //     )
-    //   ).json();
-    // })
+    const getRuneName = async (runeId, primary) => {
+      const runesNames = await (
+        await fetch(
+          `http://ddragon.leagueoflegends.com/cdn/${version}/data/en_US/runesReforged.json`
+        )
+      ).json();
 
-    // setMatchList(matches)
-    setMatchList([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+      if (primary) {
+        for (let i = 0; i < runesNames.length; i++) {
+          const runes = runesNames[i].slots[0].runes;
+          for (let j = 0; j < runes.length; j++) {
+            if (runes[j].id == runeId) {
+              return runes[j].icon;
+            }
+          }
+        }
+      }
+
+      return runesNames.find((e) => {
+        return e.id == runeId;
+      });
+    };
+
+    const getGameType = async (queueId) => {
+      if (queueId == 0) {
+        return "Custom 😛";
+      } else if (queueId == 400) {
+        return "Normal 5v5 🍗";
+      } else if (queueId == 420) {
+        return "Ranked Solo 😳";
+      } else if (queueId == 440) {
+        return "Ranked Flex 🥵";
+      } else if (queueId == 450) {
+        return "ARAM 😎🤙";
+      }
+
+      const queues = await (
+        await fetch(
+          `http://static.developer.riotgames.com/docs/lol/queues.json`
+        )
+      ).json();
+
+      let type = queues.find((e) => {
+        return e.queueId == queueId;
+      }).description;
+
+      type = type.replace("games", "");
+
+      return type;
+    };
+
+    let matches = (
+      await (
+        await fetch(
+          `https://${server}.api.riotgames.com/lol/match/v4/matchlists/by-account/${summonerData.accountId}$?api_key=${API_KEY}`
+        )
+      ).json()
+    ).matches;
+
+    if (matches.length >= 10) matches = matches.slice(0, 10);
+
+    for (let i = 0; i < matches.length; i++) {
+      matches[i].gameDetails = await (
+        await fetch(
+          `https://${server}.api.riotgames.com/lol/match/v4/matches/${matches[i].gameId}?api_key=${API_KEY}`
+        )
+      ).json();
+
+      matches[i].summonerId = summonerData.id;
+      matches[i].championName = name(matches[i].champion);
+
+      const participantId = matches[i].gameDetails.participantIdentities.find(
+        (e) => {
+          return e.player.summonerId == matches[i].summonerId;
+        }
+      );
+
+      const gameData = matches[i].gameDetails.participants.find((e) => {
+        return e.participantId == participantId.participantId;
+      });
+
+      matches[i].championName = matches[i].championName;
+      matches[i].stats = gameData;
+      matches[
+        i
+      ].primaryRune = `http://ddragon.leagueoflegends.com/cdn/img/${await getRuneName(
+        matches[i].stats.stats.perk0,
+        true
+      )}`;
+
+      matches[i].gameType = await getGameType(matches[i].gameDetails.queueId);
+
+      matches[i].secondaryRune = `http://ddragon.leagueoflegends.com/cdn/img/${
+        (await getRuneName(matches[i].stats.stats.perkSubStyle)).icon
+      }`;
+      matches[
+        i
+      ].spell1Name = `http://ddragon.leagueoflegends.com/cdn/${version}/img/spell/${await getSummonerName(
+        gameData.spell1Id
+      )}.png`;
+      matches[
+        i
+      ].spell2Name = `http://ddragon.leagueoflegends.com/cdn/${version}/img/spell/${await getSummonerName(
+        gameData.spell2Id
+      )}.png`;
+      matches[
+        i
+      ].championImg = `http://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${matches[i].championName}.png`;
+    }
+
+    setMatchList(matches);
 
     setSummonerInfo((prevState) => ({
       ...prevState,
       ...summonerData,
-      //lastGame: matches[0].timestamp
-      lastGame: Date.now(),
+      lastGame: matches[0].timestamp,
     }));
     setMostUsedChamps(mostMasteryChamps);
 

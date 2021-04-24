@@ -1,32 +1,11 @@
 import styled, { keyframes } from "styled-components";
 
-const ImgAnimation = keyframes`
-    0% {
-      filter: brightness(1.4);
-      filter: saturate(1.4);
-      -webkit-filter: brightness(1.4);
-      -webkit-filter: saturate(1.4);
-    }
-    50% {
-      filter: brightness(0.5);
-      filter: saturate(0.5);
-      -webkit-filter: brightness(0.5);
-      -webkit-filter: saturate(0.5);
-    }
-    100% {
-      filter: brightness(1);
-      filter: contrast(1);
-      -webkit-filter: brightness(1.4);
-      -webkit-filter: saturate(1.4);
-    }
-  
-  `;
-
 export const MatchContainer = styled.div`
   width: 100%;
   height: 100px;
   border-radius: 10px;
   background-color: #ffffff;
+  /* background-color: ${(props) => (props.win ? "#cbdcff" : "#ffebeb")}; */
   display: flex;
   transition: all 0.3s;
   cursor: pointer;
@@ -48,7 +27,7 @@ export const Line = styled.div`
 `;
 
 export const MatchDetails = styled.div`
-  width: 100px;
+  width: 130px;
   height: 100%;
   display: flex;
   flex-wrap: wrap;
@@ -61,7 +40,7 @@ export const MatchDetails = styled.div`
 `;
 
 export const DetailsData = styled.div`
-  width: 90px;
+  width: 110px;
   height: 100%;
   font-size: 12px;
   text-align: center;
@@ -93,9 +72,6 @@ export const ChampionImg = styled.img`
   position: relative;
   bottom: 2px;
   right: 2px;
-  animation-name: ${ImgAnimation};
-  animation-duration: 3.5s;
-  animation-iteration-count: infinite;
 `;
 
 export const RankedType = styled.p`
@@ -260,7 +236,7 @@ export const ItemsContainer = styled.div`
     width: 27px;
     height: 27px;
     border-radius: 5px;
-    background: rgba(66, 125, 245, 0.16);
+    background: rgba(66, 126, 245, 0.253);
     outline: none !important;
     border: none;
   }

@@ -1,7 +1,4 @@
 import React, { useState } from "react";
-import "../css/Match.css";
-import Jhin from "../img/champions/Jhin.png";
-import adc from "../img/positions/adc-icon.png";
 import peepoDance from "../img/emojis/peepoDance.gif";
 import peepoClap from "../img/emojis/peepoClap.gif";
 import ezyClap from "../img/emojis/ezyClap.gif";
@@ -10,6 +7,7 @@ import sadge from "../img/emojis/sadge.gif";
 import sadgeRain from "../img/emojis/sadgeRain.gif";
 import { Animated } from "react-animated-css";
 import { ColorExtractor } from "react-color-extractor";
+import { TimeDiff, Duration } from "./Time";
 
 import {
   MatchContainer,
@@ -32,26 +30,22 @@ import {
 } from "../Components/styles/Match.style";
 
 const Match = ({ data, emojiIndex }) => {
+  console.log(data);
+
   const [showEmoji, setShowEmoji] = useState(false);
   const [primaryRuneColor, setPrimaryRuneColor] = useState("");
   const [secondRuneColor, setSecondRuneColor] = useState("");
 
   const items = [
-    {
-      src: "http://ddragon.leagueoflegends.com/cdn/11.8.1/img/item/3046.png",
-    },
-    {
-      src: "http://ddragon.leagueoflegends.com/cdn/11.8.1/img/item/3001.png",
-    },
-    {
-      src: "http://ddragon.leagueoflegends.com/cdn/11.8.1/img/item/3004.png",
-    },
-    {},
-    {},
-    {},
+    data.stats.stats.item0,
+    data.stats.stats.item1,
+    data.stats.stats.item2,
+    data.stats.stats.item3,
+    data.stats.stats.item4,
+    data.stats.stats.item5,
   ];
 
-  const gameStatus = true;
+  const gameStatus = data.stats.stats.win;
 
   const GetEmoji = ({ value }) => {
     const i = emojiIndex;
@@ -87,9 +81,11 @@ const Match = ({ data, emojiIndex }) => {
       ? `rgba(${parseInt(result[1], 16)}, ${parseInt(
           result[2],
           16
-        )}, ${parseInt(result[3], 16)}, 0.1)`
+        )}, ${parseInt(result[3], 16)}, 0.10)`
       : null;
   }
+
+  console.log(data);
 
   return (
     <React.Fragment>
@@ -100,12 +96,15 @@ const Match = ({ data, emojiIndex }) => {
         onMouseLeave={() => {
           setShowEmoji(false);
         }}
+        win={data.stats.stats.win}
       >
         <MatchDetails>
           <Line status={gameStatus}></Line>
           <DetailsData>
-            <RankedType className="m-0">Ranked Solo</RankedType>
-            <TimeAgo style={{ marginBottom: 3 }}>Hace 5 horas</TimeAgo>
+            <RankedType className="m-0">{data.gameType}</RankedType>
+            <TimeAgo style={{ marginBottom: 3 }}>
+              {TimeDiff(data.timestamp)}
+            </TimeAgo>
 
             <Animated
               animationIn={gameStatus ? "fadeInRight" : "fadeIn"}
@@ -120,7 +119,9 @@ const Match = ({ data, emojiIndex }) => {
                 {gameStatus ? "VICTORIA" : "DERROTA"}
               </MatchResult>
             </Animated>
-            <p className="m-0 game-duration">33:23 min</p>
+            <p className="m-0 game-duration">
+              {Duration(data.gameDetails.gameDuration)}
+            </p>
             <Animated
               animationIn={gameStatus ? "bounceIn" : "fadeIn"}
               animationOut={gameStatus ? "bounceOut" : "fadeOut"}
@@ -135,14 +136,11 @@ const Match = ({ data, emojiIndex }) => {
         </MatchDetails>
         <ChampContainer>
           <ImageWrapper>
-            <ChampionImg src={Jhin}></ChampionImg>
+            <ChampionImg src={data.championImg}></ChampionImg>
           </ImageWrapper>
           <SummonersContainer>
-            <Summoner src="http://ddragon.leagueoflegends.com/cdn/11.8.1/img/spell/SummonerFlash.png"></Summoner>
-            <Summoner
-              src="http://ddragon.leagueoflegends.com/cdn/11.8.1/img/spell/SummonerDot.png"
-              style={{ marginTop: 2 }}
-            ></Summoner>
+            <Summoner src={data.spell1Name}></Summoner>
+            <Summoner src={data.spell2Name} style={{ marginTop: 2 }}></Summoner>
           </SummonersContainer>
           <RunesContainer>
             <ColorExtractor
@@ -150,14 +148,11 @@ const Match = ({ data, emojiIndex }) => {
                 setPrimaryRuneColor(hexToRgb(colors[0]));
               }}
             >
-              <img
-                style={{ display: "none" }}
-                src="http://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Domination/DarkHarvest/DarkHarvest.png"
-              />
+              <img style={{ display: "none" }} src={data.primaryRune} />
             </ColorExtractor>
             <Rune color={primaryRuneColor}>
               <img
-                src="http://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Domination/DarkHarvest/DarkHarvest.png"
+                src={data.primaryRune}
                 alt=""
                 style={{ width: 25, height: 25 }}
               />
@@ -168,14 +163,11 @@ const Match = ({ data, emojiIndex }) => {
                 setSecondRuneColor(hexToRgb(colors[0]));
               }}
             >
-              <img
-                style={{ display: "none" }}
-                src="http://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/7203_Whimsy.png"
-              />
+              <img style={{ display: "none" }} src={data.secondaryRune} />
             </ColorExtractor>
             <Rune color={secondRuneColor}>
               <img
-                src="http://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/7203_Whimsy.png"
+                src={data.secondaryRune}
                 alt=""
                 style={{ width: 20, height: 20 }}
               />
@@ -184,21 +176,24 @@ const Match = ({ data, emojiIndex }) => {
         </ChampContainer>
         <KdaContainer>
           <div className="kda-container">
-            <p className="kills">12</p>
+            <p className="kills">{data.stats.stats.kills}</p>
             <p className="kda-divisor">/</p>
-            <p className="deaths">2</p>
+            <p className="deaths">{data.stats.stats.deaths}</p>
             <p className="kda-divisor">/</p>
-            <p className="assists">9</p>
+            <p className="assists">{data.stats.stats.assists}</p>
           </div>
-          <p>2.60 KDA</p>
+          <p>{data.kda} KDA</p>
         </KdaContainer>
         <ItemsContainer>
           <div className="items">
             {items.map((item) => {
               return (
                 <React.Fragment>
-                  {item.src ? (
-                    <img className="item" src={item.src} />
+                  {item ? (
+                    <img
+                      className="item"
+                      src={`http://ddragon.leagueoflegends.com/cdn/11.8.1/img/item/${item}.png`}
+                    />
                   ) : (
                     <div className="item"></div>
                   )}
@@ -209,7 +204,7 @@ const Match = ({ data, emojiIndex }) => {
           <div className="wards">
             <img
               className="item"
-              src="http://ddragon.leagueoflegends.com/cdn/11.8.1/img/item/3340.png"
+              src={`http://ddragon.leagueoflegends.com/cdn/11.8.1/img/item/${data.stats.stats.item6}.png`}
             ></img>
           </div>
         </ItemsContainer>

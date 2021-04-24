@@ -11,6 +11,8 @@ const Tabs = (props) => {
     "PedroPapas909",
     "Rekkłes Fanboy",
     "Mikyx Fanboy",
+    "SpuriousCorn",
+    "QUIQO",
   ];
 
   return (
