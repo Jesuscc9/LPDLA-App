@@ -241,7 +241,8 @@ const Stats = () => {
   };
 
   useEffect(() => {
-    fetchData();
+    //fetchData();
+    setLoading(false);
   }, [summoner]);
 
   return (
@@ -298,7 +299,7 @@ const Stats = () => {
             />
           </Column1>
           <Column2>
-            <SummonerInfo data={summonerInfo} />
+            {/* <SummonerInfo data={summonerInfo} /> */}
             <Matches matches={matchList} />
           </Column2>
           <Column3>

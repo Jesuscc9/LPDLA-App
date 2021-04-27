@@ -1,7 +1,7 @@
 import styled, { keyframes } from "styled-components";
 
 export const MainContainer = styled.div`
-  width: 70%;
+  width: 100%;
   max-width: 95%;
   display: flex;
   justify-content: space-around;

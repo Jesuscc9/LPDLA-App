@@ -1,19 +1,8 @@
 import React, { useState } from "react";
-import { Tabs } from "react-bootstrap";
-import { Link } from "react-router-dom";
-import {
-  Nav,
-  LogoContainer,
-  TabsContainer,
-  SearchContainer,
-} from "./styles/Navbar.style";
 
-const Navbar = (props) => {
-  const lol_icon = require("../img/logo.png");
+import {} from "./styles/SideBar.style";
 
-  const [search, setSearch] = useState("");
-  const [server, setServer] = useState("la1");
-
+function Navbar(props) {
   const input = React.useRef(null);
 
   return (
@@ -59,6 +48,6 @@ const Navbar = (props) => {
       </Nav>
     </React.Fragment>
   );
-};
+}
 
 export default Navbar;

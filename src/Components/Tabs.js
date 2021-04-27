@@ -20,7 +20,7 @@ const Tabs = (props) => {
       {summoners.map((summoner) => {
         return (
           <React.Fragment>
-            <div className="button-container">
+            {/* <div className="button-container">
               <button
                 className="tab"
                 key={summoner}
@@ -29,7 +29,7 @@ const Tabs = (props) => {
                 <p className="name-player">{summoner}</p>
               </button>
             </div>
-            <div className="line"></div>
+            <div className="line"></div> */}
           </React.Fragment>
         );
       })}
