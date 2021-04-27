@@ -1,20 +1,4 @@
 import React from "react";
-import {
-  MDBCarousel,
-  MDBCarouselCaption,
-  MDBCarouselInner,
-  MDBCarouselItem,
-  MDBView,
-  MDBMask,
-  MDBContainer,
-  MDBBtn,
-  MDBCard,
-  MDBCardBody,
-  MDBCardImage,
-  MDBCardTitle,
-  MDBCardText,
-  MDBCol,
-} from "mdbreact";
 
 import "../css/Home.css";
 import "../css/iHover.css";
@@ -49,7 +33,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 function Home() {
   return (
     <React.Fragment>
-      <nav className="navbar navbar-expand-lg navbar-dark primary-color">
+      {/* <nav className="navbar navbar-expand-lg navbar-dark primary-color">
         <a className="navbar-brand" href="/">
           LPDLA
         </a>
@@ -80,42 +64,42 @@ function Home() {
         </div>
       </nav>
       <div className="carousel-container">
-        <MDBCarousel
+        <div
           activeItem={1}
           length={5}
           showControls={true}
           showIndicators={true}
           className=""
         >
-          <MDBCarouselInner>
-            <MDBCarouselItem itemId="1">
+          <divInner>
+            <divItem itemId="1">
               <MDBView>
                 <img className="d-block w-100" src={LPDLA1} alt="First slide" />
               </MDBView>
-              <MDBCarouselCaption>
+              <divCaption>
                 <h3 className="h3-responsive"></h3>
                 <p></p>
-              </MDBCarouselCaption>
-            </MDBCarouselItem>
-            <MDBCarouselItem itemId="2">
+              </divCaption>
+            </divItem>
+            <divItem itemId="2">
               <MDBView>
                 <img className="d-block w-100" src={LPDLA2} alt="First slide" />
               </MDBView>
-              <MDBCarouselCaption>
+              <divCaption>
                 <h3 className="h3-responsive"></h3>
                 <p></p>
-              </MDBCarouselCaption>
-            </MDBCarouselItem>
-            <MDBCarouselItem itemId="3">
+              </divCaption>
+            </divItem>
+            <divItem itemId="3">
               <MDBView>
                 <img className="d-block w-100" src={LPDLA3} alt="First slide" />
               </MDBView>
-              <MDBCarouselCaption>
+              <divCaption>
                 <h3 className="h3-responsive"></h3>
                 <p></p>
-              </MDBCarouselCaption>
-            </MDBCarouselItem>
-            <MDBCarouselItem itemId="4">
+              </divCaption>
+            </divItem>
+            <divItem itemId="4">
               <MDBView>
                 <img
                   className="d-block w-100"
@@ -123,22 +107,22 @@ function Home() {
                   alt="Second slide"
                 />
               </MDBView>
-              <MDBCarouselCaption>
+              <divCaption>
                 <h3 className="h3-responsive"></h3>
                 <p></p>
-              </MDBCarouselCaption>
-            </MDBCarouselItem>
-            <MDBCarouselItem itemId="5">
+              </divCaption>
+            </divItem>
+            <divItem itemId="5">
               <MDBView>
                 <img className="d-block w-100" src={LPDLA5} alt="Third slide" />
               </MDBView>
-              <MDBCarouselCaption>
+              <divCaption>
                 <h3 className="h3-responsive"></h3>
                 <p></p>
-              </MDBCarouselCaption>
-            </MDBCarouselItem>
-          </MDBCarouselInner>
-        </MDBCarousel>
+              </divCaption>
+            </divItem>
+          </divInner>
+        </div>
       </div>
       <br />
       <div className="container">
@@ -429,7 +413,7 @@ function Home() {
         </div>
       </div>
       <br />
-      <br />
+      <br /> */}
     </React.Fragment>
   );
 }

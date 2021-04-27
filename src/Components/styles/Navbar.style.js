@@ -2,9 +2,9 @@ import styled, { keyframes } from "styled-components";
 
 export const Nav = styled.div`
   width: 100%;
-  height: 100px;
+  height: 70px;
   position: fixed;
-  border: 1px solid white;
+
   margin-bottom: 20px;
   z-index: 100;
   display: flex;
@@ -16,25 +16,27 @@ export const Nav = styled.div`
     width: 95%;
     margin: auto;
     display: flex;
+    justify-content: space-between;
   }
 `;
 
 export const LogoContainer = styled.div`
   @import url("https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap");
-  width: 230px;
+  width: 370px;
   height: 50px;
-  border: 1px solid white;
+
   z-index: 100;
 
   img {
-    width: 30px;
+    width: 27px;
   }
 
   h1 {
-    font-size: 22px;
+    font-size: 20px;
     font-weight: 500;
     font-family: "Cocogoose Pro Regular Trial";
     margin: auto;
+    opacity: 0.9;
   }
 
   .logo-container {
@@ -47,35 +49,36 @@ export const LogoContainer = styled.div`
 `;
 
 export const TabsContainer = styled.div`
-  width: 70%;
-  border: 1px solid white;
+  width: 100%;
+  margin-right: 40px;
+  display: flex;
+  justify-content: flex-start;
 
   .tabs {
-    font-family: "Cocogoose Pro Regular Trial";
-    font-weight: 100;
+    font-weight: 500;
     display: flex;
-    width: 380px;
+    width: 250px;
     height: 50px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-size: 15px;
   }
 
   .tab {
     height: 20px;
-    flex-wrap: wrap;
     cursor: pointer;
-    opacity: 0.6;
+    opacity: ${(props) => (props.focused ? 1 : 0.6)};
     transition: all 0.2s;
     padding: 0px;
     background-color: transparent;
     border: none;
     color: white;
     outline: none !important;
+    font-size: 16px;
+    font-family: "Cocogoose Pro Regular Trial";
 
     p {
-      margin-bottom: 0px;
+      margin: 0px;
     }
 
     .line {
@@ -110,7 +113,8 @@ export const TabsContainer = styled.div`
 
 export const SearchContainer = styled.div`
   width: 20%;
-  border: 1px solid;
+
+  min-width: 300px;
 
   input {
     background-color: #141332;
