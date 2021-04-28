@@ -1,53 +1,58 @@
 import React, { useState } from "react";
 
-import {} from "./styles/SideBar.style";
+import { SideBarContainer, Summoner } from "./styles/SideBar.style";
 
-function Navbar(props) {
+import Poro from "../img/Poro.png";
+import Poro2 from "../img/Poro2.png";
+import { faUserEdit } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+const SideBar = (props) => {
   const input = React.useRef(null);
+
+  const summoners = props.summoners || [
+    {
+      name: "wideBwipoHappy",
+      image: require("../img/positions/Position_Gold-Top.png"),
+    },
+    {
+      name: "Lalo8115scout",
+      image: require("../img/positions/Position_Gold-Jungle.png"),
+    },
+    {
+      name: "PedroPapas909",
+      image: require("../img/positions/Position_Gold-Mid.png"),
+    },
+    {
+      name: "RekklesFanboy",
+      image: require("../img/positions/Position_Gold-Bot.png"),
+    },
+    {
+      name: "MikyxFanboy",
+      image: require("../img/positions/Position_Gold-Support.png"),
+    },
+  ];
 
   return (
     <React.Fragment>
-      <Nav>
-        <div className="nav-content">
-          <LogoContainer>
-            <div class="logo-container">
-              <img src={lol_icon} alt="" />
-              <h1>LPDLA</h1>
-            </div>
-          </LogoContainer>
-          <TabsContainer>
-            <div className="tabs">
-              <button className="tab">
-                <p>Overflow</p>
-                <div className="line"></div>
-              </button>
-              <button className="tab">
-                <p>Live</p>
-                <div className="line"></div>
-              </button>
-              <button className="tab">
-                <p>Chart</p>
-                <div className="line"></div>
-              </button>
-            </div>
-          </TabsContainer>
-          <SearchContainer>
-            <input
-              onChange={(e) => {
-                setSearch(e.target.value);
-              }}
-              value={search}
-              className="custom-container"
-              type="text"
-              placeholder="Summoner..."
-              aria-label="Search"
-              ref={input}
-            />{" "}
-          </SearchContainer>
+      <SideBarContainer>
+        <div className="summoners">
+          {summoners.map((summoner) => {
+            return (
+              <Summoner>
+                <img src={summoner.image} alt="" />
+                <p>{summoner.name}</p>
+              </Summoner>
+            );
+          })}
         </div>
-      </Nav>
+        <Summoner className="edit-summoners">
+          <FontAwesomeIcon icon={faUserEdit} alt="" className="icon" />
+          <p>Edit Summoners</p>
+        </Summoner>
+      </SideBarContainer>
     </React.Fragment>
   );
-}
+};
 
-export default Navbar;
+export default SideBar;

@@ -2,9 +2,9 @@ import styled, { keyframes } from "styled-components";
 
 export const MainContainer = styled.div`
   width: 100%;
-  max-width: 95%;
+  max-width: 97%;
   display: flex;
-  justify-content: space-around;
+  justify-content: flex-start;
   margin: auto;
 `;
 

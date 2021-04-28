@@ -13,7 +13,7 @@ export const Nav = styled.div`
   color: #dddddd;
 
   .nav-content {
-    width: 95%;
+    width: 97%;
     margin: auto;
     display: flex;
     justify-content: space-between;
@@ -22,7 +22,7 @@ export const Nav = styled.div`
 
 export const LogoContainer = styled.div`
   @import url("https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap");
-  width: 370px;
+  min-width: 230px;
   height: 50px;
 
   z-index: 100;
@@ -89,7 +89,7 @@ export const TabsContainer = styled.div`
       margin: auto;
       position: relative;
       bottom: 2px;
-      transition: all 0.1s;
+      transition: all 0.2s;
     }
 
     &:hover {
@@ -116,12 +116,41 @@ export const SearchContainer = styled.div`
 
   min-width: 300px;
 
-  input {
+  .input {
     background-color: #141332;
     border-radius: 10px;
     border: none;
     height: 80%;
-    width: 80%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 0px;
+    align-items: center;
+  }
+
+  .icon {
+    color: gray;
+    opacity: 0.7;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    min-width: 50px;
+    height: 100%;
+    transition: all 0.2s;
+    border-radius: 10px;
+
+    &:hover {
+      background-color: #28264d;
+    }
+  }
+
+  input {
+    width: 95%;
+    padding-left: 10px;
+    height: 100%;
+    background-color: transparent;
+    border: none;
     margin: auto;
     outline: none;
     color: #dadada;
@@ -131,6 +160,5 @@ export const SearchContainer = styled.div`
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    padding-left: 10px;
   }
 `;

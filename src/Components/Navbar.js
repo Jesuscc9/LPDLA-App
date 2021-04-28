@@ -1,3 +1,5 @@
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useState } from "react";
 import { Tabs } from "react-bootstrap";
 import { Link } from "react-router-dom";
@@ -43,17 +45,22 @@ const Navbar = (props) => {
             </div>
           </TabsContainer>
           <SearchContainer>
-            <input
-              onChange={(e) => {
-                setSearch(e.target.value);
-              }}
-              value={search}
-              className="custom-container"
-              type="text"
-              placeholder="Summoner..."
-              aria-label="Search"
-              ref={input}
-            />{" "}
+            <form className="input">
+              <input
+                onChange={(e) => {
+                  setSearch(e.target.value);
+                }}
+                value={search}
+                className="custom-container"
+                type="text"
+                placeholder="Summoner..."
+                aria-label="Search"
+                ref={input}
+              />{" "}
+              <button className="icon" type="submit">
+                <FontAwesomeIcon icon={faSearch} />
+              </button>
+            </form>
           </SearchContainer>
         </div>
       </Nav>

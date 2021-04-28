@@ -4,7 +4,7 @@ import "../css/Stats.css";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 
 import Navbar from "../Components/Navbar";
-import Tabs from "../Components/Tabs";
+import SideBar from "../Components/SideBar";
 import EloInfo from "../Components/EloInfo";
 import SummonerInfo from "../Components/SummonerInfo";
 import MostUsedChamps from "../Components/MostUsedChamps";
@@ -252,19 +252,16 @@ const Stats = () => {
           handleSummonerChange(name);
         }}
         onRegionChange={(region) => {
-          console.log("SE cambia de region");
           server = region;
         }}
       />
       <br />
-      <div className="container d-flex justify-content-center">
-        <Tabs
-          onSummonerChange={(name) => {
-            handleSummonerChange(name);
-          }}
-        />
-      </div>
       <br />
+      <br />
+      <br />
+      <MainContainer>
+        <SideBar />
+      </MainContainer>
 
       {loading ? (
         <div className="container d-flex justify-content-center">
