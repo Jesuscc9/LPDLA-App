@@ -241,7 +241,7 @@ const Stats = () => {
   };
 
   useEffect(() => {
-    //fetchData();
+    fetchData();
     setLoading(false);
   }, [summoner]);
 
