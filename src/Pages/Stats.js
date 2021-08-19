@@ -13,9 +13,13 @@ import Matches from "../Components/Matches";
 import Loader from "react-loader-spinner";
 import { Animated } from "react-animated-css";
 import { MainContainer, Column1, Column2, Column3 } from "./styles/Stats.style";
+import { key } from "../data/key";
+import { api } from "../data/lolApi.js";
+import actions from "../redux/data/actions";
+import { useDispatch } from "react-redux";
 
 const Stats = () => {
-  const API_KEY = "RGAPI-b184baf4-2de0-4277-9f4f-5db7b0a682bb";
+  const API_KEY = key;
 
   const [matchList, setMatchList] = useState([]);
   const [summoner, setSummoner] = useState("Rekkłes Fanboy");
@@ -64,10 +68,12 @@ const Stats = () => {
     if (mostMasteryChamps.length >= 19)
       mostMasteryChamps = mostMasteryChamps.slice(0, 20);
 
+    console.log("se va a llamar");
+
     const championNames = (
       await (
         await fetch(
-          `http://ddragon.leagueoflegends.com/cdn/${version}/data/en_US/champion.json`
+          `https://ddragon.leagueoflegends.com/cdn/${version}/data/en_US/champion.json`
         )
       ).json()
     ).data;
@@ -105,7 +111,7 @@ const Stats = () => {
     const getSummonerName = async (summId) => {
       const summonerSpells = await (
         await fetch(
-          `http://ddragon.leagueoflegends.com/cdn/${version}/data/en_US/summoner.json`
+          `https://ddragon.leagueoflegends.com/cdn/${version}/data/en_US/summoner.json`
         )
       ).json();
 
@@ -117,7 +123,7 @@ const Stats = () => {
     const getRuneName = async (runeId, primary) => {
       const runesNames = await (
         await fetch(
-          `http://ddragon.leagueoflegends.com/cdn/${version}/data/en_US/runesReforged.json`
+          `https://ddragon.leagueoflegends.com/cdn/${version}/data/en_US/runesReforged.json`
         )
       ).json();
 
@@ -240,8 +246,16 @@ const Stats = () => {
     setSummoner(name);
   };
 
-  useEffect(() => {
-    fetchData();
+  const dispatch = useDispatch();
+
+  useEffect(async () => {
+    api.server = server;
+  }, [server]);
+
+  useEffect(async () => {
+    // fetchData();
+    await api.getStaticData();
+    dispatch(actions.setSummonerData(await api.getSummonerData(summoner)));
   }, [summoner]);
 
   return (

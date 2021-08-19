@@ -1,0 +1,192 @@
+import { key } from "../data/key";
+
+export const api = {
+  API_KEY: key,
+  server: "",
+  runes: {},
+  champions: [],
+  version: "",
+  summoners: [],
+  queues: [],
+
+  getStaticData: async () => {
+    api.version = (
+      await (
+        await fetch("https://ddragon.leagueoflegends.com/api/versions.json")
+      ).json()
+    )[0];
+
+    api.runes = await (
+      await fetch(
+        `https://ddragon.leagueoflegends.com/cdn/${api.version}/data/en_US/runesReforged.json`
+      )
+    ).json();
+
+    api.summoners = await (
+      await fetch(
+        `https://ddragon.leagueoflegends.com/cdn/${api.version}/data/en_US/summoner.json`
+      )
+    ).json();
+
+    api.champions = await (
+      await (
+        await fetch(
+          `https://ddragon.leagueoflegends.com/cdn/${api.version}/data/en_US/champion.json`
+        )
+      ).json()
+    ).data;
+  },
+  getSummonerName: async (summonerId) => {
+    return Object.keys(api.summoners.data).find((e) => {
+      return parseInt(api.summoners.data[e].key) == parseInt(summonerId);
+    });
+  },
+  getRuneName: async (runeId, primary) => {
+    if (primary) {
+      for (let i = 0; i < api.runes.length; i++) {
+        const runes = api.runes[i].slots[0].runes;
+        for (let j = 0; j < runes.length; j++) {
+          if (runes[j].id == runeId) {
+            return runes[j].icon;
+          }
+        }
+      }
+    }
+
+    return api.runes.find((e) => {
+      return e.id == runeId;
+    });
+  },
+  getChampionName: async (id) => {
+    const keys = Object.keys(api.champions);
+    for (let i = 0; i < keys.length; i++) {
+      if (id == parseInt(api.champions[keys[i]].key)) {
+        return api.champions[keys[i]].id;
+      }
+    }
+  },
+  getMostUsedChamps: async (summonerId) => {
+    let mostMasteryChamps = await (
+      await fetch(
+        `https://${api.server}.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-summoner/${summonerId}$?api_key=${api.API_KEY}`
+      )
+    ).json();
+
+    if (mostMasteryChamps.length >= 19)
+      mostMasteryChamps = mostMasteryChamps.slice(0, 20);
+
+    const championNames = (
+      await (
+        await fetch(
+          `https://ddragon.leagueoflegends.com/cdn/${api.version}/data/en_US/champion.json`
+        )
+      ).json()
+    ).data;
+    console.log(championNames);
+
+    mostMasteryChamps.forEach((el) => {
+      el.masteryImg =
+        el.championLevel >= 5
+          ? `https://raw.communitydragon.org/pbe/game/assets/ux/mastery/mastery_icon_${el.championLevel}.png`
+          : "https://raw.communitydragon.org/pbe/game/assets/ux/mastery/mastery_icon_default.png";
+      el.championName = api.getChampionName(el.championId);
+      el.championImg = `http://ddragon.leagueoflegends.com/cdn/${api.version}/img/champion/${el.championName}.png`;
+    });
+
+    return mostMasteryChamps;
+  },
+  getGameType: async (queueId) => {
+    if (queueId == 0) {
+      return "Custom 😛";
+    } else if (queueId == 400) {
+      return "Normal 5v5 🍗";
+    } else if (queueId == 420) {
+      return "Ranked Solo 😳";
+    } else if (queueId == 440) {
+      return "Ranked Flex 🥵";
+    } else if (queueId == 450) {
+      return "ARAM 😎🤙";
+    }
+
+    const queues = await (
+      await fetch(`http://static.developer.riotgames.com/docs/lol/queues.json`)
+    ).json();
+
+    let type = queues.find((e) => {
+      return e.queueId == queueId;
+    }).description;
+
+    type = type.replace("games", "");
+
+    return type;
+  },
+  getMatchList: async (summonerId) => {
+    let matches = (
+      await (
+        await fetch(
+          `https://${api.server}.api.riotgames.com/lol/match/v4/matchlists/by-account/${summonerId}$?api_key=${api.API_KEY}`
+        )
+      ).json()
+    ).matches;
+
+    if (matches.length >= 10) matches = matches.slice(0, 10);
+
+    for (let i = 0; i < matches.length; i++) {
+      matches[i].gameDetails = await (
+        await fetch(
+          `https://${api.server}.api.riotgames.com/lol/match/v4/matches/${matches[i].gameId}?api_key=${api.API_KEY}`
+        )
+      ).json();
+
+      matches[i].summonerId = summonerId;
+      matches[i].championName = api.getChampionName(matches[i].champion);
+
+      const participantId = matches[i].gameDetails.participantIdentities.find(
+        (e) => {
+          return e.player.summonerId == matches[i].summonerId;
+        }
+      );
+
+      const gameData = matches[i].gameDetails.participants.find((e) => {
+        return e.participantId == participantId.participantId;
+      });
+
+      matches[i].championName = matches[i].championName;
+      matches[i].stats = gameData;
+      matches[
+        i
+      ].primaryRune = `http://ddragon.leagueoflegends.com/cdn/img/${api.getRuneName(
+        matches[i].stats.stats.perk0,
+        true
+      )}`;
+
+      matches[i].gameType = api.getGameType(matches[i].gameDetails.queueId);
+
+      matches[i].secondaryRune = `http://ddragon.leagueoflegends.com/cdn/img/${
+        api.getRuneName(matches[i].stats.stats.perkSubStyle).icon
+      }`;
+      matches[i].spell1Name = `http://ddragon.leagueoflegends.com/cdn/${
+        api.version
+      }/img/spell/${api.getSummonerName(gameData.spell1Id)}.png`;
+      matches[i].spell2Name = `http://ddragon.leagueoflegends.com/cdn/${
+        api.version
+      }/img/spell/${api.getSummonerName(gameData.spell2Id)}.png`;
+      matches[
+        i
+      ].championImg = `http://ddragon.leagueoflegends.com/cdn/${api.version}/img/champion/${matches[i].championName}.png`;
+    }
+  },
+  getSummonerData: async (summoner) => {
+    const summonerData = await (
+      await fetch(
+        `https://${api.server}.api.riotgames.com/lol/summoner/v4/summoners/by-name/${summoner}?api_key=${api.API_KEY}`
+      )
+    ).json();
+
+    return {
+      ...summonerData,
+      profileImg: `http://ddragon.leagueoflegends.com/cdn/${api.version}/img/profileicon/${summonerData.profileIconId}.png`,
+      mostUsedChamps: await api.getMostUsedChamps(summonerData.id),
+    };
+  },
+};
