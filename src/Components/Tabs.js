@@ -19,7 +19,7 @@ const Tabs = (props) => {
     <div className="tabs-container d-flex">
       {summoners.map((summoner) => {
         return (
-          <React.Fragment>
+          <React.Fragment key={summoner}>
             <div className="button-container">
               <button
                 className="tab"

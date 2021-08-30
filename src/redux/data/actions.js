@@ -3,6 +3,7 @@ const actions = {
   SET_RUNES: "DATA/SET_RUNES",
   SET_SUMMONERS: "DATA/SET_SUMMONERS",
   SET_SUMMONER_DATA: "DATA/SET_SUMMONER_DATA",
+  SET_MATCHESLIST: "DATA/SET_MATCHESLIST",
 
   setRunes: (runes) => ({
     type: actions.SET_RUNES,
@@ -18,6 +19,10 @@ const actions = {
   }),
   setSummonerData: (data) => ({
     type: actions.SET_SUMMONER_DATA,
+    payload: data,
+  }),
+  setMatcheslist: (data) => ({
+    type: actions.SET_MATCHESLIST,
     payload: data,
   }),
 };

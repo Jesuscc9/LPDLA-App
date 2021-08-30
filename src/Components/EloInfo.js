@@ -1,28 +1,32 @@
 import React, { useState } from "react";
 import "../css/EloInfo.css";
+import { useSelector } from "react-redux";
 
-function EloInfo ({data, onQueueChange}){
-
-
+const EloInfo = ({ queue, onQueueChange }) => {
   const emblems = {
-    bronze: require('../img/emblems/Emblem_Bronze.png'),
-    silver: require('../img/emblems/Emblem_Silver.png'),
-    gold: require('../img/emblems/Emblem_Gold.png'),
-    platinum: require('../img/emblems/Emblem_Platinum.png'),
-    diamond: require('../img/emblems/Emblem_Diamond.png'),
-    master: require('../img/emblems/Emblem_Master.png'),
-    grandmaster: require('../img/emblems/Emblem_Grandmaster.png'),
-    challenger: require('../img/emblems/Emblem_Challenger.png'),
-  }
+    bronze: require("../img/emblems/Emblem_Bronze.png"),
+    silver: require("../img/emblems/Emblem_Silver.png"),
+    gold: require("../img/emblems/Emblem_Gold.png"),
+    platinum: require("../img/emblems/Emblem_Platinum.png"),
+    diamond: require("../img/emblems/Emblem_Diamond.png"),
+    master: require("../img/emblems/Emblem_Master.png"),
+    grandmaster: require("../img/emblems/Emblem_Grandmaster.png"),
+    challenger: require("../img/emblems/Emblem_Challenger.png"),
+  };
 
-  const option = React.useRef(null)
+  const option = React.useRef(null);
 
   const resetOption = () => {
     option.current.innerHTML = `
       <option value="soloq">SoloQ</option>
       <option value="flex">Flex</option>
-    `
-  }
+    `;
+  };
+
+  const data = useSelector((state) => {
+    console.log(state);
+    return state.data.summonerData.eloInfo[queue == "soloq" ? 0 : 1];
+  });
 
   if (data) {
     return (
@@ -31,7 +35,7 @@ function EloInfo ({data, onQueueChange}){
           <div className="col1">
             <div className="row1 elo-container">
               <img
-                src={emblems[((data.tier).toLowerCase())]}
+                src={emblems[data.tier.toLowerCase()]}
                 alt=""
                 className="elo-img"
               />
@@ -42,9 +46,15 @@ function EloInfo ({data, onQueueChange}){
           </div>
           <div className="col2">
             <div className="row3-1">
-              <select name="" id="" className="form-control queue" onChange={(e) => {
-                onQueueChange(e.target.value)
-              }} ref={option}>
+              <select
+                name=""
+                id=""
+                className="form-control queue"
+                onChange={(e) => {
+                  onQueueChange(e.target.value);
+                }}
+                ref={option}
+              >
                 <option value="soloq">SoloQ</option>
                 <option value="flex">Flex</option>
               </select>
@@ -59,19 +69,22 @@ function EloInfo ({data, onQueueChange}){
                 <span style={{ color: "#F94848" }}>L</span>
               </div>
               <div className="wr" style={{ color: "black" }}>
-                {Math.round(parseInt(data.wins) / (parseInt(data.wins) + parseInt(data.losses)) * 100)}% WR
+                {Math.round(
+                  (parseInt(data.wins) /
+                    (parseInt(data.wins) + parseInt(data.losses))) *
+                    100
+                )}
+                % WR
               </div>
             </div>
-            <div className="row3">
-              {data.leaguePoints} LP
-            </div>
+            <div className="row3">{data.leaguePoints} LP</div>
           </div>
         </div>
       </React.Fragment>
     );
   } else {
-    return <div></div>;
+    return "";
   }
-}
+};
 
 export default EloInfo;

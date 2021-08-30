@@ -2,7 +2,7 @@ import { key } from "../data/key";
 
 export const api = {
   API_KEY: key,
-  server: "",
+  server: "la1",
   runes: {},
   champions: [],
   version: "",
@@ -35,13 +35,17 @@ export const api = {
         )
       ).json()
     ).data;
+
+    api.queues = await (
+      await fetch(`http://static.developer.riotgames.com/docs/lol/queues.json`)
+    ).json();
   },
-  getSummonerName: async (summonerId) => {
+  getSummonerName: (summonerId) => {
     return Object.keys(api.summoners.data).find((e) => {
       return parseInt(api.summoners.data[e].key) == parseInt(summonerId);
     });
   },
-  getRuneName: async (runeId, primary) => {
+  getRuneName: (runeId, primary) => {
     if (primary) {
       for (let i = 0; i < api.runes.length; i++) {
         const runes = api.runes[i].slots[0].runes;
@@ -57,12 +61,25 @@ export const api = {
       return e.id == runeId;
     });
   },
-  getChampionName: async (id) => {
+  getChampionName: (id) => {
     const keys = Object.keys(api.champions);
     for (let i = 0; i < keys.length; i++) {
       if (id == parseInt(api.champions[keys[i]].key)) {
         return api.champions[keys[i]].id;
       }
+    }
+  },
+  getElo: async (summonerId) => {
+    const elo = await (
+      await fetch(
+        `https://${api.server}.api.riotgames.com/lol/league/v4/entries/by-summoner/${summonerId}$?api_key=${api.API_KEY}`
+      )
+    ).json();
+
+    if (elo[0].queueType == "RANKED_SOLO_5x5") {
+      return elo;
+    } else {
+      return [{ ...elo[1] }, { ...elo[0] }];
     }
   },
   getMostUsedChamps: async (summonerId) => {
@@ -75,15 +92,6 @@ export const api = {
     if (mostMasteryChamps.length >= 19)
       mostMasteryChamps = mostMasteryChamps.slice(0, 20);
 
-    const championNames = (
-      await (
-        await fetch(
-          `https://ddragon.leagueoflegends.com/cdn/${api.version}/data/en_US/champion.json`
-        )
-      ).json()
-    ).data;
-    console.log(championNames);
-
     mostMasteryChamps.forEach((el) => {
       el.masteryImg =
         el.championLevel >= 5
@@ -95,7 +103,7 @@ export const api = {
 
     return mostMasteryChamps;
   },
-  getGameType: async (queueId) => {
+  getGameType: (queueId) => {
     if (queueId == 0) {
       return "Custom 😛";
     } else if (queueId == 400) {
@@ -108,11 +116,7 @@ export const api = {
       return "ARAM 😎🤙";
     }
 
-    const queues = await (
-      await fetch(`http://static.developer.riotgames.com/docs/lol/queues.json`)
-    ).json();
-
-    let type = queues.find((e) => {
+    let type = api.queues.find((e) => {
       return e.queueId == queueId;
     }).description;
 
@@ -120,11 +124,11 @@ export const api = {
 
     return type;
   },
-  getMatchList: async (summonerId) => {
+  getMatchList: async (accountId, summonerId) => {
     let matches = (
       await (
         await fetch(
-          `https://${api.server}.api.riotgames.com/lol/match/v4/matchlists/by-account/${summonerId}$?api_key=${api.API_KEY}`
+          `https://${api.server}.api.riotgames.com/lol/match/v4/matchlists/by-account/${accountId}$?api_key=${api.API_KEY}`
         )
       ).json()
     ).matches;
@@ -143,7 +147,7 @@ export const api = {
 
       const participantId = matches[i].gameDetails.participantIdentities.find(
         (e) => {
-          return e.player.summonerId == matches[i].summonerId;
+          return e.player.summonerId == summonerId;
         }
       );
 
@@ -175,6 +179,8 @@ export const api = {
         i
       ].championImg = `http://ddragon.leagueoflegends.com/cdn/${api.version}/img/champion/${matches[i].championName}.png`;
     }
+
+    return matches;
   },
   getSummonerData: async (summoner) => {
     const summonerData = await (
@@ -187,6 +193,11 @@ export const api = {
       ...summonerData,
       profileImg: `http://ddragon.leagueoflegends.com/cdn/${api.version}/img/profileicon/${summonerData.profileIconId}.png`,
       mostUsedChamps: await api.getMostUsedChamps(summonerData.id),
+      matchList: await api.getMatchList(
+        summonerData.accountId,
+        summonerData.id
+      ),
+      eloInfo: await api.getElo(summonerData.id),
     };
   },
 };

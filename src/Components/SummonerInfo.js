@@ -4,8 +4,11 @@ import profileIcon from "../img/logo.jpg";
 import adc from "../img/positions/adc-icon.png";
 import jg from "../img/positions/jungla-icon.jpeg";
 import { TimeDiff } from "./Time";
+import { useSelector } from "react-redux";
 
-const SummonerInfo = ({ data }) => {
+const SummonerInfo = () => {
+  const data = useSelector((state) => state.data.summonerData);
+
   return (
     <React.Fragment>
       <div className="matches-summ-info">
@@ -13,7 +16,7 @@ const SummonerInfo = ({ data }) => {
           <div className="col4">
             <div className="profile-icon-container">
               <div className="profile-icon">
-                <img src={data.profileIconImg} alt="" className="profile-img" />
+                <img src={data.profileImg} alt="" className="profile-img" />
               </div>
             </div>
             <div className="lvl-container">{data.summonerLevel}</div>
@@ -21,7 +24,7 @@ const SummonerInfo = ({ data }) => {
           <div className="col5">
             <div className="row4">{data.name}</div>
             <div className="row5">
-              Última partida: {TimeDiff(data.lastGame)}
+              Última partida: {TimeDiff(data.matchList[0]?.timestamp)}
             </div>
           </div>
           <div className="col6 d-none">
