@@ -3,9 +3,8 @@ import Match from "../Components/Match";
 import { useSelector } from "react-redux";
 
 const Matches = () => {
-  const matches = useSelector((state) => state.data.summonerData.matchList);
+  const matches = useSelector((state) => state.data.matches);
 
-  console.log("matches");
   console.log(matches);
 
   return (

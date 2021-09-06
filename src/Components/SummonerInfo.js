@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "../css/SummonerInfo.css";
 import profileIcon from "../img/logo.jpg";
 import adc from "../img/positions/adc-icon.png";
@@ -7,7 +7,18 @@ import { TimeDiff } from "./Time";
 import { useSelector } from "react-redux";
 
 const SummonerInfo = () => {
-  const data = useSelector((state) => state.data.summonerData);
+  const data = useSelector((state) => {
+    return state.data.summonerData;
+  });
+
+  const matches = useSelector((state) => {
+    return state.data.matches;
+  });
+
+  useEffect(() => {
+    console.log(data);
+    console.log(matches);
+  }, [data, matches]);
 
   return (
     <React.Fragment>
@@ -24,7 +35,7 @@ const SummonerInfo = () => {
           <div className="col5">
             <div className="row4">{data.name}</div>
             <div className="row5">
-              Última partida: {TimeDiff(data.matchList[0]?.timestamp)}
+              {/* Última partida: {TimeDiff(data.matchList[0]?.timestamp)} */}
             </div>
           </div>
           <div className="col6 d-none">

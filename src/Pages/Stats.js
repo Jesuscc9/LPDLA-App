@@ -54,8 +54,9 @@ const Stats = () => {
     setLoading(true);
     const fetchData = async () => {
       setLoading(true);
-      await new Promise((resolve) => setTimeout(resolve, 400));
+      // await new Promise((resolve) => setTimeout(resolve, 400));
       dispatch(actions.setSummonerData(await api.getSummonerData(summoner)));
+      dispatch(actions.setMatcheslist(await api.getMatchList()));
       setLoading(false);
     };
 
@@ -63,8 +64,9 @@ const Stats = () => {
   }, [summoner]);
 
   return (
-    <React.Fragment>
-      <Navbar
+    <>
+      <SummonerInfo />
+      {/* <Navbar
         onSubmit={(name) => {
           handleSummonerChange(name);
         }}
@@ -126,8 +128,8 @@ const Stats = () => {
         </MainContainer>
       </Animated>
 
-      <br />
-    </React.Fragment>
+      <br /> */}
+    </>
   );
 };
 

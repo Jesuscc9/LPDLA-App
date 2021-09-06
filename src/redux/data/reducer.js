@@ -2,11 +2,12 @@ import actions from "./actions";
 
 const initialState = {
   version: "",
-  summonerData: { mostUsedChamps: [], matchList: [], eloInfo: [] },
+  summonerData: {},
   runes: [],
   champions: {},
   summoners: {},
   matches: [],
+  eloInfo: [],
 };
 
 const reducer = (state = initialState, action) => {
@@ -25,7 +26,7 @@ const reducer = (state = initialState, action) => {
     case actions.SET_SUMMONER_DATA:
       return { ...state, summonerData: { ...payload } };
 
-    case actions.SET_MATCHES_LIST:
+    case actions.SET_MATCHESLIST:
       return { ...state, matches: [...payload] };
 
     default:

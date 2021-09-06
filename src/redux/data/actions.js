@@ -19,11 +19,11 @@ const actions = {
   }),
   setSummonerData: (data) => ({
     type: actions.SET_SUMMONER_DATA,
-    payload: data,
+    payload: { ...data },
   }),
   setMatcheslist: (data) => ({
     type: actions.SET_MATCHESLIST,
-    payload: data,
+    payload: [...data],
   }),
 };
 
