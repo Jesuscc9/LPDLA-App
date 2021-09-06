@@ -16,8 +16,6 @@ import {
   MDBCol,
 } from "mdbreact";
 
-import "../css/Home.css";
-import "../css/iHover.css";
 import LPDLA1 from "../img/team/LPDLA.jpg";
 import LPDLA2 from "../img/team/peruanos_completo.jpg";
 import LPDLA3 from "../img/team/car1.jpg";
@@ -251,7 +249,7 @@ function Home() {
       <br />
       <div className="container p-0">
         <div className="row justify-content-around">
-          <MDBCol style={{ maxWidth: "20rem", margin:"0px", padding: "0px" }}>
+          <MDBCol style={{ maxWidth: "20rem", margin: "0px", padding: "0px" }}>
             <MDBCard className="i1 m-0">
               <MDBCardImage
                 className="img-fluid player-pic"

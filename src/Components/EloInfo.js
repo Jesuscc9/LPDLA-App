@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import "../css/EloInfo.css";
 import { useSelector } from "react-redux";
 
 const EloInfo = ({ queue, onQueueChange }) => {

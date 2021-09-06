@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import "../css/Stats.css";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 
 import Navbar from "../Components/Navbar";
@@ -12,7 +11,13 @@ import Matches from "../Components/Matches";
 
 import Loader from "react-loader-spinner";
 import { Animated } from "react-animated-css";
-import { MainContainer, Column1, Column2, Column3 } from "./styles/Stats.style";
+import {
+  MainContainer,
+  Column1,
+  Column2,
+  Column3,
+  MainLayout,
+} from "./styles/Stats.style";
 import { key } from "../data/key";
 import { api } from "../data/lolApi.js";
 import actions from "../redux/data/actions";
@@ -65,7 +70,9 @@ const Stats = () => {
 
   return (
     <>
-      <SummonerInfo />
+      <MainLayout>
+        <SummonerInfo />
+      </MainLayout>
       {/* <Navbar
         onSubmit={(name) => {
           handleSummonerChange(name);

@@ -1,13 +1,13 @@
 import React, { useEffect } from "react";
-import "../css/SummonerInfo.css";
 import profileIcon from "../img/logo.jpg";
 import adc from "../img/positions/adc-icon.png";
 import jg from "../img/positions/jungla-icon.jpeg";
 import { TimeDiff } from "./Time";
 import { useSelector } from "react-redux";
+import { SummonerInfoContainer } from "./styles/SummonerInfo.style";
 
 const SummonerInfo = () => {
-  const data = useSelector((state) => {
+  const summonerData = useSelector((state) => {
     return state.data.summonerData;
   });
 
@@ -15,55 +15,39 @@ const SummonerInfo = () => {
     return state.data.matches;
   });
 
-  useEffect(() => {
-    console.log(data);
-    console.log(matches);
-  }, [data, matches]);
-
   return (
-    <React.Fragment>
-      <div className="matches-summ-info">
-        <div className="summoner-info">
-          <div className="col4">
-            <div className="profile-icon-container">
-              <div className="profile-icon">
-                <img src={data.profileImg} alt="" className="profile-img" />
-              </div>
-            </div>
-            <div className="lvl-container">{data.summonerLevel}</div>
-          </div>
-          <div className="col5">
-            <div className="row4">{data.name}</div>
-            <div className="row5">
-              {/* Última partida: {TimeDiff(data.matchList[0]?.timestamp)} */}
-            </div>
-          </div>
-          <div className="col6 d-none">
-            <div className="favorites-position">
-              <div className="row6 text-center">Posiciones favoritas:</div>
-              <div className="row7">
-                <div className="position-container">
-                  <img src={adc} alt="" className="position" />
-                  <div className="position-data">
-                    Bot
-                    <br />
-                    83%
-                  </div>
-                </div>
-                <div className="position-container">
-                  <img src={jg} alt="" className="position" />
-                  <div className="position-data">
-                    Jungla
-                    <br />
-                    17%
-                  </div>
-                </div>
-              </div>
-            </div>
+    <SummonerInfoContainer
+      backgroundUrl={
+        "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Yasuo_0.jpg"
+      }
+    >
+      <div className="profile-img-container">
+        <img src={summonerData.profileImg} alt="" />
+        <div className="level-container">
+          <div className="level">
+            <p>198</p>
           </div>
         </div>
       </div>
-    </React.Fragment>
+      <div className="name-container">
+        <h1>PedroPapas909</h1>
+        <p>Last game: 1 hour ago</p>
+      </div>
+      <div className="roles-container">
+        <p>Roles</p>
+        <div className="roles-images">
+          <img
+            src="https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-clash/global/default/assets/images/position-selector/positions/icon-position-bottom-blue.png"
+            alt=""
+          />
+          <img
+            src="https://raw.communitydragon.org/t/latest/plugins/rcp-fe-lol-clash/global/default/assets/images/position-selector/positions/icon-position-jungle-blue.png"
+            alt=""
+          />
+        </div>
+      </div>
+      {/* </div> */}
+    </SummonerInfoContainer>
   );
 };
 
