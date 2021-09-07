@@ -25,13 +25,15 @@ const SummonerInfo = () => {
         <img src={summonerData.profileImg} alt="" />
         <div className="level-container">
           <div className="level">
-            <p>198</p>
+            <p>{summonerData.summonerLevel}</p>
           </div>
         </div>
       </div>
       <div className="name-container">
-        <h1>PedroPapas909</h1>
-        <p>Last game: 1 hour ago</p>
+        <h1>{summonerData.name}</h1>
+        <p>
+          Last game: {matches[0]?.timestamp && TimeDiff(matches[0]?.timestamp)}
+        </p>
       </div>
       <div className="roles-container">
         <p>Roles</p>
