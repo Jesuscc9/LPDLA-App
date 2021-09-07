@@ -1,8 +1,8 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 
 export const SummonerInfoContainer = styled.div`
   background-color: #22222e;
-  width: 750px;
+  width: 730px;
   max-width: 95%;
   padding: 20px;
   display: flex;
@@ -11,15 +11,17 @@ export const SummonerInfoContainer = styled.div`
   box-sizing: border-box;
   border-radius: 24px;
   margin: 50px auto;
+  height: 160px;
 
+  background-position: 0px 0px;
   background-image: ${(props) =>
     `linear-gradient(90deg, #22222e 9.05%, rgba(34, 34, 46, 0.9) 100%), url("${props.backgroundUrl}");`};
   background-size: cover;
   background-position: center;
 
   .profile-img-container {
-    width: 126px;
-    height: 126px;
+    width: 116px;
+    height: 116px;
     padding: 4px;
     outline: none;
     box-sizing: border-box;
@@ -65,7 +67,7 @@ export const SummonerInfoContainer = styled.div`
       margin-top: 10px;
       font-family: "Roboto", sans-serif;
       font-weight: bold;
-      font-size: 16px;
+      font-size: 14px;
       color: #888894;
     }
   }

@@ -22,6 +22,7 @@ import { key } from "../data/key";
 import { api } from "../data/lolApi.js";
 import actions from "../redux/data/actions";
 import { useDispatch } from "react-redux";
+import Sidebar from "../Components/Sidebar";
 
 const Stats = () => {
   const [summoner, setSummoner] = useState("Rekkłes Fanboy");
@@ -71,6 +72,7 @@ const Stats = () => {
   return (
     <>
       <MainLayout>
+        <Sidebar />
         <SummonerInfo />
       </MainLayout>
       {/* <Navbar
