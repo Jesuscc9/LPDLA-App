@@ -184,7 +184,7 @@ const Match = ({ data, emojiIndex }) => {
           <div className="items">
             {items.map((item) => {
               return (
-                <React.Fragment>
+                <React.Fragment key={item}>
                   {item ? (
                     <img
                       className="item"

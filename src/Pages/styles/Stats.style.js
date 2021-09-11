@@ -1,5 +1,6 @@
 import styled, { keyframes } from "styled-components";
 
+<<<<<<< HEAD
 export const MainContainer = styled.div`
   width: 100%;
   max-width: 97%;
@@ -30,4 +31,8 @@ export const Column3 = styled.div`
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
+=======
+export const MainLayout = styled.div`
+  display: flex;
+>>>>>>> tmp
 `;

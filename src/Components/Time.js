@@ -1,25 +1,30 @@
 export const TimeDiff = (previous) => {
   const current = Date.now();
-  const msPerMinute = 60 * 1000;
-  const msPerHour = msPerMinute * 60;
-  const msPerDay = msPerHour * 24;
-  const msPerMonth = msPerDay * 30;
-  const msPerYear = msPerDay * 365;
+  var msPerMinute = 60 * 1000;
+  var msPerHour = msPerMinute * 60;
+  var msPerDay = msPerHour * 24;
+  var msPerMonth = msPerDay * 30;
+  var msPerYear = msPerDay * 365;
 
-  const elapsed = current - previous;
+  var elapsed = current - previous;
 
   if (elapsed < msPerMinute) {
-    return "Hace " + Math.round(elapsed / 1000) + " segundos ";
+    const seconds = Math.round(elapsed / 1000);
+    return `${seconds} second${seconds > 1 ? "s" : ""} ago`;
   } else if (elapsed < msPerHour) {
-    return "Hace " + Math.round(elapsed / msPerMinute) + " minutos";
+    const minutes = Math.round(elapsed / msPerMinute);
+    return `${minutes} minute${minutes > 1 ? "s" : ""} ago`;
   } else if (elapsed < msPerDay) {
-    return "Hace " + Math.round(elapsed / msPerHour) + " horas";
+    const hours = Math.round(elapsed / msPerHour);
+    return `${hours} hour${hours > 1 ? "s" : ""} ago`;
   } else if (elapsed < msPerMonth) {
-    return "Hace " + Math.round(elapsed / msPerDay) + " días";
+    const days = Math.round(elapsed / msPerDay);
+    return `${days > 1 ? `${days} days ago` : "Yesterday"}`;
   } else if (elapsed < msPerYear) {
-    return "Hace " + Math.round(elapsed / msPerMonth) + " meses";
+    const months = Math.round(elapsed / msPerMonth);
+    return `${months} month${months > 1 ? "s" : ""} ago`;
   } else {
-    return "Hace " + Math.round(elapsed / msPerYear) + " años";
+    return Math.round(elapsed / msPerYear) + " years ago";
   }
 };
 
