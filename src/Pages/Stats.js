@@ -43,22 +43,22 @@ const Stats = () => {
 
   useEffect(() => {
     setLoading(true);
+
     const fetchData = async () => {
       setLoading(true);
       try {
         dispatch(actions.setSummonerData(await api.getSummonerData(summoner)));
         dispatch(actions.setMatcheslist(await api.getMatchList()));
         setError(false);
+        setLoading(false);
       } catch (e) {
         console.log(e);
+        setLoading(false);
         setError(true);
       }
-
-      setLoading(false);
     };
 
     fetchData();
-    setLoading(false);
   }, [summoner]);
 
   return (
@@ -72,27 +72,43 @@ const Stats = () => {
             searchSummoner={(summoner) => {
               setSummoner(summoner);
             }}
+            updateServer={(server) => {
+              api.server = server;
+            }}
           />
           <AnimatePresence>
-            {!error ? (
-              <motion.div
-                key="summonerData"
-                initial={{ scale: 0.3, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                exit={{ opacity: 0 }}
-              >
-                <SummonerInfo />
-              </motion.div>
+            {loading ? (
+              <div className="loader">
+                <Loader
+                  type="TailSpin"
+                  color="#117f90"
+                  height={60}
+                  width={60}
+                />
+              </div>
             ) : (
-              <motion.div
-                key="error"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                className="error-container"
-              >
-                <h1>Error trying to fetch that summoner :(</h1>
-              </motion.div>
+              <div>
+                {!error ? (
+                  <motion.div
+                    key="summonerData"
+                    initial={{ scale: 0.3, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                  >
+                    <SummonerInfo />
+                  </motion.div>
+                ) : (
+                  <motion.div
+                    key="error"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    className="error-container"
+                  >
+                    <h1>Error trying to fetch that summoner :(</h1>
+                  </motion.div>
+                )}
+              </div>
             )}
           </AnimatePresence>
         </div>

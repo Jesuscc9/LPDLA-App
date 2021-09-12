@@ -11,6 +11,7 @@ const Navbar = ({ searchSummoner, updateServer }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (!search.length) return;
     searchSummoner(search);
   };
 
@@ -37,6 +38,17 @@ const Navbar = ({ searchSummoner, updateServer }) => {
             type="text"
             placeholder="Summoner..."
           />
+          <select
+            onChange={(e) => {
+              updateServer(e.target.value);
+            }}
+          >
+            <option value="la1">LAN</option>
+            <option value="la2">LAS</option>
+            <option value="euw1">EUW</option>
+            <option value="na1">NA</option>
+            <option value="kr">KR</option>
+          </select>
         </SearchForm>
       </Nav>
     </React.Fragment>

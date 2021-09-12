@@ -56,6 +56,9 @@ export const TabsContainer = styled.div`
 `;
 
 export const SearchForm = styled.form`
+  display: flex;
+  padding: 0px 10px;
+
   input {
     background-color: #22222e;
     border: none;
@@ -63,8 +66,19 @@ export const SearchForm = styled.form`
     outline: none;
     color: #dadada;
     font-size: 14px;
-    padding: 10px 16px;
+    padding: 10px 20px;
     font-weight: 400;
-    border-radius: 0.5rem;
+    border-radius: 0.5rem 0rem 0rem 0.5rem;
+    margin-right: 2px;
+  }
+
+  select {
+    background-color: #22222e;
+    color: #dadada;
+    outline: none;
+    border: 0px solid;
+    padding: 10px 4px;
+    border-radius: 0rem 0.5rem 0.5rem 0;
+    cursor: pointer;
   }
 `;

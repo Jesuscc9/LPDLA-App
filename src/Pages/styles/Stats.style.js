@@ -2,7 +2,6 @@ import styled, { keyframes } from "styled-components";
 
 export const MainLayout = styled.div`
   color: #fff;
-
   display: flex;
   justify-content: space-between;
 
@@ -13,6 +12,12 @@ export const MainLayout = styled.div`
   .col2 {
     width: 100%;
     padding: 10px 30px;
+
+    .loader {
+      margin-top: 60px;
+      display: flex;
+      justify-content: center;
+    }
 
     .error-container {
       position: absolute;
