@@ -5,8 +5,6 @@ import { useSelector } from "react-redux";
 const Matches = () => {
   const matches = useSelector((state) => state.data.matches);
 
-  console.log(matches);
-
   return (
     <React.Fragment>
       {matches.map((match, i) => {

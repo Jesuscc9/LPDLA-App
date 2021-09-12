@@ -1,10 +1,5 @@
-<<<<<<< HEAD
-import React from 'react';
-import ReactDOM from 'react-dom';
-=======
 import React from "react";
 import ReactDOM from "react-dom";
->>>>>>> tmp
 
 import "./Global.css";
 import App from "./App";

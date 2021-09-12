@@ -9,7 +9,7 @@ export const SidebarContainer = styled.div`
     width: 100%;
     display: grid;
     place-items: center;
-    margin-top: 20px;
+    padding-top: 20px;
 
     img {
     }

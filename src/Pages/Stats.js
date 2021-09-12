@@ -3,21 +3,16 @@ import { Link } from "react-router-dom";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 
 import Navbar from "../Components/Navbar";
-import SideBar from "../Components/SideBar";
+import SideBar from "../Components/Sidebar";
 import EloInfo from "../Components/EloInfo";
 import SummonerInfo from "../Components/SummonerInfo";
 import MostUsedChamps from "../Components/MostUsedChamps";
 import Matches from "../Components/Matches";
 
 import Loader from "react-loader-spinner";
-import { Animated } from "react-animated-css";
-import {
-  MainContainer,
-  Column1,
-  Column2,
-  Column3,
-  MainLayout,
-} from "./styles/Stats.style";
+import { motion, AnimatePresence } from "framer-motion";
+
+import { MainLayout } from "./styles/Stats.style";
 import { key } from "../data/key";
 import { api } from "../data/lolApi.js";
 import actions from "../redux/data/actions";
@@ -26,19 +21,9 @@ import Sidebar from "../Components/Sidebar";
 
 const Stats = () => {
   const [summoner, setSummoner] = useState("Rekkłes Fanboy");
-  const [rankType, setRankType] = useState("soloq");
-
-  const [summonerInfo, setSummonerInfo] = useState({
-    profileIconImg: "",
-    summonerLevel: "",
-    name: "",
-  });
 
   const [loading, setLoading] = useState(true);
-
-  const [eloInfo, setEloInfo] = useState([]);
-
-  const [mostUsedChamps, setMostUsedChamps] = useState({});
+  const [error, setError] = useState(false);
 
   let server = "la1";
 
@@ -60,9 +45,15 @@ const Stats = () => {
     setLoading(true);
     const fetchData = async () => {
       setLoading(true);
-      // await new Promise((resolve) => setTimeout(resolve, 400));
-      dispatch(actions.setSummonerData(await api.getSummonerData(summoner)));
-      dispatch(actions.setMatcheslist(await api.getMatchList()));
+      try {
+        dispatch(actions.setSummonerData(await api.getSummonerData(summoner)));
+        dispatch(actions.setMatcheslist(await api.getMatchList()));
+        setError(false);
+      } catch (e) {
+        console.log(e);
+        setError(true);
+      }
+
       setLoading(false);
     };
 
@@ -73,8 +64,38 @@ const Stats = () => {
   return (
     <>
       <MainLayout>
-        <Sidebar />
-        <SummonerInfo />
+        <div className="col1">
+          <Sidebar />
+        </div>
+        <div className="col2">
+          <Navbar
+            searchSummoner={(summoner) => {
+              setSummoner(summoner);
+            }}
+          />
+          <AnimatePresence>
+            {!error ? (
+              <motion.div
+                key="summonerData"
+                initial={{ scale: 0.3, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                exit={{ opacity: 0 }}
+              >
+                <SummonerInfo />
+              </motion.div>
+            ) : (
+              <motion.div
+                key="error"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className="error-container"
+              >
+                <h1>Error trying to fetch that summoner :(</h1>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
       </MainLayout>
       {/* <Navbar
         onSubmit={(name) => {
@@ -126,13 +147,8 @@ const Stats = () => {
             />
           </Column1>
           <Column2>
-<<<<<<< HEAD
-            {/* <SummonerInfo data={summonerInfo} /> */}
-            <Matches matches={matchList} />
-=======
             <SummonerInfo data={summonerInfo} />
             <Matches />
->>>>>>> tmp
           </Column2>
           <Column3>
             <MostUsedChamps data={mostUsedChamps} />

@@ -1,38 +1,24 @@
 import styled, { keyframes } from "styled-components";
 
-<<<<<<< HEAD
-export const MainContainer = styled.div`
-  width: 100%;
-  max-width: 97%;
-  display: flex;
-  justify-content: flex-start;
-  margin: auto;
-`;
-
-export const Column1 = styled.div`
-  width: 300px;
-
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-`;
-
-export const Column2 = styled.div`
-  width: 600px;
-
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-`;
-
-export const Column3 = styled.div`
-  width: 300px;
-
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-=======
 export const MainLayout = styled.div`
+  color: #fff;
+
   display: flex;
->>>>>>> tmp
+  justify-content: space-between;
+
+  .col1 {
+    width: 75px;
+  }
+
+  .col2 {
+    width: 100%;
+    padding: 10px 30px;
+
+    .error-container {
+      position: absolute;
+      top: 44%;
+      left: 50%;
+      transform: translate(-50%, -100%);
+    }
+  }
 `;

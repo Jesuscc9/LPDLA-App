@@ -3,83 +3,27 @@ import styled, { keyframes } from "styled-components";
 export const Nav = styled.div`
   width: 100%;
   height: 70px;
-  position: fixed;
 
-  margin-bottom: 20px;
-  z-index: 100;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
-  color: #dddddd;
-
-  .nav-content {
-    width: 97%;
-    margin: auto;
-    display: flex;
-    justify-content: space-between;
-  }
-`;
-
-export const LogoContainer = styled.div`
-  @import url("https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap");
-  min-width: 230px;
-  height: 50px;
-
-  z-index: 100;
-
-  img {
-    width: 27px;
-  }
-
-  h1 {
-    font-size: 20px;
-    font-weight: 500;
-    font-family: "Cocogoose Pro Regular Trial";
-    margin: auto;
-    opacity: 0.9;
-  }
-
-  .logo-container {
-    width: 120px;
-    height: 50px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
 `;
 
 export const TabsContainer = styled.div`
   width: 100%;
   margin-right: 40px;
   display: flex;
-  justify-content: flex-start;
-
-  .tabs {
-    font-weight: 500;
-    display: flex;
-    width: 250px;
-    height: 50px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
+  justify-content: flex;
 
   .tab {
-    height: 20px;
     cursor: pointer;
     opacity: ${(props) => (props.focused ? 1 : 0.6)};
     transition: all 0.2s;
-    padding: 0px;
     background-color: transparent;
     border: none;
-    color: white;
-    outline: none !important;
+    color: #fff;
     font-size: 16px;
-    font-family: "Cocogoose Pro Regular Trial";
-
-    p {
-      margin: 0px;
-    }
+    margin: 0px 20px;
 
     .line {
       width: 0px;
@@ -111,54 +55,16 @@ export const TabsContainer = styled.div`
   }
 `;
 
-export const SearchContainer = styled.div`
-  width: 20%;
-
-  min-width: 300px;
-
-  .input {
-    background-color: #141332;
-    border-radius: 10px;
-    border: none;
-    height: 80%;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    padding: 0px;
-    align-items: center;
-  }
-
-  .icon {
-    color: gray;
-    opacity: 0.7;
-    background-color: transparent;
-    border: none;
-    outline: none;
-    cursor: pointer;
-    min-width: 50px;
-    height: 100%;
-    transition: all 0.2s;
-    border-radius: 10px;
-
-    &:hover {
-      background-color: #28264d;
-    }
-  }
-
+export const SearchForm = styled.form`
   input {
-    width: 95%;
-    padding-left: 10px;
-    height: 100%;
-    background-color: transparent;
+    background-color: #22222e;
     border: none;
     margin: auto;
     outline: none;
     color: #dadada;
-    font-family: "Cocogoose Pro Regular Trial Light";
-    font-size: 12px;
-    font-weight: 100;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
+    font-size: 14px;
+    padding: 10px 16px;
+    font-weight: 400;
+    border-radius: 0.5rem;
   }
 `;

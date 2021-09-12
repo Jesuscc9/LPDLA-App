@@ -66,12 +66,20 @@ export const api = {
     });
   },
   getChampionName: (id) => {
+    if (id == undefined) return;
     const keys = Object.keys(api.champions);
     for (let i = 0; i < keys.length; i++) {
       if (id == parseInt(api.champions[keys[i]].key)) {
         return api.champions[keys[i]].id;
       }
     }
+  },
+  getRoleImg: (role) => {
+    if (role == "adc") role = "bottom";
+    if (role == "support") role = "utility";
+    if (role == "mid") role = "middle";
+
+    return `https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-clash/global/default/assets/images/position-selector/positions/icon-position-${role}-blue.png`;
   },
   getElo: async (summonerId) => {
     const elo = await (

@@ -23,7 +23,6 @@ const EloInfo = ({ queue, onQueueChange }) => {
   };
 
   const data = useSelector((state) => {
-    console.log(state);
     return state.data.eloInfo[queue == "soloq" ? 0 : 1];
   });
 

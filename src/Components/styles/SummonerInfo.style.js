@@ -2,7 +2,7 @@ import styled, { keyframes } from "styled-components";
 
 export const SummonerInfoContainer = styled.div`
   background-color: #22222e;
-  width: 730px;
+  width: 650px;
   max-width: 95%;
   padding: 20px;
   display: flex;
@@ -11,22 +11,24 @@ export const SummonerInfoContainer = styled.div`
   box-sizing: border-box;
   border-radius: 24px;
   margin: 50px auto;
-  height: 160px;
 
-  background-position: 0px 0px;
+  background-position: 0px 0%;
   background-image: ${(props) =>
-    `linear-gradient(90deg, #22222e 9.05%, rgba(34, 34, 46, 0.9) 100%), url("${props.backgroundUrl}");`};
+    `linear-gradient(90deg, #22222e 7.05%, rgba(34, 34, 46, 0.9) 100%), url("${props.backgroundUrl}");`};
   background-size: cover;
   background-position: center;
 
   .profile-img-container {
-    width: 116px;
-    height: 116px;
+    width: 106px;
+    height: 106px;
     padding: 4px;
     outline: none;
     box-sizing: border-box;
+    transition: border 1s;
     border-radius: 50%;
-    border: 3px solid #4b3800;
+    border: 3px solid
+      ${(props) =>
+        props.borderImg ? props.borderImg : "rgba(255, 255, 255, 0)"};
     display: grid;
     place-items: center;
 
