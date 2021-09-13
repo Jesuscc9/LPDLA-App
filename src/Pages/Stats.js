@@ -13,11 +13,12 @@ import Loader from "react-loader-spinner";
 import { motion, AnimatePresence } from "framer-motion";
 
 import { MainLayout } from "./styles/Stats.style";
-import { key } from "../data/key";
 import { api } from "../data/lolApi.js";
 import actions from "../redux/data/actions";
 import { useDispatch } from "react-redux";
 import Sidebar from "../Components/Sidebar";
+
+import { defaultVariant } from "../utils.js";
 
 const Stats = () => {
   const [summoner, setSummoner] = useState("Rekkłes Fanboy");
@@ -89,21 +90,14 @@ const Stats = () => {
             ) : (
               <div>
                 {!error ? (
-                  <motion.div
-                    key="summonerData"
-                    initial={{ scale: 0.3, opacity: 0 }}
-                    animate={{ scale: 1, opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                  >
+                  <motion.div key="summonerData" {...defaultVariant}>
                     <SummonerInfo />
                   </motion.div>
                 ) : (
                   <motion.div
                     key="error"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
                     className="error-container"
+                    {...defaultVariant}
                   >
                     <h1>Error trying to fetch that summoner :(</h1>
                   </motion.div>

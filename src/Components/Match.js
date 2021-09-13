@@ -7,7 +7,7 @@ import sadge from "../img/emojis/sadge.gif";
 import sadgeRain from "../img/emojis/sadgeRain.gif";
 import { Animated } from "react-animated-css";
 import { ColorExtractor } from "react-color-extractor";
-import { TimeDiff, Duration } from "./Time";
+import { TimeDiff, Duration } from "../utils.js";
 
 import {
   MatchContainer,

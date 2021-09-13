@@ -33,7 +33,8 @@ export const SummonerInfoContainer = styled.div`
     place-items: center;
 
     img {
-      width: 100%;
+      width: 94px;
+      height: 94px;
       border-radius: 50%;
       transition: transform 0.4s;
       cursor: pointer;

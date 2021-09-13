@@ -35,3 +35,9 @@ export const Duration = (timestamp) => {
 
   return minutes.substr(-2) + ":" + seconds.substr(-2);
 };
+
+export const defaultVariant = {
+  initial: { opacity: 0 },
+  animate: { opacity: 1 },
+  exit: { opacity: 0 },
+};

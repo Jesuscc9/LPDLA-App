@@ -21,6 +21,8 @@ export const MainLayout = styled.div`
 
     .error-container {
       position: absolute;
+      text-align: center;
+      width: 100%;
       top: 44%;
       left: 50%;
       transform: translate(-50%, -100%);

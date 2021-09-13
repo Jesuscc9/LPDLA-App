@@ -69,7 +69,7 @@ export const SearchForm = styled.form`
     padding: 10px 20px;
     font-weight: 400;
     border-radius: 0.5rem 0rem 0rem 0.5rem;
-    margin-right: 2px;
+    margin-right: 1px;
   }
 
   select {

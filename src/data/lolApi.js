@@ -74,12 +74,64 @@ export const api = {
       }
     }
   },
-  getRoleImg: (role) => {
-    if (role == "adc") role = "bottom";
-    if (role == "support") role = "utility";
-    if (role == "mid") role = "middle";
+  getMainRoles: (matches) => {
+    if (!matches.length) return;
 
-    return `https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-clash/global/default/assets/images/position-selector/positions/icon-position-${role}-blue.png`;
+    const lanes = {
+      top: 0,
+      jungle: 0,
+      mid: 0,
+      adc: 0,
+      support: 0,
+    };
+
+    if (matches.length > 0) {
+      matches.forEach((element) => {
+        if (
+          element.lane == "TOP" ||
+          element.lane == "MID" ||
+          element.lane == "JUNGLE"
+        ) {
+          lanes[element.lane.toLowerCase()]++;
+        } else if (element.lane == "BOTTOM") {
+          if (element.role.includes("SUPPORT")) {
+            lanes.support++;
+          } else {
+            lanes.adc++;
+          }
+        }
+      });
+    }
+
+    const sorted = Object.entries(lanes).sort((a, b) => b[1] - a[1]);
+
+    const popularRoles = [sorted[0][0], sorted[1][0]];
+
+    return popularRoles.map((role) => {
+      if (role == "adc") role = "bottom";
+      if (role == "support") role = "utility";
+      if (role == "mid") role = "middle";
+      return `https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-clash/global/default/assets/images/position-selector/positions/icon-position-${role}-blue.png`;
+    });
+  },
+  getRecentChamp: (matches) => {
+    if (!matches.length) return;
+
+    const champs = {};
+
+    if (matches.length > 0) {
+      matches.forEach((element) => {
+        if (!champs[element.champion]) {
+          champs[element.champion] = 1;
+        } else {
+          champs[element.champion]++;
+        }
+      });
+    }
+
+    const sorted = Object.entries(champs).sort((a, b) => b[1] - a[1]);
+
+    return api.getChampionName([sorted[0][0]]);
   },
   getElo: async (summonerId) => {
     const elo = await (
