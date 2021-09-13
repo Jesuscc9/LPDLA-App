@@ -21,7 +21,6 @@ export const SummonerInfoContainer = styled.div`
   .profile-img-container {
     width: 106px;
     height: 106px;
-    padding: 4px;
     outline: none;
     box-sizing: border-box;
     transition: border 1s;
@@ -38,6 +37,8 @@ export const SummonerInfoContainer = styled.div`
       border-radius: 50%;
       transition: transform 0.4s;
       cursor: pointer;
+      position: relative;
+      top: 1px;
 
       &:hover {
         transform: scale(1.1);
