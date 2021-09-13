@@ -36,12 +36,12 @@ export const SummonerInfoContainer = styled.div`
       height: 94px;
       border-radius: 50%;
       transition: transform 0.4s;
-      cursor: pointer;
       position: relative;
       top: 1px;
 
       &:hover {
-        transform: scale(1.1);
+        cursor: pointer;
+        transform: scale(1.1) !important;
       }
     }
 

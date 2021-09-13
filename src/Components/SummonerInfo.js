@@ -1,7 +1,4 @@
 import React, { useEffect } from "react";
-import profileIcon from "../img/logo.jpg";
-import adc from "../img/positions/adc-icon.png";
-import jg from "../img/positions/jungla-icon.jpeg";
 import { TimeDiff } from "../utils.js";
 import { useSelector } from "react-redux";
 import { SummonerInfoContainer } from "./styles/SummonerInfo.style";
@@ -27,52 +24,57 @@ const SummonerInfo = () => {
   const { data, loading, error } = usePalette(summonerData.profileImg);
 
   const popularRoles = api.getMainRoles(matches);
-  // api.getRecentChamp(matches);
 
   return (
-    <SummonerInfoContainer
-      backgroundUrl={championImg}
-      borderImg={data.darkMuted}
-    >
-      <div className="profile-img-container">
-        <motion.img
-          {...defaultVariant}
-          initial={{ rotate: 20, scale: 0.7 }}
-          animate={{ rotate: 0, scale: 1 }}
-          transition={{ delay: 0.2, duration: 0.1 }}
-          src={summonerData.profileImg}
-          alt=""
-        />
-        <div className="level-container">
-          <div className="level">
-            <p>{summonerData.summonerLevel}</p>
+    <>
+      {summonerData.profileImg && matches.length && (
+        <SummonerInfoContainer
+          backgroundUrl={championImg}
+          borderImg={data.darkMuted}
+        >
+          <div className="profile-img-container">
+            <motion.img
+              {...defaultVariant}
+              initial={{ rotate: 20, scale: 0.7 }}
+              animate={{ rotate: 0, scale: 1 }}
+              transition={{ delay: 0.2, duration: 0.1 }}
+              src={summonerData.profileImg}
+              alt=""
+            />
+
+            <div className="level-container">
+              <div className="level">
+                <p>{summonerData.summonerLevel}</p>
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
-      <div className="name-container">
-        <h1>{summonerData.name}</h1>
-        <p>
-          Last game: {matches[0]?.timestamp && TimeDiff(matches[0]?.timestamp)}
-        </p>
-      </div>
-      <div className="roles-container">
-        <p>Roles</p>
-        <AnimatePresence>
-          <motion.div
-            className="roles-images"
-            key="rolesImg"
-            {...defaultVariant}
-          >
-            {matches.length && (
-              <>
-                <img src={popularRoles[0]} alt="" />
-                <img src={popularRoles[1]} alt="" />
-              </>
-            )}
-          </motion.div>
-        </AnimatePresence>
-      </div>
-    </SummonerInfoContainer>
+          <div className="name-container">
+            <h1>{summonerData.name}</h1>
+            <p>
+              Last game:
+              {matches[0]?.timestamp && TimeDiff(matches[0]?.timestamp)}
+            </p>
+          </div>
+          <div className="roles-container">
+            <p>Roles</p>
+            <AnimatePresence>
+              <motion.div
+                className="roles-images"
+                key="rolesImg"
+                {...defaultVariant}
+              >
+                {matches.length && (
+                  <>
+                    <img src={popularRoles[0]} alt="" />
+                    <img src={popularRoles[1]} alt="" />
+                  </>
+                )}
+              </motion.div>
+            </AnimatePresence>
+          </div>
+        </SummonerInfoContainer>
+      )}
+    </>
   );
 };
 
