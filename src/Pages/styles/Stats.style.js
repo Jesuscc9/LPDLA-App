@@ -7,11 +7,19 @@ export const MainLayout = styled.div`
 
   .col1 {
     width: 75px;
+    height: 100vh;
+    box-sizing: border-box;
+
+    @media (max-width: 678px) {
+      display: none;
+    }
   }
 
   .col2 {
     width: 100%;
-    padding: 10px 30px;
+    box-sizing: border-box;
+    max-width: 95%;
+    margin: 0px auto;
 
     .loader {
       margin-top: 60px;

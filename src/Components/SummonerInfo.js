@@ -51,7 +51,7 @@ const SummonerInfo = () => {
           <div className="name-container">
             <h1>{summonerData.name}</h1>
             <p>
-              Last game:
+              Last game:{"  "}
               {matches[0]?.timestamp && TimeDiff(matches[0]?.timestamp)}
             </p>
           </div>

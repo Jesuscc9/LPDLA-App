@@ -88,7 +88,7 @@ const Stats = () => {
                 />
               </div>
             ) : (
-              <div>
+              <>
                 {!error ? (
                   <motion.div key="summonerData" {...defaultVariant}>
                     <SummonerInfo />
@@ -102,7 +102,7 @@ const Stats = () => {
                     <h1>Error trying to fetch that summoner :(</h1>
                   </motion.div>
                 )}
-              </div>
+              </>
             )}
           </AnimatePresence>
         </div>

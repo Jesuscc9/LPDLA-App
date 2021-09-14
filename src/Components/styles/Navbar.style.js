@@ -3,17 +3,23 @@ import styled, { keyframes } from "styled-components";
 export const Nav = styled.div`
   width: 100%;
   height: 70px;
-
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  @media (max-width: 678px) {
+    justify-content: flex-end;
+  }
 `;
 
 export const TabsContainer = styled.div`
   width: 100%;
-  margin-right: 40px;
   display: flex;
   justify-content: flex;
+
+  @media (max-width: 678px) {
+    display: none;
+  }
 
   .tab {
     cursor: pointer;

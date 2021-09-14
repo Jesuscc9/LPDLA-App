@@ -3,12 +3,12 @@ import styled, { keyframes } from "styled-components";
 export const SummonerInfoContainer = styled.div`
   background-color: #22222e;
   width: 650px;
-  max-width: 95%;
   padding: 20px;
+  max-width: 95%;
   display: flex;
   justify-content: space-around;
-  flex-wrap: wrap;
   box-sizing: border-box;
+  flex-wrap: wrap;
   border-radius: 24px;
   margin: 50px auto;
 
@@ -16,7 +16,7 @@ export const SummonerInfoContainer = styled.div`
   background-image: ${(props) =>
     `linear-gradient(90deg, #22222e 7.05%, rgba(34, 34, 46, 0.9) 100%), url("${props.backgroundUrl}");`};
   background-size: cover;
-  background-position: center;
+  background-position: center 20%;
 
   .profile-img-container {
     width: 106px;
@@ -61,6 +61,8 @@ export const SummonerInfoContainer = styled.div`
   }
 
   .name-container {
+    margin: 0px 0px;
+
     h1 {
       margin-top: 20px;
       letter-spacing: 0.2px;
