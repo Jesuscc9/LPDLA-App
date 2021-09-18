@@ -4,6 +4,7 @@ const actions = {
   SET_SUMMONERS: "DATA/SET_SUMMONERS",
   SET_SUMMONER_DATA: "DATA/SET_SUMMONER_DATA",
   SET_MATCHESLIST: "DATA/SET_MATCHESLIST",
+  SET_ELO: "DATA/SET_ELO",
 
   setRunes: (runes) => ({
     type: actions.SET_RUNES,
@@ -24,6 +25,10 @@ const actions = {
   setMatcheslist: (data) => ({
     type: actions.SET_MATCHESLIST,
     payload: [...data],
+  }),
+  setElo: (queues) => ({
+    type: actions.SET_ELO,
+    payload: [...queues],
   }),
 };
 

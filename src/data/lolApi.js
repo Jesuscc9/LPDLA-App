@@ -111,7 +111,7 @@ export const api = {
       if (role == "adc") role = "bottom";
       if (role == "support") role = "utility";
       if (role == "mid") role = "middle";
-      return `https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-clash/global/default/assets/images/position-selector/positions/icon-position-${role}-blue.png`;
+      return `https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-clash/global/default/icon-position-${role}-blue.png`;
     });
   },
   getRecentChamp: (matches) => {
@@ -130,13 +130,12 @@ export const api = {
     }
 
     const sorted = Object.entries(champs).sort((a, b) => b[1] - a[1]);
-
     return api.getChampionName([sorted[0][0]]);
   },
-  getElo: async (summonerId) => {
+  getElo: async () => {
     const elo = await (
       await fetch(
-        `https://${api.server}.api.riotgames.com/lol/league/v4/entries/by-summoner/${summonerId}$?api_key=${api.API_KEY}`
+        `https://${api.server}.api.riotgames.com/lol/league/v4/entries/by-summoner/${api.summonerData.id}$?api_key=${api.API_KEY}`
       )
     ).json();
 
@@ -197,52 +196,53 @@ export const api = {
       ).json()
     ).matches;
 
-    // if (matches.length >= 10) matches = matches.slice(0, 10);
+    return matches
 
-    // for (let i = 0; i < matches.length; i++) {
-    //   matches[i].gameDetails = await (
-    //     await fetch(
-    //       `https://${api.server}.api.riotgames.com/lol/match/v4/matches/${matches[i].gameId}?api_key=${api.API_KEY}`
-    //     )
-    //   ).json();
 
-    //   matches[i].summonerId = api.summonerData.id;
-    //   matches[i].championName = api.getChampionName(matches[i].champion);
+    for (let i = 0; i < 10; i++) {
+      matches[i].gameDetails = await (
+        await fetch(
+          `https://${api.server}.api.riotgames.com/lol/match/v4/matches/${matches[i].gameId}?api_key=${api.API_KEY}`
+        )
+      ).json();
 
-    //   const participantId = matches[i].gameDetails.participantIdentities.find(
-    //     (e) => {
-    //       return e.player.summonerId == api.summonerData.id;
-    //     }
-    //   );
+      matches[i].summonerId = api.summonerData.id;
+      matches[i].championName = api.getChampionName(matches[i].champion);
 
-    //   const gameData = matches[i].gameDetails.participants.find((e) => {
-    //     return e.participantId == participantId.participantId;
-    //   });
+      const participantId = matches[i].gameDetails.participantIdentities.find(
+        (e) => {
+          return e.player.summonerId == api.summonerData.id;
+        }
+      );
 
-    //   matches[i].championName = matches[i].championName;
-    //   matches[i].stats = gameData;
-    //   matches[
-    //     i
-    //   ].primaryRune = `http://ddragon.leagueoflegends.com/cdn/img/${api.getRuneName(
-    //     matches[i].stats.stats.perk0,
-    //     true
-    //   )}`;
+      const gameData = matches[i].gameDetails.participants.find((e) => {
+        return e.participantId == participantId.participantId;
+      });
 
-    //   matches[i].gameType = api.getGameType(matches[i].gameDetails.queueId);
+      matches[i].championName = matches[i].championName;
+      matches[i].stats = gameData;
+      matches[
+        i
+      ].primaryRune = `http://ddragon.leagueoflegends.com/cdn/img/${api.getRuneName(
+        matches[i].stats.stats.perk0,
+        true
+      )}`;
 
-    //   matches[i].secondaryRune = `http://ddragon.leagueoflegends.com/cdn/img/${
-    //     api.getRuneName(matches[i].stats.stats.perkSubStyle).icon
-    //   }`;
-    //   matches[i].spell1Name = `http://ddragon.leagueoflegends.com/cdn/${
-    //     api.version
-    //   }/img/spell/${api.getSummonerName(gameData.spell1Id)}.png`;
-    //   matches[i].spell2Name = `http://ddragon.leagueoflegends.com/cdn/${
-    //     api.version
-    //   }/img/spell/${api.getSummonerName(gameData.spell2Id)}.png`;
-    //   matches[
-    //     i
-    //   ].championImg = `http://ddragon.leagueoflegends.com/cdn/${api.version}/img/champion/${matches[i].championName}.png`;
-    // }
+      matches[i].gameType = api.getGameType(matches[i].gameDetails.queueId);
+
+      matches[i].secondaryRune = `http://ddragon.leagueoflegends.com/cdn/img/${
+        api.getRuneName(matches[i].stats.stats.perkSubStyle).icon
+      }`;
+      matches[i].spell1Name = `http://ddragon.leagueoflegends.com/cdn/${
+        api.version
+      }/img/spell/${api.getSummonerName(gameData.spell1Id)}.png`;
+      matches[i].spell2Name = `http://ddragon.leagueoflegends.com/cdn/${
+        api.version
+      }/img/spell/${api.getSummonerName(gameData.spell2Id)}.png`;
+      matches[
+        i
+      ].championImg = `http://ddragon.leagueoflegends.com/cdn/${api.version}/img/champion/${matches[i].championName}.png`;
+    }
 
     return matches;
   },
@@ -259,12 +259,6 @@ export const api = {
     return {
       ...summonerData,
       profileImg: `http://ddragon.leagueoflegends.com/cdn/${api.version}/img/profileicon/${summonerData.profileIconId}.png`,
-      // mostUsedChamps: await api.getMostUsedChamps(summonerData.id),
-      // matchList: await api.getMatchList(
-      //   summonerData.accountId,
-      //   summonerData.id
-      // ),
-      // eloInfo: await api.getElo(summonerData.id),
     };
   },
 };

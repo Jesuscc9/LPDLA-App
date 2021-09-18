@@ -5,7 +5,7 @@ export const MainLayout = styled.div`
   display: flex;
   justify-content: space-between;
 
-  .col1 {
+  .col1{
     width: 75px;
     height: 100vh;
     box-sizing: border-box;
@@ -15,11 +15,22 @@ export const MainLayout = styled.div`
     }
   }
 
-  .col2 {
+  .col2{
     width: 100%;
     box-sizing: border-box;
     max-width: 95%;
     margin: 0px auto;
+
+    .row1{
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      padding-top: 20px;
+
+      > *{
+        margin: 0px 20px;
+      }
+    }
 
     .loader {
       margin-top: 60px;

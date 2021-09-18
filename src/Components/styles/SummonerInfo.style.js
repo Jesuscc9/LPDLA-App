@@ -10,13 +10,17 @@ export const SummonerInfoContainer = styled.div`
   box-sizing: border-box;
   flex-wrap: wrap;
   border-radius: 24px;
-  margin: 50px auto;
+  margin-top: 0px;
 
   background-position: 0px 0%;
   background-image: ${(props) =>
     `linear-gradient(90deg, #22222e 7.05%, rgba(34, 34, 46, 0.9) 100%), url("${props.backgroundUrl}");`};
   background-size: cover;
   background-position: center 20%;
+
+  @media (min-width: 540px){
+    max-height: 146px;
+  }
 
   .profile-img-container {
     width: 106px;

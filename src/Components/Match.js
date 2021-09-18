@@ -182,9 +182,9 @@ const Match = ({ data, emojiIndex }) => {
         </KdaContainer>
         <ItemsContainer>
           <div className="items">
-            {items.map((item) => {
+            {items.map((item, i) => {
               return (
-                <React.Fragment key={item}>
+                <React.Fragment key={i}>
                   {item ? (
                     <img
                       className="item"

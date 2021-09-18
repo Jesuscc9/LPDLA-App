@@ -7,7 +7,7 @@ const initialState = {
   champions: {},
   summoners: {},
   matches: [],
-  eloInfo: [],
+  elo: [],
 };
 
 const reducer = (state = initialState, action) => {
@@ -28,6 +28,9 @@ const reducer = (state = initialState, action) => {
 
     case actions.SET_MATCHESLIST:
       return { ...state, matches: [...payload] };
+
+    case actions.SET_ELO:
+      return { ...state, elo: [...payload] };
 
     default:
       return state;

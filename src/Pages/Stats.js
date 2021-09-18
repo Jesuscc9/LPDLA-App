@@ -26,8 +26,6 @@ const Stats = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
 
-  let server = "la1";
-
   useEffect(() => {
     const getStaticData = async () => {
       await api.getStaticData();
@@ -35,10 +33,6 @@ const Stats = () => {
 
     getStaticData();
   }, []);
-
-  const handleSummonerChange = (name) => {
-    setSummoner(name);
-  };
 
   const dispatch = useDispatch();
 
@@ -50,6 +44,7 @@ const Stats = () => {
       try {
         dispatch(actions.setSummonerData(await api.getSummonerData(summoner)));
         dispatch(actions.setMatcheslist(await api.getMatchList()));
+        dispatch(actions.setElo(await api.getElo()));
         setError(false);
         setLoading(false);
       } catch (e) {
@@ -91,7 +86,11 @@ const Stats = () => {
               <>
                 {!error ? (
                   <motion.div key="summonerData" {...defaultVariant}>
-                    <SummonerInfo />
+                    <div className="row1">
+                      <SummonerInfo />
+                      <EloInfo />
+                    </div>
+                    {/* <Matches /> */}
                   </motion.div>
                 ) : (
                   <motion.div

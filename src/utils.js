@@ -41,3 +41,7 @@ export const defaultVariant = {
   animate: { opacity: 1 },
   exit: { opacity: 0 },
 };
+
+export const romanConverter = (roman) => {
+  return roman == "IV" ? 4 : roman.length
+}

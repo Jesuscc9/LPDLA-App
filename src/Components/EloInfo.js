@@ -1,88 +1,77 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import { romanConverter } from "../utils";
+import { EloContainer } from "./styles/EloInfo.stye";
 
-const EloInfo = ({ queue, onQueueChange }) => {
-  const emblems = {
-    bronze: require("../img/emblems/Emblem_Bronze.png"),
-    silver: require("../img/emblems/Emblem_Silver.png"),
-    gold: require("../img/emblems/Emblem_Gold.png"),
-    platinum: require("../img/emblems/Emblem_Platinum.png"),
-    diamond: require("../img/emblems/Emblem_Diamond.png"),
-    master: require("../img/emblems/Emblem_Master.png"),
-    grandmaster: require("../img/emblems/Emblem_Grandmaster.png"),
-    challenger: require("../img/emblems/Emblem_Challenger.png"),
-  };
+const EloInfo = () => {
+  const data = useSelector((state) => state.data.elo);
+  console.log(data);
 
-  const option = React.useRef(null);
+  const [elo, setElo] = useState(data[0]);
+  const [queue, setQueue] = useState(1);
 
-  const resetOption = () => {
-    option.current.innerHTML = `
-      <option value="soloq">SoloQ</option>
-      <option value="flex">Flex</option>
-    `;
-  };
+  const winrate = (a, b) => Math.trunc((a / (a + b)) * 100);
 
-  const data = useSelector((state) => {
-    return state.data.eloInfo[queue == "soloq" ? 0 : 1];
-  });
+  const winrateColor = (wr) => {
+    if(wr < 40){
+      return "#FF5050"
+    }else if(wr < 50){
+      return "#FFAA50";
+    }else if(wr < 60){
+      return "#009959"
+    }
+    return "#50FF70"
+  }
 
-  if (data) {
-    return (
-      <React.Fragment>
-        <div className="soloq">
-          <div className="col1">
-            <div className="row1 elo-container">
+  return (
+    <>
+      <EloContainer>
+        <div className="elo-header">
+          <p>Ranked</p>
+          <select
+            className="form-control queue"
+            onChange={(e) => {
+              setElo(data[queue]);
+              setQueue(queue ? 0 : 1);
+            }}
+          >
+            <option value="soloq">SoloQ</option>
+            <option value="flex">Flex</option>
+          </select>
+        </div>
+        {elo ? (
+          <>
+            <div className="elo-data">
               <img
-                src={emblems[data.tier.toLowerCase()]}
-                alt=""
+                src={`https://opgg-static.akamaized.net/images/medals/${elo.tier.toLowerCase()}_${romanConverter(
+                  elo.rank
+                )}.png`}
                 className="elo-img"
               />
+              <div className="elo-stats">
+                <span className="rank tier">{elo.tier.toLowerCase()} </span>
+                <span className="rank"> {elo.rank}</span>
+                <div className="league-points-container">
+                  <span className="league-points">{elo.leaguePoints} LP </span>
+                  <span className="winrate" style={{color: winrateColor(winrate(elo.wins, elo.losses))}}>
+                    {winrate(elo.wins, elo.losses)}%
+                  </span>
+                </div>
+                <div className="games">
+                  <span className="wins">{elo.wins}W / </span>
+                  <span className="loses">{elo.losses}L</span>
+                </div>
+              </div>
             </div>
-            <div className="row2 text-center">
-              {data.tier + " " + data.rank}
-            </div>
+          </>
+        ) : (
+          <div className="elo-error">
+            <h2>No data for this ranked mode :(</h2>
           </div>
-          <div className="col2">
-            <div className="row3-1">
-              <select
-                name=""
-                id=""
-                className="form-control queue"
-                onChange={(e) => {
-                  onQueueChange(e.target.value);
-                }}
-                ref={option}
-              >
-                <option value="soloq">SoloQ</option>
-                <option value="flex">Flex</option>
-              </select>
-            </div>
-            <div className="row3 data-wr">
-              <div className="wins">
-                {data.wins}
-                <span style={{ color: "#37B03F" }}>W</span>
-              </div>
-              <div className="loses">
-                {data.losses}
-                <span style={{ color: "#F94848" }}>L</span>
-              </div>
-              <div className="wr" style={{ color: "black" }}>
-                {Math.round(
-                  (parseInt(data.wins) /
-                    (parseInt(data.wins) + parseInt(data.losses))) *
-                    100
-                )}
-                % WR
-              </div>
-            </div>
-            <div className="row3">{data.leaguePoints} LP</div>
-          </div>
-        </div>
-      </React.Fragment>
-    );
-  } else {
-    return "";
-  }
+        )}
+      </EloContainer>
+    </>
+  );
 };
 
 export default EloInfo;
